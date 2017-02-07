@@ -23,7 +23,6 @@
 
 #include <string>
 #include <typeinfo>
-#include <RangeError.h>
 
 namespace DAQ {
   namespace V10 {
@@ -57,8 +56,8 @@ public:
 		       uint32_t runNumber,
 		       uint32_t timeOffset,
 		       time_t   timestamp,
-		       std::string title) throw(CRangeError);
-  CRingStateChangeItem(const CRingItem& item) throw(std::bad_cast);
+               std::string title);
+  CRingStateChangeItem(const CRingItem& item);
   CRingStateChangeItem(const CRingStateChangeItem& rhs);
   virtual ~CRingStateChangeItem();
 
@@ -74,7 +73,7 @@ public:
   void setElapsedTime(uint32_t offset);
   uint32_t getElapsedTime() const;
 
-  void setTitle(std::string title) throw(CRangeError);
+  void setTitle(std::string title);
   std::string getTitle() const;
 
   void setTimestamp(time_t stamp);

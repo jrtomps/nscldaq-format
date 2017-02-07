@@ -27,12 +27,10 @@ nscldaq8_HEADERS = DataFormatV8.h \
                     format_cast.h
 
 libdataformatv8_la_CXXFLAGS = -I@srcdir@/.. \
-                              -I@top_srcdir@/utilities/format \
-                              -I@top_srcdir@/utilities/Buffer \
-                               @LIBTCLPLUS_CFLAGS@
+                              -I@top_srcdir@/format \
+                              -I@top_srcdir@/Buffer
 
-libdataformatv8_la_LDFLAGS = @LIBTCLPLUS_LDFLAGS@ \
-                             @top_builddir@/utilities/Buffer/libbuffer.la
+libdataformatv8_la_LDFLAGS = @top_builddir@/Buffer/libbuffer.la
 
 noinst_PROGRAMS = unittests
 
@@ -46,25 +44,17 @@ unittests_SOURCES	= TestRunner.cpp \
 			    cvoidbuffertest.cpp \
 			    cgenericbodyparsertest.cpp
 
-
-unittests_LDADD	= $(CPPUNIT_LDFLAGS) 		\
+unittests_LDADD	= $(CPPUNIT_LIBS) 		\
                   @builddir@/libdataformatv8.la	\
-                  @top_builddir@/utilities/Buffer/libbuffer.la \
-                  @LIBEXCEPTION_LDFLAGS@
+                  @top_builddir@/Buffer/libbuffer.la
 
-unittests_CPPFLAGS= -I@srcdir@/.. \
-										-I@top_srcdir@/utilities/format \
-                    -I@top_srcdir@/utilities/Buffer \
+unittests_CPPFLAGS= -I@top_srcdir@/format \
+                    -I@top_srcdir@/Buffer \
                     @CPPUNIT_CFLAGS@ \
-                    @LIBTCLPLUS_CFLAGS@ \
-                    @TCL_FLAGS@ \
-                    -I@top_srcdir@/base/testutils \
-                    -I@top_srcdir@/base/headers
+                    -I@top_srcdir@/testutils \
+                    -I@top_srcdir@/utils
 
-unittests_LDFLAGS	= @CPPUNIT_LDFLAGS@ \
-                          @TCL_LDFLAGS@ \
-                          @LIBEXCEPTION_LDFLAGS@ \
-                          -Wl,"-rpath-link=$(libdir)"
+unittests_LDFLAGS = -Wl,"-rpath-link=$(libdir)"
 
 
 TESTS=./unittests

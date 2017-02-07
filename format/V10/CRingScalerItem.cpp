@@ -9,16 +9,17 @@
 
      Author:
              Ron Fox
-	     NSCL
-	     Michigan State University
-	     East Lansing, MI 48824-1321
+         NSCL
+         Michigan State University
+         East Lansing, MI 48824-1321
 */
-#include <config.h>
+
 #include "V10/CRingScalerItem.h"
 #include <time.h>
 #include <string.h>
 #include <sstream>
 #include <stdio.h>
+#include <stdexcept>
 
 using namespace std;
 
@@ -77,7 +78,7 @@ CRingScalerItem::CRingScalerItem(uint32_t startTime,
   \param rhs - const reference to a RingItem.  We are doing an upcast to 
   a scaler buffer.
 */ 
-CRingScalerItem::CRingScalerItem(const CRingItem& rhs) throw(bad_cast) :
+CRingScalerItem::CRingScalerItem(const CRingItem& rhs) :
   CRingItem(rhs)
 {
   if (type() != INCREMENTAL_SCALERS) {
@@ -216,10 +217,10 @@ CRingScalerItem::getTimestamp() const
   Set a scaler value.
   \param channel - Number of the channel to modify.
   \param value   - The new value for that channel.
-  \throw CRangError if channel is too big.
+  \throw std::out_of_range if channel is too big.
 */
 void
-CRingScalerItem::setScaler(uint32_t channel, uint32_t value) throw(CRangeError)
+CRingScalerItem::setScaler(uint32_t channel, uint32_t value)
 {
   throwIfInvalidChannel(channel, "Attempting to set a scaler value");
   m_pScalers->s_scalers[channel] = value;
@@ -228,7 +229,7 @@ CRingScalerItem::setScaler(uint32_t channel, uint32_t value) throw(CRangeError)
 /*!
   Set a scaler values.
   \param values  - The new values for that channel.
-  \throw CRangError if there are too many channels
+  \throw std::out_of_range if there are too many channels
 */
 void
 CRingScalerItem::setScalers(const std::vector<uint32_t>& values)
@@ -244,10 +245,10 @@ CRingScalerItem::setScalers(const std::vector<uint32_t>& values)
   \param channel - Number of the channel we want.
   \return uint32_t
   \retval Value of the selected scaler channel
-  \throw CRangeError - if the channel number is out of range.
+  \throw std::out_of_range - if the channel number is out of range.
 */
 uint32_t
-CRingScalerItem::getScaler(uint32_t channel) const throw(CRangeError) 
+CRingScalerItem::getScaler(uint32_t channel) const
 {
   throwIfInvalidChannel(channel, "Attempting to get a scaler value");
   
@@ -370,11 +371,15 @@ CRingScalerItem::bodySize(size_t n)
 */
 void
 CRingScalerItem::throwIfInvalidChannel(uint32_t channel,
-				       const char* message) const throw(CRangeError)
+                       const char* message) const
 {
   if (channel >= m_pScalers->s_scalerCount) {
-    throw CRangeError(0, m_pScalers->s_scalerCount, channel,
-		      message);
+      std::string msg("Failure while ");
+      msg += message;
+      msg += " Index " + to_string(channel);
+      msg += " is not in range [0," + to_string(m_pScalers->s_scalerCount);
+      msg += ").";
+      throw std::out_of_range(msg);
   }
 }
 

@@ -15,7 +15,6 @@
 	     East Lansing, MI 48824-1321
 */
 
-#include <config.h>
 #include "V10/CRingTextItem.h"
 #include <string.h>
 #include <sstream>
@@ -76,7 +75,7 @@ CRingTextItem::CRingTextItem(uint16_t       type,
    
    \throw bad_cast - if rhs is not a text ring item.
 */
-CRingTextItem::CRingTextItem(const CRingItem& rhs) throw(bad_cast): 
+CRingTextItem::CRingTextItem(const CRingItem& rhs) :
   CRingItem(rhs)
 {
   if (!validType()) throw bad_cast();

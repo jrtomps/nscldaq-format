@@ -14,7 +14,6 @@
 	     East Lansing, MI 48824-1321
 */
 
-#include <config.h>
 #include "V11/CRingItem.h"
 #include "V11/DataFormatV11.h"
 

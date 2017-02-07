@@ -17,8 +17,6 @@
 #include <BufferIOV8.h>
 #include <V8/CRawBuffer.h>
 #include <ByteBuffer.h>
-#include <CDataSource.h>
-#include <CDataSink.h>
 
 #include <iostream>
 #include <stdexcept>
@@ -43,19 +41,6 @@ std::istream& operator>>(std::istream& stream, DAQ::V8::CRawBuffer& buffer)
   return stream;
 }
 
-CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
-{
-  DAQ::Buffer::ByteBuffer bytes(DAQ::V8::gBufferSize);
-
-  auto pData = reinterpret_cast<char*>(bytes.data());
-  stream.read(pData, bytes.size());
-
-  // CDataSource gaurantees that we get the entirety of our requested data.
-
-  buffer.setBuffer(bytes);
-
-  return stream;
-}
 
 
 std::ostream& operator<<(std::ostream& stream, const DAQ::V8::CRawBuffer& buffer)
@@ -72,6 +57,27 @@ std::ostream& operator<<(std::ostream& stream, const DAQ::V8::CRawBuffer& buffer
   return stream;
 }
 
+#ifdef NSCLDAQ_BUILD
+
+#include <CDataSource.h>
+#include <CDataSink.h>
+
+
+CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
+{
+  DAQ::Buffer::ByteBuffer bytes(DAQ::V8::gBufferSize);
+
+  auto pData = reinterpret_cast<char*>(bytes.data());
+  stream.read(pData, bytes.size());
+
+  // CDataSource gaurantees that we get the entirety of our requested data.
+
+  buffer.setBuffer(bytes);
+
+  return stream;
+}
+
+
 CDataSink& operator<<(CDataSink& stream, const DAQ::V8::CRawBuffer& buffer)
 {
   if (buffer.getBuffer().size() != DAQ::V8::gBufferSize) {
@@ -84,3 +90,5 @@ CDataSink& operator<<(CDataSink& stream, const DAQ::V8::CRawBuffer& buffer)
 
   return stream;
 }
+
+#endif // NSCLDAQ_BUILD

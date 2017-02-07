@@ -13,13 +13,13 @@
 	     Michigan State University
 	     East Lansing, MI 48824-1321
 */
-#include <config.h>
 #include "V11/CRingScalerItem.h"
 #include <V11/DataFormatV11.h>
 #include <time.h>
 #include <string.h>
 #include <sstream>
 #include <stdio.h>
+#include <stdexcept>
 
 using namespace std;
 
@@ -133,8 +133,9 @@ CRingScalerItem::CRingScalerItem(
   Casting construction. 
   \param rhs - const reference to a RingItem.  We are doing an upcast to 
   a scaler buffer.
+  \throws std::bad_cast if rhs is not a PERIODIC_SCALERS type
 */ 
-CRingScalerItem::CRingScalerItem(const CRingItem& rhs) throw(bad_cast) :
+CRingScalerItem::CRingScalerItem(const CRingItem& rhs) :
   CRingItem(rhs)
 {
   if (type() != PERIODIC_SCALERS) {
@@ -340,10 +341,10 @@ CRingScalerItem::getTimestamp() const
   Set a scaler value.
   \param channel - Number of the channel to modify.
   \param value   - The new value for that channel.
-  \throw CRangError if channel is too big.
+  \throw std::out_of_range if channel is too big.
 */
 void
-CRingScalerItem::setScaler(uint32_t channel, uint32_t value) throw(CRangeError)
+CRingScalerItem::setScaler(uint32_t channel, uint32_t value)
 {
     throwIfInvalidChannel(channel, "Attempting to set a scaler value");
     pScalerItemBody pScalers = reinterpret_cast<pScalerItemBody>(getBodyPointer());
@@ -354,7 +355,7 @@ CRingScalerItem::setScaler(uint32_t channel, uint32_t value) throw(CRangeError)
 /*!
   Set a scaler values.
   \param values  - The new values for that channel.
-  \throw CRangError if there are too many channels
+  \throw std::out_of_range if there are too many channels
 */
 void
 CRingScalerItem::setScalers(const std::vector<uint32_t>& values)
@@ -373,7 +374,7 @@ CRingScalerItem::setScalers(const std::vector<uint32_t>& values)
   \throw CRangeError - if the channel number is out of range.
 */
 uint32_t
-CRingScalerItem::getScaler(uint32_t channel) const throw(CRangeError) 
+CRingScalerItem::getScaler(uint32_t channel) const
 {
     throwIfInvalidChannel(channel, "Attempting to get a scaler value");
     pScalerItemBody pScalers = reinterpret_cast<pScalerItemBody>(getBodyPointer());
@@ -505,13 +506,17 @@ CRingScalerItem::bodySize(size_t n)
 */
 void
 CRingScalerItem::throwIfInvalidChannel(uint32_t channel,
-				       const char* message) const throw(CRangeError)
+                       const char* message) const
 {
     pScalerItemBody pScalers = reinterpret_cast<pScalerItemBody>(getBodyPointer());
 
     if (channel >= pScalers->s_scalerCount) {
-      throw CRangeError(0, pScalers->s_scalerCount, channel,
-                        message);
+        std::string msg("Failure while ");
+        msg += message;
+        msg += " Index " + to_string(channel);
+        msg += " is not in range [0," + to_string(pScalers->s_scalerCount);
+        msg += ").";
+        throw std::out_of_range(msg);
     }
 }
 

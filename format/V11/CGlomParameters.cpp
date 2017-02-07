@@ -85,11 +85,11 @@ CGlomParameters::CGlomParameters(const CGlomParameters& rhs) :
 /**
  * copy constructor - generic
  *
- * If the rhs is not an EVB_GLOM_INFO item, we'll throw a bad_cast.
+ * \throws bad_cast if the rhs is not an EVB_GLOM_INFO item
  *
  * @param rhs - CRingItem reference from which we will construct.
  */
-CGlomParameters::CGlomParameters(const CRingItem& rhs) throw(std::bad_cast) :
+CGlomParameters::CGlomParameters(const CRingItem& rhs):
     CRingItem(rhs)
 {
     if (type() != EVB_GLOM_INFO) throw std::bad_cast();        

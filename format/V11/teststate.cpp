@@ -106,7 +106,7 @@ void teststate::fullcons()
 			 1234, 5678, 314159,
 			 title);
   }
-  catch (CRangeError& except) {
+  catch (std::out_of_range& except) {
     threw = true;
   }
   ASSERT(threw);

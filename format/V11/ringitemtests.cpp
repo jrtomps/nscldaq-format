@@ -4,8 +4,6 @@
 #include <cppunit/Asserter.h>
 #include <Asserts.h>
 
-#include <config.h>
-
 #define private public
 #define protected public
 #include <V11/CRingItem.h>

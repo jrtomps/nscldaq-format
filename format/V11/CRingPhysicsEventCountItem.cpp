@@ -13,7 +13,6 @@
 	     Michigan State University
 	     East Lansing, MI 48824-1321
 */
-#include <config.h>
 #include "V11/CRingPhysicsEventCountItem.h"
 #include <sstream>
 
@@ -127,7 +126,7 @@ CRingPhysicsEventCountItem::CRingPhysicsEventCountItem(
 
   \throw std::bad_cast if rhs is not a PHYSICS_EVENT_COUNT item.
 */
-CRingPhysicsEventCountItem::CRingPhysicsEventCountItem(const CRingItem& rhs) throw(std::bad_cast)  :
+CRingPhysicsEventCountItem::CRingPhysicsEventCountItem(const CRingItem& rhs) :
   CRingItem(rhs)
 {
   if (type() != PHYSICS_EVENT_COUNT) {

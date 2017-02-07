@@ -19,7 +19,7 @@ static const char* Copyright = "(C) Copyright Michigan State University 2014, Al
 #include <fstream>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include <CTestSourceSink.h>
+//#include <CTestSourceSink.h>
 #include <BufferIOV8.h>
 #include <V8/DataFormatV8.h>
 #include <V8/CRawBuffer.h>
@@ -71,7 +71,7 @@ void CFormattedIOV8Test::tearDown()
 
 void CFormattedIOV8Test::extract_0()
 {
-  CTestSourceSink ss(34);
+  std::stringstream ss;
   std::vector<std::uint16_t> data = {0x0001, 0x0011,
                                      0, 0, 0, 0,
                                      0, 0, 0, 5,
@@ -81,7 +81,7 @@ void CFormattedIOV8Test::extract_0()
   buffer << data;
 
   // Load the source/sink with data
-  ss.put(buffer.data(), buffer.size()*sizeof(std::uint16_t));
+  ss.write(reinterpret_cast<char*>(buffer.data()), buffer.size()*sizeof(std::uint16_t));
 
   DAQ::V8::CRawBuffer rawBuf;
   ss >> rawBuf;
@@ -93,7 +93,6 @@ void CFormattedIOV8Test::extract_0()
 
 void CFormattedIOV8Test::insert_0()
 {
-  CTestSourceSink ss(34);
   std::vector<std::uint16_t> data = {0x0001, 0x0011,
                                      0, 0, 0, 0,
                                      0, 0, 0, 5,
@@ -102,13 +101,14 @@ void CFormattedIOV8Test::insert_0()
   DAQ::Buffer::ByteBuffer buffer;
   buffer << data;
 
-  CTestSourceSink sink(34);
+  std::stringstream sink;
   DAQ::V8::CRawBuffer rawBuf;
   rawBuf.setBuffer(buffer);
 
   sink << rawBuf;
 
-  auto record = sink.getBuffer();
+  std::vector<char> record(34);
+  sink.read(record.data(), record.size());
 
   std::vector<char> charBuffer(rawBuf.getBuffer().begin(), rawBuf.getBuffer().end());
 
@@ -121,3 +121,54 @@ void CFormattedIOV8Test::insert_0()
 
 }
 
+//void CFormattedIOV8Test::extract_0()
+//{
+//  CTestSourceSink ss(34);
+//  std::vector<std::uint16_t> data = {0x0001, 0x0011,
+//                                     0, 0, 0, 0,
+//                                     0, 0, 0, 5,
+//                                     0x0102, 0x0102, 0x0304, 0, 0,
+//                                     0, 0};
+//  DAQ::Buffer::ByteBuffer buffer;
+//  buffer << data;
+
+//  // Load the source/sink with data
+//  ss.put(buffer.data(), buffer.size()*sizeof(std::uint16_t));
+
+//  DAQ::V8::CRawBuffer rawBuf;
+//  ss >> rawBuf;
+
+//  CPPUNIT_ASSERT_EQUAL_MESSAGE("Extraction operator retrieves data we expect",
+//                               buffer, rawBuf.getBuffer());
+
+//}
+
+//void CFormattedIOV8Test::insert_0()
+//{
+//  CTestSourceSink ss(34);
+//  std::vector<std::uint16_t> data = {0x0001, 0x0011,
+//                                     0, 0, 0, 0,
+//                                     0, 0, 0, 5,
+//                                     0x0102, 0x0102, 0x0304, 0, 0,
+//                                     0, 0};
+//  DAQ::Buffer::ByteBuffer buffer;
+//  buffer << data;
+
+//  CTestSourceSink sink(34);
+//  DAQ::V8::CRawBuffer rawBuf;
+//  rawBuf.setBuffer(buffer);
+
+//  sink << rawBuf;
+
+//  auto record = sink.getBuffer();
+
+//  std::vector<char> charBuffer(rawBuf.getBuffer().begin(), rawBuf.getBuffer().end());
+
+//  CPPUNIT_ASSERT_EQUAL_MESSAGE("Number of bytes written are correct",
+//                               rawBuf.getBuffer().size(), record.size());
+
+//  CPPUNIT_ASSERT_EQUAL_MESSAGE("What was written actually was written",
+//                               charBuffer, record);
+
+
+//}

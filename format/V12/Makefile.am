@@ -34,11 +34,9 @@ nscldaq12_HEADERS = CRingItem.h \
 libdataformatv12_la_CFLAGS = -I@srcdir@/..
 
 libdataformatv12_la_CPPFLAGS = -I@srcdir@/.. \
-                               -I@top_srcdir@/utilities/Buffer \
-                               @LIBTCLPLUS_CFLAGS@
+                               -I@top_srcdir@/Buffer
 
-libdataformatv12_la_LDFLAGS = @top_builddir@/utilities/Buffer/libbuffer.la \
-                                @LIBTCLPLUS_LDFLAGS@
+libdataformatv12_la_LDFLAGS = @top_builddir@/Buffer/libbuffer.la
 
 noinst_PROGRAMS = unittests
 
@@ -57,29 +55,17 @@ unittests_SOURCES	= TestRunner.cpp \
                         dataformattest.cpp \
                         formatcasttest.cpp
 
-
-#				ringitemtests.cpp \
-#										 physcounttests.cpp		\
-#										formatoutputtests.cpp dataformattests.cpp       \
-#										fragmenttest.cpp glomparamtests.cpp factorytests.cpp
-
-unittests_LDADD	= $(CPPUNIT_LDFLAGS) 		\
+unittests_LDADD	= $(CPPUNIT_LIBS) 		\
                         @builddir@/libdataformatv12.la	\
-                        @top_builddir@/utilities/Buffer/libbuffer.la \
-                        @LIBEXCEPTION_LDFLAGS@
+                        @top_builddir@/Buffer/libbuffer.la
 
 unittests_CFLAGS= -I@srcdir@/..
 unittests_CPPFLAGS= -I@srcdir@/.. \
-                    -I@top_srcdir@/utilities/Buffer \
+                    -I@top_srcdir@/Buffer \
 		    @CPPUNIT_CFLAGS@ \
-                    @LIBTCLPLUS_CFLAGS@ \
-                    @TCL_FLAGS@ \
-                    -I@top_srcdir@/base/testutils
+                    -I@top_srcdir@/testutils
 
-unittests_LDFLAGS	= @CPPUNIT_LDFLAGS@ \
-                            @TCL_LDFLAGS@ \
-                          @LIBEXCEPTION_LDFLAGS@ \
-                          -Wl,"-rpath-link=$(libdir)"
+unittests_LDFLAGS	= -Wl,"-rpath-link=$(libdir)"
 
 
 TESTS=./unittests
