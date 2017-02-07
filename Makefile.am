@@ -6,8 +6,8 @@ SUBDIRS = utils \
           format \
           FormattedIO
 
-        #conversion \
-        #  IO \
+        #conversion
+        #  IO
 
 
 
