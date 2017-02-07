@@ -20,12 +20,9 @@
 #include "V12/CRingItem.h"
 #include "V12/DataFormat.h"
 
-#include <RangeError.h>
-#include <stdint.h>
-#include <time.h>
+#include <ctime>
 #include <string>
 #include <vector>
-#include <typeinfo>
 
 namespace DAQ {
   namespace V12 {

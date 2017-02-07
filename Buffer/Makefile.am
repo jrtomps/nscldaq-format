@@ -10,12 +10,6 @@ include_HEADERS = ByteBuffer.h \
                   Deserializer.h \
                   Deserializer2.h
 
-
-libbuffer_la_CXXFLAGS = -I@srcdir@ \
-                         @LIBTCLPLUS_CFLAGS@
-
-libbuffer_la_LIBADD = @LIBTCLPLUS_LDFLAGS@
-
 noinst_PROGRAMS = unittests
 
 unittests_SOURCES = TestRunner.cpp \
@@ -24,20 +18,13 @@ unittests_SOURCES = TestRunner.cpp \
                     bytebuffertest.cpp \
                     deserializertest.cpp
 
-unittests_LDADD	= $(builddir)/libbuffer.la \
-                    @CPPUNIT_LDFLAGS@ 		\
-									@LIBEXCEPTION_LDFLAGS@
+unittests_LDADD	= $(builddir)/libbuffer.la
 
-unittests_CPPFLAGS= -I@srcdir@ \
-                    -I@top_srcdir@/base/testutils \
-                    @CPPUNIT_CFLAGS@ \
-                    @LIBTCLPLUS_CFLAGS@ \
-                    @TCL_FLAGS@ 
+unittests_CPPFLAGS= -I@top_srcdir@/testutils \
+                    $(CPPUNIT_CFLAGS)
 
-unittests_LDFLAGS	= @CPPUNIT_LDFLAGS@ \
-										@LIBEXCEPTION_LDFLAGS@ \
-										@TCL_LDFLAGS@ \
-										-Wl,"-rpath-link=$(libdir)"
+unittests_LDFLAGS = $(CPPUNIT_LIBS) \
+                -Wl,"-rpath-link=$(libdir)"
 
 TESTS=./unittests
 

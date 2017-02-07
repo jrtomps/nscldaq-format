@@ -22,7 +22,6 @@
 
 #include <vector>
 #include <typeinfo>
-#include <RangeError.h>
 #include <string>
 
 namespace DAQ {
@@ -53,7 +52,7 @@ public:
 		  time_t   timestamp,
 		  std::vector<uint32_t> scalers,
                   uint32_t timeDivisor = 1, bool incremental=true);
-  CRingScalerItem(const CRingItem& rhs) throw(std::bad_cast);
+  CRingScalerItem(const CRingItem& rhs);
   CRingScalerItem(const CRingScalerItem& rhs);
   
   virtual ~CRingScalerItem();
@@ -79,8 +78,8 @@ public:
   
   bool isIncremental() const;
 
-  void     setScaler(uint32_t channel, uint32_t value) throw(CRangeError);
-  uint32_t getScaler(uint32_t channel) const throw(CRangeError);
+  void     setScaler(uint32_t channel, uint32_t value);
+  uint32_t getScaler(uint32_t channel) const;
   std::vector<uint32_t> getScalers() const;
   void setScalers(const std::vector<uint32_t>& values);
 
@@ -97,7 +96,7 @@ private:
   size_t bodySize(size_t n);
   void init(size_t n);
   void throwIfInvalidChannel(uint32_t channel, 
-			     const char* message) const throw(CRangeError);
+                 const char* message) const;
 };
    
 } // end of V11 namespace

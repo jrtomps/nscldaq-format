@@ -19,8 +19,6 @@
 
 #include <iosfwd>
 
-class CDataSource;
-class CDataSink;
 
 namespace DAQ
 {
@@ -43,6 +41,23 @@ extern std::ostream& operator<<(std::ostream& stream,
                                 const DAQ::V10::CRingItem& item);
 
 /*!
+ * \brief Extract a V10 CRingItem from the std::istream
+ *
+ * \param stream  the stream
+ * \param item    a V10 item
+ * \return the stream
+ */
+extern std::istream& operator>>(std::istream& stream,
+                                DAQ::V10::CRingItem& item);
+
+
+#ifdef NSCLDAQ_BUILD
+
+class CDataSource;
+class CDataSink;
+
+
+/*!
  * \brief Insert V10 CRingItem into a CDataSink
  *
  * \param stream  the stream to send data to
@@ -55,16 +70,6 @@ extern CDataSink& operator<<(CDataSink& stream,
 
 
 /*!
- * \brief Extract a V10 CRingItem from the std::istream
- *
- * \param stream  the stream
- * \param item    a V10 item
- * \return the stream
- */
-extern std::istream& operator>>(std::istream& stream,
-                                DAQ::V10::CRingItem& item);
-
-/*!
  * \brief Extract a V10 CRingItem from a CDataSource
  *
  * \param stream  the stream
@@ -73,5 +78,7 @@ extern std::istream& operator>>(std::istream& stream,
  */
 extern CDataSource& operator>>(CDataSource& stream,
                                DAQ::V10::CRingItem& item);
+
+#endif // NSCLDAQ_BUILD
 
 #endif // RINGIO_H

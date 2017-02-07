@@ -22,8 +22,6 @@
 #include "V12/DataFormat.h"
 
 #include <vector>
-#include <typeinfo>
-#include <RangeError.h>
 #include <string>
 
 namespace DAQ {
@@ -130,8 +128,6 @@ public:
 
 private:
   size_t bodySize() const;
-  void throwIfInvalidChannel(uint32_t channel,
-                 const char* message) const;
 };
    
 } // end of V12 namespace

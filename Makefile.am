@@ -1,9 +1,13 @@
 
+ACLOCAL_AMFLAGS=-I m4
 
-SUBDIRS = Buffer \
+SUBDIRS = utils \
+          Buffer \
           format \
-          IO \
-					FormattedIO \
-					conversion
+          FormattedIO
+
+        #conversion \
+        #  IO \
+
 
 

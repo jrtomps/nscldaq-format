@@ -62,13 +62,13 @@ CRingFragmentItem::CRingFragmentItem(uint64_t timestamp, uint32_t source, uint32
 /**
  * constructor 
  * 
- * Given a reference to a ring item create a CRingFragment item:
- * - If the type of the ring item is not EVB_FRAGMENT, throw std::bad_cast.
- * - Otherwise create this from the ring item.
+ * Given a reference to a ring item, create a CRingFragment item:
+ *
+ * \throws std::bad_cast if the type of the ring item is not EVB_FRAGMENT
  *
  * @param item - Reference to a generic ring item.
  */
-CRingFragmentItem::CRingFragmentItem(const CRingItem& rhs) throw(std::bad_cast) :
+CRingFragmentItem::CRingFragmentItem(const CRingItem& rhs):
   CRingItem(rhs)
 {
   if ((type() != EVB_FRAGMENT) && (type() != EVB_UNKNOWN_PAYLOAD)) {

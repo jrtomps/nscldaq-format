@@ -25,10 +25,6 @@ namespace DAQ {
   }
 }
 
-// Fwd declarations
-class CDataSource;
-class CDataSink;
-
 /*!
  * \brief Extract V8 buffer from an std::istream
  *
@@ -41,17 +37,6 @@ class CDataSink;
  * \return the stream
  */
 extern std::istream& operator>>(std::istream& stream, DAQ::V8::CRawBuffer& buffer);
-
-/*!
- * \brief Extract V8 buffer from a CDataSource
- *
- *  Same semantics as the istream version.
- *
- * \param stream  to read from
- * \param buffer  buffer to fill
- * \return the stream
- */
-extern CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer);
 
 
 /*!
@@ -67,6 +52,27 @@ extern CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
  */
 extern std::ostream& operator<<(std::ostream& stream, const DAQ::V8::CRawBuffer& buffer);
 
+
+
+#ifdef NSCLDAQ_BUILD
+
+// Fwd declarations
+class CDataSource;
+class CDataSink;
+
+
+/*!
+ * \brief Extract V8 buffer from a CDataSource
+ *
+ *  Same semantics as the istream version.
+ *
+ * \param stream  to read from
+ * \param buffer  buffer to fill
+ * \return the stream
+ */
+extern CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer);
+
+
 /*! \brief Insert V8 buffer into a CDataSink
  *
  * Same semantics as the ostream version
@@ -79,6 +85,9 @@ extern std::ostream& operator<<(std::ostream& stream, const DAQ::V8::CRawBuffer&
  * \throws std::runtime_error if the data size does not match gBfferSize
  */
 extern CDataSink& operator<<(CDataSink& stream, const DAQ::V8::CRawBuffer& buffer);
+
+
+#endif // NSCLDAQ_BUILD
 
 
 

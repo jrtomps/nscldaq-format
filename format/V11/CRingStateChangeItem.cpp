@@ -15,12 +15,11 @@
 */
 
 
-#include <config.h>
 #include "V11/CRingStateChangeItem.h"
 #include <V11/DataFormatV11.h>
-#include <RangeError.h>
 #include <sstream>
 #include <string.h>
+#include <stdexcept>
 
 
 using namespace std;
@@ -67,13 +66,13 @@ CRingStateChangeItem::CRingStateChangeItem(uint16_t reason) :
    \param title      - Title string.  The length of this string must be at most
                        TITLE_MAXSIZE.
 
-   \throw CRangeError - If the title string can't fit in s_title.
+   \throw std::out_of_range - If the title string can't fit in s_title.
 */
 CRingStateChangeItem::CRingStateChangeItem(uint16_t reason,
 					   uint32_t runNumber,
 					   uint32_t timeOffset,
 					   time_t   timestamp,
-					   std::string title) throw(CRangeError) :
+                       std::string title) :
   CRingItem(reason, sizeof(StateChangeItem))
 
 {
@@ -106,7 +105,7 @@ CRingStateChangeItem::CRingStateChangeItem(uint16_t reason,
                        TITLE_MAXSIZE.
    @param offsetDivisor - What timeOffset needs to be divided by to get seconds.
 
-   \throw CRangeError - If the title string can't fit in s_title.
+   \throw std::out_of_range - If the title string can't fit in s_title.
  */
 CRingStateChangeItem::CRingStateChangeItem(
     uint64_t eventTimestamp, uint32_t sourceId, uint32_t barrierType, uint16_t reason,
@@ -136,7 +135,7 @@ CRingStateChangeItem::CRingStateChangeItem(
    \param item - The source item.
    \throw bad_cast - the item is not a state change item.
 */
-CRingStateChangeItem::CRingStateChangeItem(const CRingItem& item) throw(std::bad_cast) : 
+CRingStateChangeItem::CRingStateChangeItem(const CRingItem& item) :
   CRingItem(item)
 {
   if (!isStateChange()) {
@@ -274,16 +273,21 @@ CRingStateChangeItem::computeElapsedTime() const
 /*!
   Set the title string.
   \param title - new title string.
-  \throw CRangeError - if the title string is too long to fit.
+  \throw std::out_of_range - if the title string is too long to fit.
 */
 void
-CRingStateChangeItem::setTitle(string title)  throw(CRangeError)
+CRingStateChangeItem::setTitle(string title)
 {
     // Ensure the title is small enough.
   
     if(title.size() > TITLE_MAXSIZE) {
-      throw CRangeError(0, TITLE_MAXSIZE, title.size(),
-                        "Checking size of title against TITLE_MAXSIZE");
+        std::string msg ("Failure while ");
+        msg += "checking size of title against TITLE_MAXSIZE.";
+
+        msg += " Index " + to_string(title.size());
+        msg += " is not in range [0," + to_string(TITLE_MAXSIZE);
+        msg += ").";
+        throw std::out_of_range(msg);
     }
     pStateChangeItemBody pItem =
         reinterpret_cast<pStateChangeItemBody>(getBodyPointer());

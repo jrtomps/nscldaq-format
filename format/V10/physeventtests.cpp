@@ -4,7 +4,6 @@
 #include <cppunit/Asserter.h>
 #include "Asserts.h"
 
-#include <config.h>
 #include <V10/DataFormatV10.h>
 #include <ByteBuffer.h>
 #include <DebugUtils.h>

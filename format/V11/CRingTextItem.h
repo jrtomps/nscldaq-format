@@ -21,7 +21,6 @@
 
 #include "V11/DataFormatV11.h"
 
-#include <RangeError.h>
 #include <stdint.h>
 #include <time.h>
 #include <string>
@@ -54,7 +53,7 @@ public:
     std::vector<std::string> theStrings, uint32_t offsetTime, time_t timestamp,
     int offsetDivisor = 1
   );
-  CRingTextItem(const CRingItem& rhs) throw(std::bad_cast);
+  CRingTextItem(const CRingItem& rhs);
   CRingTextItem(const CRingTextItem& rhs);
 
   virtual ~CRingTextItem();

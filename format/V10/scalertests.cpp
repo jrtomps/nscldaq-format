@@ -115,7 +115,7 @@ void scltests::castcons()
   catch (bad_cast) {
     thrown = true;
   }
-  catch (CRangeError& re) {
+  catch (std::out_of_range& re) {
     thrown = true;
   }
   ASSERT(!thrown);

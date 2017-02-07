@@ -3,8 +3,6 @@
 
 #include <V12/CRawRingItem.h>
 #include <V12/CRingItem.h>
-#include <typeinfo>
-#include <iostream>
 
 namespace DAQ {
 namespace V12 {

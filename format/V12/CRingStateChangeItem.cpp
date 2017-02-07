@@ -15,7 +15,6 @@
 */
 
 
-#include <config.h>
 #include "V12/CRingStateChangeItem.h"
 #include <V12/CRawRingItem.h>
 #include <Deserializer.h>

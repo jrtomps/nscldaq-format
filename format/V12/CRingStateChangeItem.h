@@ -21,8 +21,6 @@
 #include <V12/DataFormat.h>
 
 #include <string>
-#include <typeinfo>
-#include <RangeError.h>
 
 namespace DAQ {
   namespace V12 {

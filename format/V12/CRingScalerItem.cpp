@@ -14,7 +14,6 @@
 	     East Lansing, MI 48824-1321
 */
 
-#include <config.h>
 #include "V12/CRingScalerItem.h"
 #include <V12/DataFormat.h>
 #include <V12/CRawRingItem.h>
@@ -550,19 +549,6 @@ CRingScalerItem::bodySize() const
 {
   return (7+m_scalers.size())*sizeof(uint32_t);
 }
-/*
-** Throws a range error if the channel number is invalid.
-*/
-void
-CRingScalerItem::throwIfInvalidChannel(uint32_t channel,
-                       const char* message) const
-{
-    if (channel >= m_scalers.size()) {
-      throw CRangeError(0, m_scalers.size(), channel,
-                        message);
-    }
-}
-
 
 } // end of V12 namespace
 } // end DAQ

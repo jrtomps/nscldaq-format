@@ -16,8 +16,6 @@
 
 #include "RingIOV10.h"
 
-#include <CDataSource.h>
-#include <CDataSink.h>
 #include <V10/CRingItem.h>
 
 #include <V10/DataFormatV10.h>
@@ -33,14 +31,6 @@ std::ostream& operator<<(std::ostream& stream,
   return stream;
 }
 
-
-CDataSink& operator<<(CDataSink& sink,
-                      const DAQ::V10::CRingItem& item)
-{
-  sink.put(item.getItemPointer(), item.size());
-
-  return sink;
-}
 
 std::istream& operator>>(std::istream& stream,
                          DAQ::V10::CRingItem& item)
@@ -61,6 +51,20 @@ std::istream& operator>>(std::istream& stream,
 }
 
 
+#ifdef NSCLDAQ_BUILD
+
+#include <CDataSource.h>
+#include <CDataSink.h>
+
+
+CDataSink& operator<<(CDataSink& sink,
+                      const DAQ::V10::CRingItem& item)
+{
+  sink.put(item.getItemPointer(), item.size());
+
+  return sink;
+}
+
 CDataSource& operator>>(CDataSource& source,
                         DAQ::V10::CRingItem& item)
 {
@@ -78,3 +82,5 @@ CDataSource& operator>>(CDataSource& source,
 
   return source;
 }
+
+#endif

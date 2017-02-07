@@ -17,8 +17,6 @@
 
 #include "V12/CRingItem.h"
 
-#include <typeinfo>
-
 namespace DAQ {
   namespace V12 {
 

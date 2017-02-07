@@ -21,9 +21,6 @@
 #include "V12/CRingItem.h"
 #include "V12/DataFormat.h"
 
-#include <time.h>
-#include <typeinfo>
-#include <string>
 #include <ctime>
 
 namespace DAQ {
