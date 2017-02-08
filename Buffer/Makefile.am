@@ -17,7 +17,7 @@ unittests_SOURCES = TestRunner.cpp \
                     bytebuffertest.cpp \
                     deserializertest.cpp
 
-unittests_LDADD	= $(builddir)/libbuffer.la
+unittests_LDADD	= @builddir@/libbuffer.la
 
 unittests_CPPFLAGS= -I@top_srcdir@/testutils \
                     $(CPPUNIT_CFLAGS)
