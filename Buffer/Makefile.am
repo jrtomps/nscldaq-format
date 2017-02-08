@@ -11,7 +11,6 @@ include_HEADERS = ByteBuffer.h \
 
 noinst_PROGRAMS = unittests
 
-unittests_DEPENDENCIES = @builddir@/libbuffer.la
 
 unittests_SOURCES = TestRunner.cpp \
                     translatorptrtest.cpp \
@@ -19,7 +18,7 @@ unittests_SOURCES = TestRunner.cpp \
                     bytebuffertest.cpp \
                     deserializertest.cpp
 
-unittests_LDADD	= @builddir@/libbuffer.la
+unittests_LDADD	= libbuffer.la
 
 unittests_CPPFLAGS= -I@top_srcdir@/testutils \
                     $(CPPUNIT_CFLAGS)
