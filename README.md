@@ -5,13 +5,25 @@ The NSCLDAQ format package addresses the need for users to operate on data
 taken with NSCLDAQ without requiring the entirety of NSCLDAQ. The goal of this
 is to simplify the task of the experimenter. We provide:
 
-1. Classes that encapsulate version 8, 10, and 11 data.
+1. Classes that encapsulate version 8, 10, 11, and 12 data.
 2. I/O tools for extracting these data from event files. For example, users can
-   write things like: 
+   write things like a dumper program: 
 ```
-CRingItem item; 
-std::cin >> item; 
-std::cout << item.size();
+
+using namespace DAQ::V12;
+using namespace std;
+
+CRawRingItem item; 
+
+ifstream file("run-0012-00.evt", ios::binary);
+
+file >> item;
+while (file) {
+  auto pItem = RingItemFactory::createRingItem(item);
+  cout << item.toString();
+  cout << "----------------------------------" << endl;
+}
+
 ```
 3. A filter framework to quickly develop programs that process version 11
    data in event files.
@@ -28,7 +40,9 @@ The NSCLDAQ format package leverages the GNU autotools build system that generat
 ```
 autoreconf -i
 ./configure --prefix=/path/to/install
-make all install check
+make all 
+make install 
+make check
 ```
 
 If you are building from a distribution tarball, then you skip the first step and just do:
