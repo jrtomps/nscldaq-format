@@ -14,6 +14,7 @@
 #include <V10/DataFormatV10.h>
 #include <string.h>
 #include <time.h>
+#include <stdexcept>
 
 using namespace std;
 using namespace DAQ::V10;

@@ -1,8 +1,7 @@
 lib_LTLIBRARIES = libbuffer.la
 
 
-libbuffer_la_SOURCES =  ByteBuffer.cpp \
-                        ByteOrder.cpp
+libbuffer_la_SOURCES = ByteOrder.cpp
 
 include_HEADERS = ByteBuffer.h \
                   ByteOrder.h \
