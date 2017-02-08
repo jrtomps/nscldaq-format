@@ -50,8 +50,12 @@ std::istream& operator>>(std::istream& stream,
   return stream;
 }
 
+#ifdef nothing
+#warning "nthing"
+#endif
 
 #ifdef NSCLDAQ_BUILD
+#warning "in nscldaq_build"
 
 #include <CDataSource.h>
 #include <CDataSink.h>

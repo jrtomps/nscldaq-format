@@ -14,8 +14,8 @@
              East Lansing, MI 48824-1321
 */
 
-#ifndef NSCLDAQ10_RINGIO_H
-#define NSCLDAQ10_RINGIO_H
+#ifndef DAQ_V10_RINGIO_H
+#define DAQ_V10_RINGIO_H
 
 #include <iosfwd>
 
@@ -81,4 +81,4 @@ extern CDataSource& operator>>(CDataSource& stream,
 
 #endif // NSCLDAQ_BUILD
 
-#endif // RINGIO_H
+#endif // DAQ_V10_RINGIO_H

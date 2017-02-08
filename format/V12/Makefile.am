@@ -33,10 +33,18 @@ nscldaq12_HEADERS = CRingItem.h \
 
 libdataformatv12_la_CFLAGS = -I@srcdir@/..
 
+if FORMAT_STANDALONE
 libdataformatv12_la_CPPFLAGS = -I@srcdir@/.. \
                                -I@top_srcdir@/Buffer
 
 libdataformatv12_la_LDFLAGS = @top_builddir@/Buffer/libbuffer.la
+else
+FORMAT_DIR=utilities/nscldaq-format
+libdataformatv12_la_CPPFLAGS = -I@srcdir@/.. \
+                               -I@top_srcdir@/$(FORMAT_DIR)/Buffer
+
+libdataformatv12_la_LDFLAGS = @top_builddir@/$(FORMAT_DIR)/Buffer/libbuffer.la
+endif
 
 noinst_PROGRAMS = unittests
 
@@ -55,15 +63,25 @@ unittests_SOURCES	= TestRunner.cpp \
                         dataformattest.cpp \
                         formatcasttest.cpp
 
+if FORMAT_STANDALONE
 unittests_LDADD	= $(CPPUNIT_LIBS) 		\
                         @builddir@/libdataformatv12.la	\
                         @top_builddir@/Buffer/libbuffer.la
-
-unittests_CFLAGS= -I@srcdir@/..
 unittests_CPPFLAGS= -I@srcdir@/.. \
                     -I@top_srcdir@/Buffer \
 		    @CPPUNIT_CFLAGS@ \
                     -I@top_srcdir@/testutils
+else
+unittests_LDADD	= $(CPPUNIT_LIBS) 		\
+                        @builddir@/libdataformatv12.la	\
+                        @top_builddir@/$(FORMAT_DIR)/Buffer/libbuffer.la
+unittests_CPPFLAGS= -I@srcdir@/.. \
+                    -I@top_srcdir@/$(FORMAT_DIR)/Buffer \
+		    @CPPUNIT_CFLAGS@ \
+                    -I@top_srcdir@/$(FORMAT_DIR)/testutils
+endif
+
+unittests_CFLAGS= -I@srcdir@/..
 
 unittests_LDFLAGS	= -Wl,"-rpath-link=$(libdir)"
 
