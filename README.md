@@ -9,7 +9,6 @@ is to simplify the task of the experimenter. We provide:
 2. I/O tools for extracting these data from event files. For example, users can
    write things like a dumper program: 
 ```
-
 using namespace DAQ::V12;
 using namespace std;
 
@@ -23,7 +22,6 @@ while (file) {
   cout << item.toString();
   cout << "----------------------------------" << endl;
 }
-
 ```
 3. A filter framework to quickly develop programs that process version 11
    data in event files.
