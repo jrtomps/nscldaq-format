@@ -16,6 +16,7 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <stdexcept>
 
 using namespace std;
 using namespace DAQ::V11;

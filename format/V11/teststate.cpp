@@ -14,7 +14,7 @@
 
 #include <string.h>
 #include <time.h>
-
+#include <stdexcept>
 
 using namespace std;
 
