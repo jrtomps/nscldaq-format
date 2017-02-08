@@ -8,7 +8,8 @@ is to simplify the task of the experimenter. We provide:
 1. Classes that encapsulate version 8, 10, 11, and 12 data.
 2. I/O tools for extracting these data from event files. For example, users can
    write things like a dumper program: 
-```
+
+```cpp
 using namespace DAQ::V12;
 using namespace std;
 
@@ -23,6 +24,7 @@ while (file) {
   cout << "----------------------------------" << endl;
 }
 ```
+
 3. A filter framework to quickly develop programs that process version 11
    data in event files.
 4. A dumper program to inspect the data in your event file.
