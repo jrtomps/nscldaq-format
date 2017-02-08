@@ -11,6 +11,8 @@ include_HEADERS = ByteBuffer.h \
 
 noinst_PROGRAMS = unittests
 
+unittests_DEPENDENCIES = @builddir@/libbuffer.la
+
 unittests_SOURCES = TestRunner.cpp \
                     translatorptrtest.cpp \
                     byteordertest.cpp\
