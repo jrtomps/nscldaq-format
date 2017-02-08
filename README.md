@@ -20,8 +20,10 @@ ifstream file("run-0012-00.evt", ios::binary);
 file >> item;
 while (file) {
   auto pItem = RingItemFactory::createRingItem(item);
-  cout << item.toString();
+  cout << pItem->toString();
   cout << "----------------------------------" << endl;
+
+  file >> item;
 }
 ```
 
