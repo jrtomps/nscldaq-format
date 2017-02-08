@@ -64,6 +64,22 @@ bool mustSwap(ByteIterator beg, ByteIterator end) {
 }
 
 
+template<class ByteIterator>
+void parseHeader(ByteIterator beg, ByteIterator end, uint32_t& size, uint32_t& type,
+                 uint64_t& tstamp, uint32_t& sourceId, bool& swapRequired)
+{
+    if (beg+20 > end) {
+        throw std::runtime_error("DAQ::V12::Parser::parseHeader() insufficient data provided");
+    }
+
+    swapRequired = mustSwap(beg+4, beg+8);
+    DAQ::BO::CByteSwapper swapper(swapRequired);
+    swapper.interpretAs(beg, size);
+    swapper.interpretAs(beg+4, type);
+    swapper.interpretAs(beg+8, tstamp);
+    swapper.interpretAs(beg+16, sourceId);
+}
+
 
 /*! \brief Parse size and type
  *

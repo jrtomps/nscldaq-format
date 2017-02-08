@@ -18,7 +18,7 @@
 #ifndef DAQ_V12_CRINGITEMFACTORY_H
 #define DAQ_V12_CRINGITEMFACTORY_H
 
-#include <CRingItem.h>
+#include <V12/CRingItem.h>
 
 namespace DAQ {
   namespace V12 {
