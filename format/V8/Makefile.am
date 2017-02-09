@@ -9,7 +9,8 @@ libdataformatv8_la_SOURCES = bheader.cpp \
 				CGenericBodyParser.cpp \
                                 CControlBuffer.cpp \
                                 CTextBuffer.cpp \
-                                CVoidBuffer.cpp
+                                CVoidBuffer.cpp \
+																DataFormatV8.cpp
 
 nscldaq8dir = @includedir@/V8
 
