@@ -22,6 +22,7 @@
 #include <map>
 
 using namespace std;
+using namespace DAQ::V12;
 
 static bool initialized = false;
 static map<string, int>   textToInt;
