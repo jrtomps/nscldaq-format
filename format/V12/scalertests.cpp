@@ -44,6 +44,7 @@ class scltests : public CppUnit::TestFixture {
   CPPUNIT_TEST(setScalers_0);
   CPPUNIT_TEST(assign_0);
   CPPUNIT_TEST(toString_0);
+  CPPUNIT_TEST(formatMask_0);
   CPPUNIT_TEST_SUITE_END();
 
 
@@ -77,6 +78,7 @@ protected:
   void setScalers_0();
   void assign_0();
   void toString_0();
+  void formatMask_0();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(scltests);
@@ -424,4 +426,30 @@ void scltests::toString_0()
     msg += "    0              1                 0.10\n";
 
     EQMSG("tostring divisor=1", msg, item.toString());
+}
+
+
+void scltests::formatMask_0()
+{
+    CRingScalerItem item(
+                123, 1,
+                10, 20,  1485797295, {255}
+                );
+    CRingScalerItem::m_scalerFormatMask = 0xf;
+
+    std::string msg;
+    msg += "Size (bytes) : 52\n";
+    msg += "Type         : Scalers\n";
+    msg += "Timestamp    : 123\n";
+    msg += "Source Id    : 1\n";
+    msg += "Unix Tstamp  : Mon Jan 30 12:28:15 2017\n";
+    msg += "Start Offset : 10.0 seconds\n";
+    msg += "End Offset   : 20.0 seconds\n";
+    msg += "Incremental? : Yes\n";
+    msg += "\n";
+    msg += "Index         Counts                 Rate (counts/sec)\n";
+    msg += "    0             15                 1.50\n";
+
+    EQMSG("tostring with format mask", msg, item.toString());
+
 }

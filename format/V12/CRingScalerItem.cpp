@@ -32,6 +32,10 @@ using namespace std;
 namespace DAQ {
   namespace V12 {
 
+
+  // default the mask to 64 bits (in other words, don't mask anything out)
+  uint64_t CRingScalerItem::m_scalerFormatMask = 0xffffffffffffffff;
+
 ///////////////////////////////////////////////////////////////////////////////////////
 //
 // Constructors and other canonicals.
@@ -525,10 +529,11 @@ CRingScalerItem::toString() const
   out << "Index         Counts                 Rate (counts/sec)\n";
   for (int i=0; i < scalers.size(); i++) {
     char line[128];
-    double rate = (static_cast<double>(scalers[i])/duration);
+    uint64_t value = scalers[i] & m_scalerFormatMask;
+    double rate = (static_cast<double>(value)/duration);
 
     sprintf(line, "%5d      %9d                 %.2f\n",
-        i, scalers[i], rate);
+        i, value, rate);
     out << line;
   }
 

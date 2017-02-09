@@ -29,7 +29,8 @@ nscldaq12_HEADERS = CRingItem.h \
                     CCompoundRingItem.h \
                     CRingItemParser.h \
                     CDataFormatItem.h \
-                    format_cast.h
+                    format_cast.h \
+                    DataFormat.h
 
 libdataformatv12_la_CFLAGS = -I@srcdir@/..
 
