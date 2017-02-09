@@ -8,6 +8,7 @@
 #include <V12/StringsToIntegers.h>
 
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
