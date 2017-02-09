@@ -55,6 +55,8 @@ public:
   uint32_t        m_scalerWidth;
   std::vector<uint32_t>       m_scalers;
 
+  static uint64_t m_scalerFormatMask;
+
   // Constructors and canonicals.:
 
 public:
