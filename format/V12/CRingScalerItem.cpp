@@ -34,7 +34,7 @@ namespace DAQ {
 
 
   // default the mask to 64 bits (in other words, don't mask anything out)
-  uint64_t m_scalerFormatMask = 0xffffffffffffffff;
+  uint64_t CRingScalerItem::m_scalerFormatMask = 0xffffffffffffffff;
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //
