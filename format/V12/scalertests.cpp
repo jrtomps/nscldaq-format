@@ -448,7 +448,7 @@ void scltests::formatMask_0()
     msg += "Incremental? : Yes\n";
     msg += "\n";
     msg += "Index         Counts                 Rate (counts/sec)\n";
-    msg += "    0             15                 0.10\n";
+    msg += "    0             15                 1.50\n";
 
     EQMSG("tostring with format mask", msg, item.toString());
 
