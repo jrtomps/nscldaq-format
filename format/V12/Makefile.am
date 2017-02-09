@@ -65,7 +65,7 @@ unittests_SOURCES	= TestRunner.cpp \
                         ringparsertests.cpp \
                         dataformattest.cpp \
                         formatcasttest.cpp \
-												stringtointtest.cpp
+												stringtointstest.cpp
 
 if FORMAT_STANDALONE
 unittests_LDADD	= $(CPPUNIT_LIBS) 		\

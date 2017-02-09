@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <V12/DataFormat.h>
+#include <stdexcept>
 
 #include <map>
 
@@ -71,10 +72,13 @@ convertOne(string aNumber)
       return textToInt[aNumber];
     }
     else {
-      string whyBad  = " must be an integer or a symbolic item type but was ";
-      whyBad        += aNumber;
-      throw CInvalidArgumentException(aNumber, whyBad,
-				      string("Converting a list to integers"));
+      string whyBad  = "Failed while converting list of types. ";
+      whyBad += "Elements of list must be an integer or a symbolic ";
+      whyBad += " item type. The user provided ";
+      whyBad += "'";
+      whyBad += aNumber + "'";
+
+      throw std::invalid_argument(whyBad);
     }
   }
   return value;
