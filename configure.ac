@@ -22,6 +22,7 @@ AM_CONDITIONAL([FORMAT_STANDALONE],[true])
 
 AC_CONFIG_FILES([Makefile
                  utils/Makefile
+                 testutils/Makefile
                  Buffer/Makefile
                  FormattedIO/Makefile
                  IO/Makefile
