@@ -18,6 +18,8 @@ AC_SUBST([AM_CXXFLAGS], [-fno-strict-aliasing])
 
 AM_INIT_AUTOMAKE([foreign])
 
+AM_CONDITIONAL([FORMAT_STANDALONE],[true])
+
 AC_CONFIG_FILES([Makefile
                  utils/Makefile
                  Buffer/Makefile

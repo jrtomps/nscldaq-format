@@ -20,8 +20,13 @@ unittests_SOURCES = TestRunner.cpp \
 
 unittests_LDADD	= libbuffer.la
 
+if FORMAT_STANDALONE
 unittests_CPPFLAGS= -I@top_srcdir@/testutils \
                     $(CPPUNIT_CFLAGS)
+else
+unittests_CPPFLAGS= -I@top_srcdir@/base/testutils \
+                    $(CPPUNIT_CFLAGS)
+endif
 
 unittests_LDFLAGS = $(CPPUNIT_LIBS) \
                 -Wl,"-rpath-link=$(libdir)"

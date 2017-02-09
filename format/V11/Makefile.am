@@ -44,14 +44,20 @@ unittests_SOURCES	= TestRunner.cpp \
 										formatoutputtests.cpp dataformattests.cpp       \
 										fragmenttest.cpp glomparamtests.cpp factorytests.cpp 
 
-unittests_LDADD	= -L$(libdir) $(CPPUNIT_LIBS) 		\
-                        @builddir@/libdataformatv11.la
-
-unittests_CFLAGS = -I@srcdir@/..
+if FORMAT_STANDALONE
 unittests_CPPFLAGS = -I@srcdir@/.. \
                     $(CPPUNIT_CFLAGS) \
                     -I@top_srcdir@/testutils
+else
+FORMAT_DIR=utilities/nscldaq-format
+unittests_CPPFLAGS = -I@srcdir@/.. \
+                    $(CPPUNIT_CFLAGS) \
+                    -I@top_srcdir@/$(FORMAT_DIR)/testutils
+endif
 
+unittests_LDADD	= -L$(libdir) $(CPPUNIT_LIBS) 		\
+                        @builddir@/libdataformatv11.la
+unittests_CFLAGS = -I@srcdir@/..
 unittests_LDFLAGS = -Wl,"-rpath-link=$(libdir)"
 
 
