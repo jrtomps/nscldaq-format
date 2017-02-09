@@ -4,7 +4,9 @@ ACLOCAL_AMFLAGS=-I m4
 SUBDIRS = utils \
           Buffer \
           format \
-          FormattedIO
+          FormattedIO \
+					testutils
+
 
         #conversion
         #  IO
