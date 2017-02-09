@@ -12,7 +12,8 @@ libdataformatv12_la_SOURCES = CRingItem.cpp \
                               CAbnormalEndItem.cpp \
                               CCompoundRingItem.cpp \
                               CRingItemParser.cpp \
-                              CDataFormatItem.cpp
+                              CDataFormatItem.cpp \
+															StringsToIntegers.cpp 
 
 nscldaq12dir = @includedir@/V12
 
@@ -30,7 +31,8 @@ nscldaq12_HEADERS = CRingItem.h \
                     CRingItemParser.h \
                     CDataFormatItem.h \
                     format_cast.h \
-                    DataFormat.h
+                    DataFormat.h \
+										StringsToIntegers.h
 
 libdataformatv12_la_CFLAGS = -I@srcdir@/..
 
@@ -62,7 +64,8 @@ unittests_SOURCES	= TestRunner.cpp \
                         compounditemtests.cpp \
                         ringparsertests.cpp \
                         dataformattest.cpp \
-                        formatcasttest.cpp
+                        formatcasttest.cpp \
+												stringtointtest.cpp
 
 if FORMAT_STANDALONE
 unittests_LDADD	= $(CPPUNIT_LIBS) 		\
