@@ -6,6 +6,8 @@ SUBDIRS = utils \
           format \
           FormattedIO
 
+DIST_SUBDIRS = testutils
+
         #conversion
         #  IO
 
