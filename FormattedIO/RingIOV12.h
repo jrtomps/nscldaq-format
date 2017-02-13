@@ -1,53 +1,14 @@
 #ifndef DAQ_V12_RINGIOV12_H
 #define DAQ_V12_RINGIOV12_H
 
-#include <V12/CRingItem.h>
-
-#include <array>
 #include <iosfwd>
 
 namespace DAQ {
-  namespace V12 {
+namespace V12 {
     class CRawRingItem;
+} // end V12
+} // end DAQ
 
-    /*!
-     * \brief Serialize the ring item header into some memory
-     *
-     * \param item      the ring item to serialize
-     * \param buffer    the buffer to fill with the serial representation
-     *
-     */
-    template<class ByteIterator>
-    ByteIterator serializeHeader(const DAQ::V12::CRingItem &item, ByteIterator out)
-    {
-        uint32_t temp32;
-        uint64_t temp64;
-
-        temp32 = item.size();
-        out = std::copy(reinterpret_cast<char*>(&temp32),
-                        reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-                        out);
-
-        temp32 = item.type();
-        out = std::copy(reinterpret_cast<char*>(&temp32),
-                        reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-                        out);
-
-        temp64 = item.getEventTimestamp();
-        out = std::copy(reinterpret_cast<char*>(&temp64),
-                        reinterpret_cast<char*>(&temp64)+sizeof(temp64),
-                        out);
-
-        temp32 = item.getSourceId();
-        out = std::copy(reinterpret_cast<char*>(&temp32),
-                        reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-                        out);
-
-        return out;
-
-    }
-  }
-}
 
 /*!
  * \brief Insert V12 CRingItem into a std::ostream

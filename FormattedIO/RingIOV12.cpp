@@ -25,20 +25,12 @@
 #include <iostream>
 #include <algorithm>
 
-namespace DAQ {
-namespace V12 {
-
-
-
-} // end V12
-} // end DAQ
-
 std::ostream& operator<<(std::ostream& stream,
                          const DAQ::V12::CRawRingItem& item)
 {
   std::array<char,20> header;
 
-  serializeHeader(item, header.begin());
+  DAQ::V12::serializeHeader(item, header.begin());
 
   stream.write(header.data(), header.size());
   stream.write(reinterpret_cast<const char*>(item.getBody().data()), item.getBody().size());
