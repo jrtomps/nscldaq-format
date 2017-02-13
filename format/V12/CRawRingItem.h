@@ -21,7 +21,7 @@
 #include <V12/DataFormat.h>
 
 #include <ByteBuffer.h>
-#include <Deserializer2.h>
+#include <RangeDeserializer.h>
 
 namespace DAQ {
 namespace V12 {

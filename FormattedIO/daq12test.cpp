@@ -22,7 +22,7 @@ static const char* Copyright = "(C) Copyright Michigan State University 2014, Al
 
 #include <RingIOV12.h>
 #include <V12/CRawRingItem.h>
-#include <Deserializer2.h>
+#include <RangeDeserializer.h>
 
 #ifdef NSCLDAQ_BUILD
 #include <CTestSourceSink.h>

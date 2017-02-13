@@ -7,7 +7,7 @@ include_HEADERS = ByteBuffer.h \
                   ByteOrder.h \
                   BufferPtr.h \
                   ContainerDeserializer.h \
-                  Deserializer2.h
+                  RangeDeserializer.h
 
 noinst_PROGRAMS = unittests
 

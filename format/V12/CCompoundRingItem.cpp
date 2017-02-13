@@ -18,7 +18,7 @@
 #include <V12/CRingItemParser.h>
 #include <ByteBuffer.h>
 #include <ByteOrder.h>
-#include <Deserializer2.h>
+#include <RangeDeserializer.h>
 #include <sstream>
 #include <iterator>
 #include <utility>
