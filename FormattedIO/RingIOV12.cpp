@@ -25,34 +25,22 @@
 #include <iostream>
 #include <algorithm>
 
+namespace DAQ {
+namespace V12 {
+
+
+
+} // end V12
+} // end DAQ
+
 std::ostream& operator<<(std::ostream& stream,
                          const DAQ::V12::CRawRingItem& item)
 {
-  char header[20];
-  uint32_t temp32;
-  uint64_t temp64;
+  std::array<char,20> header;
 
-  temp32 = item.size();
-  std::copy(reinterpret_cast<char*>(&temp32),
-            reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-            header);
+  serializeHeader(item, header.begin());
 
-  temp32 = item.type();
-  std::copy(reinterpret_cast<char*>(&temp32),
-            reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-            header+4);
-
-  temp64 = item.getEventTimestamp();
-  std::copy(reinterpret_cast<char*>(&temp64),
-            reinterpret_cast<char*>(&temp64)+sizeof(temp64),
-            header+8);
-
-  temp32 = item.getSourceId();
-  std::copy(reinterpret_cast<char*>(&temp32),
-            reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-            header+16);
-
-  stream.write(reinterpret_cast<char*>(header), sizeof(header));
+  stream.write(header.data(), header.size());
   stream.write(reinterpret_cast<const char*>(item.getBody().data()), item.getBody().size());
 
   return stream;
@@ -63,13 +51,13 @@ std::ostream& operator<<(std::ostream& stream,
 std::istream& operator>>(std::istream& stream,
                          DAQ::V12::CRawRingItem& item)
 {
-    char header[20];
-    stream.read(header, sizeof(header));
+    std::array<char,20> header;
+    stream.read(header.data(), header.size());
 
     uint32_t size, type, sourceId;
     uint64_t tstamp;
     bool swapNeeded;
-    DAQ::V12::Parser::parseHeader(header, header+sizeof(header),
+    DAQ::V12::Parser::parseHeader(header.begin(), header.end(),
                                   size, type, tstamp, sourceId, swapNeeded);
 
     item.setType(type);
@@ -78,8 +66,8 @@ std::istream& operator>>(std::istream& stream,
 
     item.setMustSwap(swapNeeded);
 
-    item.getBody().resize(size-sizeof(header));
-    stream.read(reinterpret_cast<char*>(item.getBody().data()), size-sizeof(header));
+    item.getBody().resize(size-header.size());
+    stream.read(reinterpret_cast<char*>(item.getBody().data()), size-header.size());
 
     return stream;
 }
@@ -93,31 +81,10 @@ std::istream& operator>>(std::istream& stream,
 CDataSink& operator<<(CDataSink& sink,
                       const DAQ::V12::CRawRingItem& item)
 {
-    char header[20];
-    uint32_t temp32;
-    uint64_t temp64;
+    std::array<char,20> header;
+    DAQ::V12::serializeHeader(item, header.begin());
 
-    temp32 = item.size();
-    std::copy(reinterpret_cast<char*>(&temp32),
-              reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-              header);
-
-    temp32 = item.type();
-    std::copy(reinterpret_cast<char*>(&temp32),
-              reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-              header+4);
-
-    temp64 = item.getEventTimestamp();
-    std::copy(reinterpret_cast<char*>(&temp64),
-              reinterpret_cast<char*>(&temp64)+sizeof(temp64),
-              header+8);
-
-    temp32 = item.getSourceId();
-    std::copy(reinterpret_cast<char*>(&temp32),
-              reinterpret_cast<char*>(&temp32)+sizeof(temp32),
-              header+16);
-
-    sink.put(reinterpret_cast<char*>(header), sizeof(header));
+    sink.put(header.data(), header.size());
     sink.put(reinterpret_cast<const char*>(item.getBody().data()), item.getBody().size());
 
   return sink;
@@ -127,13 +94,13 @@ CDataSink& operator<<(CDataSink& sink,
 CDataSource& operator>>(CDataSource& source,
                         DAQ::V12::CRawRingItem& item)
 {
-    char header[20];
-    source.read(reinterpret_cast<char*>(header), sizeof(header));
+    std::array<char,20> header;
+    source.read(header.data(), header.size());
 
     uint32_t size, type, sourceId;
     uint64_t tstamp;
     bool swapNeeded;
-    DAQ::V12::Parser::parseHeader(header, header+sizeof(header),
+    DAQ::V12::Parser::parseHeader(header.begin(), header.end(),
                                   size, type, tstamp, sourceId, swapNeeded);
 
     item.setType(type);
@@ -142,8 +109,8 @@ CDataSource& operator>>(CDataSource& source,
 
     item.setMustSwap(swapNeeded);
 
-    item.getBody().resize(size-sizeof(header));
-    source.read(reinterpret_cast<char*>(item.getBody().data()), size-sizeof(header));
+    item.getBody().resize(size-header.size());
+    source.read(reinterpret_cast<char*>(item.getBody().data()), size-header.size());
 
     return source;
 }
