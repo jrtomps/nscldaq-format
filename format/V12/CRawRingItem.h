@@ -148,7 +148,7 @@ template<class ByteIterator> CRawRingItem::CRawRingItem(ByteIterator beg, ByteIt
     stream >> rawTstamp.s_value;
     stream >> rawSourceId.s_value;
 
-    m_mustSwap = (((rawType.s_value & 0xffff) == 0) && (rawType.s_value != V12::VOID));
+    m_mustSwap = (((rawType.s_value & 0xffff) == 0) && (rawType.s_value != V12::UNDEFINED));
 
     uint32_t size;
     if (m_mustSwap) {

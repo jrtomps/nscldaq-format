@@ -130,7 +130,7 @@ protected:
   void setType_1() {
       CDataFormatItem item;
       CPPUNIT_ASSERT_THROW_MESSAGE("set type to non-RING_FORMAT is bad!",
-                                   item.setType(VOID),
+                                   item.setType(UNDEFINED),
                                    std::invalid_argument);
   }
 

@@ -40,9 +40,9 @@ namespace DAQ {
     /*!
      * \brief Default constructor
      *
-     * Constructs the data with a VOID type, NULL_TIMESTAMP, 0 source id, and empty body.
+     * Constructs the data with a UNDEFINED type, NULL_TIMESTAMP, 0 source id, and empty body.
      */
-    CRawRingItem::CRawRingItem() : CRawRingItem(VOID, NULL_TIMESTAMP, 0, {}) {}
+    CRawRingItem::CRawRingItem() : CRawRingItem(UNDEFINED, NULL_TIMESTAMP, 0, {}) {}
 
 
     /*!
@@ -79,7 +79,7 @@ namespace DAQ {
         stream >> rawTstamp.s_value;
         stream >> rawSourceId.s_value;
 
-        m_mustSwap = (((rawType.s_value & 0xffff) == 0) && (rawType.s_value != V12::VOID));
+        m_mustSwap = (((rawType.s_value & 0xffff) == 0) && (rawType.s_value != V12::UNDEFINED));
 
         uint32_t size;
         if (m_mustSwap) {

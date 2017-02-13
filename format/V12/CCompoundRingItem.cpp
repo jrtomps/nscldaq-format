@@ -32,11 +32,11 @@ namespace V12 {
 /*!
  * \brief Default constructor
  *
- * The default constructor sets the source ID to 0, type to VOID, and
+ * The default constructor sets the source ID to 0, type to UNDEFINED, and
  * the timestamp to NULL_TIMESTAMP. There are no children.
  */
 CCompositeRingItem::CCompositeRingItem()
-: CCompositeRingItem(VOID | 0x8000, NULL_TIMESTAMP, 0, {}) {}
+: CCompositeRingItem(UNDEFINED | 0x8000, NULL_TIMESTAMP, 0, {}) {}
 
 /*!
  * \brief CCompositeRingItem::CCompositeRingItem

@@ -115,7 +115,7 @@ void texttests::simplecons_1() {
   // Make some strings:
 
   CPPUNIT_ASSERT_THROW_MESSAGE( "text items must have a text type",
-                                V12::CRingTextItem item(V12::VOID, {}),
+                                V12::CRingTextItem item(V12::UNDEFINED, {}),
                                 std::invalid_argument);
 }
 
@@ -154,7 +154,7 @@ void texttests::fullcons_0()
 
 void texttests::fullcons_1() {
     CPPUNIT_ASSERT_THROW_MESSAGE( "text items must have a text type",
-                                  V12::CRingTextItem item(V12::VOID, {}, 0, 0),
+                                  V12::CRingTextItem item(V12::UNDEFINED, {}, 0, 0),
                                   std::invalid_argument);
 }
 

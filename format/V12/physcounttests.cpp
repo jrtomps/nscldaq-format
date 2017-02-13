@@ -206,7 +206,7 @@ void physcounttests::accessors()
   EQMSG("count", (uint64_t)12345678, i.getEventCount());
 
   CPPUNIT_ASSERT_THROW_MESSAGE("cannot change type of physics event count item",
-                               i.setType(V12::VOID),
+                               i.setType(V12::UNDEFINED),
                                std::invalid_argument);
 
   CPPUNIT_ASSERT_NO_THROW(i.setType(V12::PHYSICS_EVENT_COUNT));

@@ -88,7 +88,7 @@ public:
 
   void simpleCtor_0() {
         V12::CRawRingItem item;
-        EQMSG("type", V12::VOID, item.type());
+        EQMSG("type", V12::UNDEFINED, item.type());
   }
 
   void simpleCtor_1() {

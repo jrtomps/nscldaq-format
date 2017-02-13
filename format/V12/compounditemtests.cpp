@@ -57,7 +57,7 @@ protected:
 
   void constructor_0() {
       CPPUNIT_ASSERT_THROW_MESSAGE("type must have composite bit set",
-                                   CCompositeRingItem item(VOID, 0, 0, {}),
+                                   CCompositeRingItem item(UNDEFINED, 0, 0, {}),
                                    std::invalid_argument);
   }
 
@@ -359,7 +359,7 @@ protected:
   void setType_0() {
       CCompositeRingItem item;
       CPPUNIT_ASSERT_THROW_MESSAGE("type must have composite bit set",
-                                   item.setType(VOID),
+                                   item.setType(UNDEFINED),
                                    std::invalid_argument);
   }
 

@@ -55,7 +55,7 @@ void physeventtests::ringitemcopy()
 void physeventtests::badcast()
 {
   V12::CRawRingItem myitem;
-  EQ (V12::VOID, myitem.type());
+  EQ (V12::UNDEFINED, myitem.type());
   
   V12::CPhysicsEventItem newitem;
   CPPUNIT_ASSERT_THROW( newitem = V12::CPhysicsEventItem(myitem), std::bad_cast );
@@ -98,6 +98,6 @@ void physeventtests::ringitemassign_0()
 void physeventtests::setType_0() {
     V12::CPhysicsEventItem item;
     CPPUNIT_ASSERT_THROW_MESSAGE("physics event type must be PHYSICS_EVENT",
-                                 item.setType(V12::VOID),
+                                 item.setType(V12::UNDEFINED),
                                  std::invalid_argument);
 }

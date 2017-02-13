@@ -79,7 +79,7 @@ and general usage moreso than the structs provided in this header.
 */
 
 
-#include <stdint.h>
+#include <cstdint>
 #include <time.h>
 
 #ifdef __cplusplus
@@ -95,7 +95,7 @@ namespace DAQ {
 static const uint16_t FORMAT_MAJOR  = 12;  /* nscldaq-12. */
 static const uint16_t FORMAT_MINOR  =  0;  /* nscldaq-x.0 */
 
-static const uint32_t VOID = 0;
+static const uint32_t UNDEFINED = 0;
 
 /* state change item type codes: */
 
