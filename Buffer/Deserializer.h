@@ -12,6 +12,7 @@ using namespace std;
 namespace DAQ {
   namespace Buffer {
 
+
     template<class Container> class ContainerDeserializer
     {
 
@@ -105,9 +106,15 @@ namespace DAQ {
       bool fail() const { return m_fail; }
       bool eof()  const { return m_eof; }
 
-
-
     };
+
+
+  template<class Container>
+   ContainerDeserializer<Container>  makeContainerDeserializer(const Container& cont,
+                                                               bool swapNeeded) {
+       return ContainerDeserializer<Container>(cont, swapNeeded);
+   }
+
   } // end of Buffer
 } // end of DAQ
 

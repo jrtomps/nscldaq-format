@@ -121,6 +121,15 @@ namespace DAQ {
 
 
     };
+
+    template<class ByteIterator>
+  RangeDeserializer<ByteIterator> makeRangeDeserializer(ByteIterator beg,
+                                                        ByteIterator end,
+                                                        bool swapNeeded)
+  {
+      return RangeDeserializer<ByteIterator>(beg, end, swapNeeded);
+  }
+
   } // end of Buffer
 } // end of DAQ
 
