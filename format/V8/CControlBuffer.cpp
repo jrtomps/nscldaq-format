@@ -16,7 +16,7 @@
 
 #include "V8/CControlBuffer.h"
 #include <V8/CRawBuffer.h>
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 #include <stdexcept>
 #include <typeinfo>
 

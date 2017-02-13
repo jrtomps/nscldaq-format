@@ -11,7 +11,7 @@
 #include "V12/CRingStateChangeItem.h"
 #include "V12/CPhysicsEventItem.h"
 #include "V12/CRingPhysicsEventCountItem.h"
-#include "Deserializer.h"
+#include "ContainerDeserializer.h"
 
 #include <iostream>
 #include <sstream>

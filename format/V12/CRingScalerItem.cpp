@@ -17,7 +17,7 @@
 #include "V12/CRingScalerItem.h"
 #include <V12/DataFormat.h>
 #include <V12/CRawRingItem.h>
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 
 #include <ctime>
 #include <stdexcept>

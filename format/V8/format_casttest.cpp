@@ -28,7 +28,7 @@
 #include <V8/CPhysicsEventBuffer.h>
 #include <V8/CTextBuffer.h>
 
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 
 #include <DebugUtils.h>
 

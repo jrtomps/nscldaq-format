@@ -36,7 +36,7 @@ namespace DAQ {
  *
  * \code
  * #include <V12/CPhysicsEventItem.h>
- * #include <Deserializer.h>
+ * #include <ContainerDeserializer.h>
  *
  * CRawRingItem rawItem(someDataBuffer);
  * CPhysicsEventItem item(rawItem);

@@ -8,7 +8,7 @@
 #include "V12/DataFormat.h"
 #include "V12/CAbnormalEndItem.h"
 #include "V12/CRawRingItem.h"
-#include "Deserializer.h"
+#include "ContainerDeserializer.h"
 
 // Tests for glom parameter ring item class:
 

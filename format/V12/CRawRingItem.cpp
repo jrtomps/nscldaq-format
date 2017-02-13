@@ -16,7 +16,7 @@
 
 #include "CRawRingItem.h"
 #include "DataFormat.h"
-#include "Deserializer.h"
+#include "ContainerDeserializer.h"
 #include "ByteOrder.h"
 #include <sstream>
 #include <iomanip>

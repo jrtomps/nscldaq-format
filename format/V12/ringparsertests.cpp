@@ -11,7 +11,7 @@
 #include "V12/CPhysicsEventItem.h"
 #include "V12/CRingPhysicsEventCountItem.h"
 #include "V12/CRingItemParser.h"
-#include "Deserializer.h"
+#include "ContainerDeserializer.h"
 #include "ByteBuffer.h"
 
 #include <iostream>

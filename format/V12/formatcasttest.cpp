@@ -12,7 +12,7 @@
 #include "V12/CRawRingItem.h"
 #include "V12/CDataFormatItem.h"
 #include "ByteBuffer.h"
-#include "Deserializer.h"
+#include "ContainerDeserializer.h"
 
 #include <iostream>
 #include <sstream>

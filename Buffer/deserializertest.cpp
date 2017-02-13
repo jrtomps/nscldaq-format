@@ -7,7 +7,7 @@
 
 #define private public
 #define protected public
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 #undef protected
 #undef private
 

@@ -8,7 +8,7 @@
 #include <V12/CRawRingItem.h>
 #include <V12/CRingScalerItem.h>
 #include <ByteBuffer.h>
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 
 #include "DebugUtils.h"
 

@@ -17,7 +17,7 @@
 
 #include "V12/CRingTextItem.h"
 #include <V12/CRawRingItem.h>
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 #include <sstream>
 #include <ctime>
 #include <algorithm>

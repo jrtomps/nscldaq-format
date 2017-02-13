@@ -16,7 +16,7 @@
 
 #include "V8/CRawBuffer.h"
 #include <BufferPtr.h>
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 
 namespace DAQ
 {

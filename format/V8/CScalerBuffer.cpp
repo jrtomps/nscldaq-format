@@ -18,7 +18,7 @@
 #include "V8/CRawBuffer.h"
 #include <ByteBuffer.h>
 #include <BufferPtr.h>
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 
 using namespace std;
 

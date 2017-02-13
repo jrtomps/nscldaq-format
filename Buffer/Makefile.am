@@ -6,7 +6,7 @@ libbuffer_la_SOURCES = ByteOrder.cpp
 include_HEADERS = ByteBuffer.h \
                   ByteOrder.h \
                   BufferPtr.h \
-                  Deserializer.h \
+                  ContainerDeserializer.h \
                   Deserializer2.h
 
 noinst_PROGRAMS = unittests

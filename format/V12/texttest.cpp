@@ -7,7 +7,7 @@
 #include <V12/DataFormat.h>
 #include <V12/CRingTextItem.h>
 #include <V12/CRawRingItem.h>
-#include <Deserializer.h>
+#include <ContainerDeserializer.h>
 
 #include <string>
 #include <vector>
