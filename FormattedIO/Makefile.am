@@ -89,7 +89,7 @@ unittests_LDADD		= @builddir@/libdaqformatio.la \
 unittests_CPPFLAGS=  -I@top_srcdir@/$(FORMAT_DIR)/Buffer \
 -I@top_srcdir@/$(FORMAT_DIR)/format \
 -I@top_srcdir@/$(FORMAT_DIR)/testutils \
--I@top_srcdir@/utilitites/IO
+-I@top_srcdir@/utilities/IO
 endif
 
 unittests_CXXFLAGS = $(AM_CXXFLAGS)

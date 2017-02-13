@@ -93,7 +93,32 @@ std::istream& operator>>(std::istream& stream,
 CDataSink& operator<<(CDataSink& sink,
                       const DAQ::V12::CRawRingItem& item)
 {
-//  sink.put(item.getItemPointer(), item.size());
+    char header[20];
+    uint32_t temp32;
+    uint64_t temp64;
+
+    temp32 = item.size();
+    std::copy(reinterpret_cast<char*>(&temp32),
+              reinterpret_cast<char*>(&temp32)+sizeof(temp32),
+              header);
+
+    temp32 = item.type();
+    std::copy(reinterpret_cast<char*>(&temp32),
+              reinterpret_cast<char*>(&temp32)+sizeof(temp32),
+              header+4);
+
+    temp64 = item.getEventTimestamp();
+    std::copy(reinterpret_cast<char*>(&temp64),
+              reinterpret_cast<char*>(&temp64)+sizeof(temp64),
+              header+8);
+
+    temp32 = item.getSourceId();
+    std::copy(reinterpret_cast<char*>(&temp32),
+              reinterpret_cast<char*>(&temp32)+sizeof(temp32),
+              header+16);
+
+    sink.put(reinterpret_cast<char*>(header), sizeof(header));
+    sink.put(reinterpret_cast<const char*>(item.getBody().data()), item.getBody().size());
 
   return sink;
 }
@@ -102,19 +127,25 @@ CDataSink& operator<<(CDataSink& sink,
 CDataSource& operator>>(CDataSource& source,
                         DAQ::V12::CRawRingItem& item)
 {
-//  size_t headerSize = 2*sizeof(uint32_t);
+    char header[20];
+    source.read(reinterpret_cast<char*>(header), sizeof(header));
 
-//  char* pItem = reinterpret_cast<char*>(item.getItemPointer());
-//  source.read(pItem, headerSize);
+    uint32_t size, type, sourceId;
+    uint64_t tstamp;
+    bool swapNeeded;
+    DAQ::V12::Parser::parseHeader(header, header+sizeof(header),
+                                  size, type, tstamp, sourceId, swapNeeded);
 
-//  uint32_t totalSize = byte_cast<uint32_t>(pItem);
-//  char* pBody = pItem + headerSize;
-//  source.read(pBody, totalSize-headerSize);
+    item.setType(type);
+    item.setEventTimestamp(tstamp);
+    item.setSourceId(sourceId);
 
-//  item.setBodyCursor(pItem+totalSize);
-//  item.updateSize();
+    item.setMustSwap(swapNeeded);
 
-  return source;
+    item.getBody().resize(size-sizeof(header));
+    source.read(reinterpret_cast<char*>(item.getBody().data()), size-sizeof(header));
+
+    return source;
 }
 
 #endif // NSCLDAQ_BUILD
