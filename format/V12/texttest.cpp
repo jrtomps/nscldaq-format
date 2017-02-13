@@ -190,6 +190,7 @@ void texttests::castcons_0()
   body.push_back(0);// null terminate
 
   V12::CRingTextItem item(ritem);
+  EQMSG("type", V12::PACKET_TYPES, item.type());
   EQMSG("offset",(uint32_t)1234, item.getTimeOffset());
   EQMSG("timestamp", (time_t)4321, item.getTimestamp());
   EQMSG("count", (uint32_t)4, item.getStringCount());

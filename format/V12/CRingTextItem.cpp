@@ -112,6 +112,7 @@ CRingTextItem::CRingTextItem(const CRawRingItem& rhs)
 {
   if (!validType(rhs)) throw bad_cast();
 
+  m_type = rhs.type();
   m_sourceId     = rhs.getSourceId();
   m_evtTimestamp = rhs.getEventTimestamp();
 
