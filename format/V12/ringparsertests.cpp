@@ -32,7 +32,7 @@ class CRingItemParserTests : public CppUnit::TestFixture
     CPPUNIT_TEST(parse_4);
     CPPUNIT_TEST(parse_5);
     CPPUNIT_TEST(parseSwapped_0);
-    CPPUNIT_TEST(peekHeader_0);
+    CPPUNIT_TEST(parseSizeAndType_0);
     CPPUNIT_TEST(parseHeader_0);
     CPPUNIT_TEST_SUITE_END();
 private:
@@ -184,13 +184,13 @@ protected:
       EQMSG("size of child", uint32_t(21), pItem->size());
   }
 
-  void peekHeader_0() {
+  void parseSizeAndType_0() {
       Buffer::ByteBuffer body;
       body << uint32_t(20) << PHYSICS_EVENT;
 
       uint32_t size, type;
       bool swapNeeded;
-      Parser::peekHeaderType(body.begin(), body.end(), size, type, swapNeeded);
+      Parser::parseSizeAndType(body.begin(), body.end(), size, type, swapNeeded);
 
       EQMSG("size", uint32_t(20), size);
       EQMSG("type", PHYSICS_EVENT, type);

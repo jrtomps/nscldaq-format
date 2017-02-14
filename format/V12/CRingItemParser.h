@@ -95,7 +95,8 @@ void parseHeader(ByteIterator beg, ByteIterator end, uint32_t& size, uint32_t& t
  *
  */
 template<class ByteIterator>
-void peekHeaderType(ByteIterator beg, ByteIterator end, uint32_t& size, uint32_t& type, bool& swapRequired)
+void parseSizeAndType(ByteIterator beg, ByteIterator end,
+                      uint32_t& size, uint32_t& type, bool& swapRequired)
 {
 
     if (beg+8 > end) {
@@ -205,7 +206,7 @@ parseComposite(ByteIterator beg, ByteIterator end)
         std::pair<CRingItemUPtr, ByteIterator> result;
 
         uint32_t size, type;
-        peekHeaderType(it, end, size, type, swapNeeded);
+        parseSizeAndType(it, end, size, type, swapNeeded);
 
         if (isComposite(type)) {
             result = parseComposite(it, std::min(it+size, end));
@@ -277,7 +278,7 @@ parse(ByteIterator beg, ByteIterator end) {
     bool mustSwap;
     uint32_t size, type;
 
-    peekHeaderType(beg, end, size, type, mustSwap);
+    parseSizeAndType(beg, end, size, type, mustSwap);
 
     std::pair<CRingItemUPtr, ByteIterator> result;
     if (isComposite(type)) {

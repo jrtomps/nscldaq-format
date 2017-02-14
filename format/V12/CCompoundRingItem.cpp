@@ -100,7 +100,7 @@ CCompositeRingItem::CCompositeRingItem(const CRawRingItem& rawItem)
         uint32_t size, type;
         std::pair<CRingItemUPtr, ByteIterator> result;
 
-        Parser::peekHeaderType(it, end, size, type, swapNeeded);
+        Parser::parseSizeAndType(it, end, size, type, swapNeeded);
         if (Parser::isComposite(type)) {
             result = Parser::parseComposite(it, std::min(it+size, end));
         } else {
