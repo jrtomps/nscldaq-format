@@ -18,6 +18,8 @@
 #include <cppunit/ui/text/TestRunner.h>
 #include <string>
 #include <iostream>
+#include <cstring>
+#include <unistd.h>
 using namespace std;
 
 int main(int argc, char** argv)
@@ -46,4 +48,13 @@ namespace DAQ {
   namespace V8 {
     std::size_t gBufferSize = 34;
   }
+}
+
+
+std::string uniqueName(std::string baseName)
+{
+    pid_t pid = getpid();
+    char fullName[10000];
+    sprintf(fullName, "%s_%d", baseName.c_str(), pid);
+    return std::string(fullName);
 }

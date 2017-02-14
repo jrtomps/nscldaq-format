@@ -65,6 +65,7 @@ std::istream& operator>>(std::istream& stream,
 }
 
 
+
 #ifdef NSCLDAQ_BUILD
 
 #include <CDataSource.h>
@@ -106,5 +107,7 @@ CDataSource& operator>>(CDataSource& source,
 
     return source;
 }
+
+
 
 #endif // NSCLDAQ_BUILD

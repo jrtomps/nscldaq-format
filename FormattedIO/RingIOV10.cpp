@@ -55,7 +55,6 @@ std::istream& operator>>(std::istream& stream,
 #endif
 
 #ifdef NSCLDAQ_BUILD
-#warning "in nscldaq_build"
 
 #include <CDataSource.h>
 #include <CDataSink.h>
