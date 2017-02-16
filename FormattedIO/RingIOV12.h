@@ -81,15 +81,15 @@ extern CDataSource& operator>>(CDataSource& stream,
  *  search can be ended, then the predicate should return false.
  */
 template<class UnaryPredicate>
-void readItemIf(CDataSource& source, DAQ::V12::CRawRingItem& item,
-                UnaryPredicate pred)
+bool readItemIf(CDataSource& source, DAQ::V12::CRawRingItem& item,
+                UnaryPredicate& pred)
 {
 
     bool stopLooking;
     do {
       stopLooking = pred(source);
     }
-    while ( stopLooking );
+    while ( !stopLooking );
 
     if (stopLooking) {
         source >> item;

@@ -77,8 +77,9 @@ CDataSink& operator<<(CDataSink& sink,
     std::array<char,20> header;
     DAQ::V12::serializeHeader(item, header.begin());
 
-    sink.put(header.data(), header.size());
-    sink.put(reinterpret_cast<const char*>(item.getBody().data()), item.getBody().size());
+    auto& body = item.getBody();
+    sink.putv({ {header.data(), header.size()},
+                {body.data(), body.size()} });
 
   return sink;
 }
