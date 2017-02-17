@@ -8,8 +8,3 @@ SUBDIRS = utils \
 					testutils
 
 
-        #conversion
-        #  IO
-
-
-
