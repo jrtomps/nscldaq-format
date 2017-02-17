@@ -25,8 +25,6 @@ AC_CONFIG_FILES([Makefile
                  testutils/Makefile
                  Buffer/Makefile
                  FormattedIO/Makefile
-                 IO/Makefile
-                 conversion/Makefile
                  format/Makefile
                  format/V8/Makefile
                  format/V10/Makefile
