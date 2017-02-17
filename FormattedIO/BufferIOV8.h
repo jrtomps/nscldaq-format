@@ -57,9 +57,11 @@ extern std::ostream& operator<<(std::ostream& stream, const DAQ::V8::CRawBuffer&
 #ifdef NSCLDAQ_BUILD
 
 // Fwd declarations
+
+namespace DAQ {
 class CDataSource;
 class CDataSink;
-
+}
 
 /*!
  * \brief Extract V8 buffer from a CDataSource
@@ -70,7 +72,7 @@ class CDataSink;
  * \param buffer  buffer to fill
  * \return the stream
  */
-extern CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer);
+extern DAQ::CDataSource& operator>>(DAQ::CDataSource& stream, DAQ::V8::CRawBuffer& buffer);
 
 
 /*! \brief Insert V8 buffer into a CDataSink
@@ -84,7 +86,7 @@ extern CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
 
  * \throws std::runtime_error if the data size does not match gBfferSize
  */
-extern CDataSink& operator<<(CDataSink& stream, const DAQ::V8::CRawBuffer& buffer);
+extern DAQ::CDataSink& operator<<(DAQ::CDataSink& stream, const DAQ::V8::CRawBuffer& buffer);
 
 
 #endif // NSCLDAQ_BUILD

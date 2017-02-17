@@ -53,9 +53,10 @@ extern std::istream& operator>>(std::istream& stream,
 
 #ifdef NSCLDAQ_BUILD
 
+namespace DAQ {
 class CDataSource;
 class CDataSink;
-
+}
 
 /*!
  * \brief Insert V10 CRingItem into a CDataSink
@@ -65,7 +66,7 @@ class CDataSink;
  *
  * \return  the stream
  */
-extern CDataSink& operator<<(CDataSink& stream,
+extern DAQ::CDataSink& operator<<(DAQ::CDataSink& stream,
                              const DAQ::V10::CRingItem& item);
 
 
@@ -76,7 +77,7 @@ extern CDataSink& operator<<(CDataSink& stream,
  * \param item    a V10 item
  * \return the stream
  */
-extern CDataSource& operator>>(CDataSource& stream,
+extern DAQ::CDataSource& operator>>(DAQ::CDataSource& stream,
                                DAQ::V10::CRingItem& item);
 
 #endif // NSCLDAQ_BUILD

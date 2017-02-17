@@ -71,7 +71,7 @@ std::istream& operator>>(std::istream& stream,
 #include <CDataSource.h>
 #include <CDataSink.h>
 
-CDataSink& operator<<(CDataSink& sink,
+DAQ::CDataSink& operator<<(DAQ::CDataSink& sink,
                       const DAQ::V12::CRawRingItem& item)
 {
     std::array<char,20> header;
@@ -85,7 +85,7 @@ CDataSink& operator<<(CDataSink& sink,
 }
 
 
-CDataSource& operator>>(CDataSource& source,
+DAQ::CDataSource& operator>>(DAQ::CDataSource& source,
                         DAQ::V12::CRawRingItem& item)
 {
     std::array<char,20> header;

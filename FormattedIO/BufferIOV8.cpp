@@ -63,7 +63,7 @@ std::ostream& operator<<(std::ostream& stream, const DAQ::V8::CRawBuffer& buffer
 #include <CDataSink.h>
 
 
-CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
+DAQ::CDataSource& operator>>(DAQ::CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
 {
   DAQ::Buffer::ByteBuffer bytes(DAQ::V8::gBufferSize);
 
@@ -78,7 +78,7 @@ CDataSource& operator>>(CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
 }
 
 
-CDataSink& operator<<(CDataSink& stream, const DAQ::V8::CRawBuffer& buffer)
+DAQ::CDataSink& operator<<(DAQ::CDataSink& stream, const DAQ::V8::CRawBuffer& buffer)
 {
   if (buffer.getBuffer().size() != DAQ::V8::gBufferSize) {
     std::string errmsg ("operator<<(CDataSource&, const DAQ::V8::CRawBuffer&) ");

@@ -60,7 +60,7 @@ std::istream& operator>>(std::istream& stream,
 #include <CDataSink.h>
 
 
-CDataSink& operator<<(CDataSink& sink,
+DAQ::CDataSink& operator<<(DAQ::CDataSink& sink,
                       const DAQ::V10::CRingItem& item)
 {
   sink.put(item.getItemPointer(), item.size());
@@ -68,7 +68,7 @@ CDataSink& operator<<(CDataSink& sink,
   return sink;
 }
 
-CDataSource& operator>>(CDataSource& source,
+DAQ::CDataSource& operator>>(DAQ::CDataSource& source,
                         DAQ::V10::CRingItem& item)
 {
   size_t headerSize = 2*sizeof(uint32_t);

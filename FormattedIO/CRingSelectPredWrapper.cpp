@@ -25,7 +25,6 @@ using namespace std;
 
 
 namespace DAQ {
-namespace V12 {
 
 //////////////////////////////////////////////////////////////////////
 // Constructors and other canonicals.
@@ -55,6 +54,5 @@ CRingSelectPredWrapper::operator()(CDataSource& ring)
 
 }
 
-} // end V12
 } // end DAQ
 

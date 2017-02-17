@@ -23,13 +23,10 @@
 
 
 class CRingSelectionPredicate;
-class CDataSource;
-
 
 namespace DAQ {
-namespace V12 {
 
-
+class CDataSource;
 
 class CRingSelectPredWrapper
 {
@@ -52,7 +49,5 @@ public:
 };
 
 
-
-} // end V12
 } // end DAQ
 #endif // CRINGSELECTIONPREDICATE_H
