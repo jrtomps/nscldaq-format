@@ -15,8 +15,6 @@
 	     East Lansing, MI 48824-1321
 */
 
-#include <config.h>
-
 #include "CRingSelectionPredicate.h"
 #include <CRingBuffer.h>
 #include <V12/CRingItemParser.h>
