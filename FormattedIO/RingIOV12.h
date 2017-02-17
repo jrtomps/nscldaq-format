@@ -63,6 +63,7 @@ extern CDataSource& operator>>(CDataSource& stream,
                                DAQ::V12::CRawRingItem& item);
 
 
+namespace DAQ {
 
 /*!
  * \brief Selectively read data item
@@ -98,6 +99,7 @@ bool readItemIf(CDataSource& source, DAQ::V12::CRawRingItem& item,
     return stopLooking;
 }
 
+}
 
 #endif // NSCLDAQ_BUILD
 
