@@ -80,14 +80,13 @@ libdaqformatio_la_CXXFLAGS = $(AM_CXXFLAGS)
 
 noinst_PROGRAMS = unittests
 
+
+if FORMAT_STANDALONE
 unittests_SOURCES	= TestRunner.cpp  \
                             daq8test.cpp \
                                                                                 daq10test.cpp \
                                                                                 daq11test.cpp \
-                                                                                daq12test.cpp \
-                                                                                selecttest.cpp
-
-if FORMAT_STANDALONE
+                                                                                daq12test.cpp
 unittests_LDADD		= @builddir@/libdaqformatio.la \
                         @top_builddir@/Buffer/libbuffer.la \
                         @top_builddir@/format/V8/libdataformatv8.la \
@@ -101,6 +100,14 @@ unittests_CPPFLAGS=  -I@top_srcdir@/Buffer \
 -I@top_srcdir@/testutils
 
 else
+
+unittests_SOURCES	= TestRunner.cpp  \
+                            daq8test.cpp \
+                                                                                daq10test.cpp \
+                                                                                daq11test.cpp \
+                                                                                daq12test.cpp \
+                                                                                selecttest.cpp
+
 
 unittests_LDADD		= @builddir@/libdaqformatio.la \
                         @top_builddir@/$(FORMAT_DIR)/Buffer/libbuffer.la \
