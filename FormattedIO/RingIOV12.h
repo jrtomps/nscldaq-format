@@ -99,7 +99,7 @@ bool readItemIf(CDataSource& source, DAQ::V12::CRawRingItem& item,
     return stopLooking;
 }
 
-}
+} // end DAQ
 
 #endif // NSCLDAQ_BUILD
 

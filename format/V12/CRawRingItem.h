@@ -87,7 +87,8 @@ public:
 
   template<class ByteIterator> CRawRingItem(ByteIterator beg, ByteIterator end);
 
-  explicit CRawRingItem(const CRingItem& rhs);
+  CRawRingItem(const CRawRingItem& rhs) = default;
+  CRawRingItem(const CRingItem& rhs);
   virtual ~CRawRingItem();
 
   CRawRingItem& operator=(const CRawRingItem& rhs) = default;
