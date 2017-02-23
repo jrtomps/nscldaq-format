@@ -209,6 +209,20 @@ CDataFormatItem::getMajor() const
 {
     return m_major;
 }
+
+/**
+ * set major
+ *
+ * Sets the format major revision level.
+ *
+ * \param version the version to set
+ */
+void
+CDataFormatItem::setMajor(uint16_t version)
+{
+    m_major = version;
+}
+
 /**
  * minor
  *
@@ -221,6 +235,21 @@ CDataFormatItem::getMinor() const
 {
     return m_minor;
 }
+
+/**
+ * set minor
+ *
+ * Sets the format minor version.
+ *
+ * \param version   the version to set
+ */
+void
+CDataFormatItem::setMinor(uint16_t version)
+{
+    m_minor = version;
+}
+
+
 
 /**
  * typeName
