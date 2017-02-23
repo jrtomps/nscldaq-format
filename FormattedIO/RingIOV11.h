@@ -53,6 +53,10 @@ extern std::istream& operator>>(std::istream& stream,
 namespace DAQ {
 class CDataSource;
 class CDataSink;
+
+    void writeItem(CDataSink& sink, const V11::CRingItem& item);
+    void readItem(CDataSource& sink, V11::CRingItem& item);
+
 }
 
 /*!

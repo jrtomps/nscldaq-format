@@ -59,31 +59,40 @@ std::istream& operator>>(std::istream& stream,
 #include <CDataSource.h>
 #include <CDataSink.h>
 
+namespace DAQ {
+
+    void writeItem(CDataSink& sink, const V10::CRingItem& item) {
+        sink.put(item.getItemPointer(), item.size());
+    }
+
+    void readItem(CDataSource& source, V10::CRingItem& item) {
+        size_t headerSize = 2*sizeof(uint32_t);
+
+        char* pItem = reinterpret_cast<char*>(item.getItemPointer());
+        source.read(pItem, headerSize);
+
+        uint32_t totalSize = byte_cast<uint32_t>(pItem);
+        char* pBody = pItem + headerSize;
+        source.read(pBody, totalSize-headerSize);
+
+        item.setBodyCursor(pItem + totalSize);
+        item.updateSize();
+    }
+
+} // end DAQ
 
 DAQ::CDataSink& operator<<(DAQ::CDataSink& sink,
                       const DAQ::V10::CRingItem& item)
 {
-  sink.put(item.getItemPointer(), item.size());
-
+  DAQ::writeItem(sink, item);
   return sink;
 }
 
 DAQ::CDataSource& operator>>(DAQ::CDataSource& source,
                         DAQ::V10::CRingItem& item)
 {
-  size_t headerSize = 2*sizeof(uint32_t);
-
-  char* pItem = reinterpret_cast<char*>(item.getItemPointer());
-  source.read(pItem, headerSize);
-
-  uint32_t totalSize = byte_cast<uint32_t>(pItem);
-  char* pBody = pItem + headerSize;
-  source.read(pBody, totalSize-headerSize);
-
-  item.setBodyCursor(pItem + totalSize);
-  item.updateSize();
-
-  return source;
+    DAQ::readItem(source, item);
+    return source;
 }
 
 #endif

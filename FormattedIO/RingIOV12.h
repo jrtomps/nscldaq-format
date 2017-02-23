@@ -6,6 +6,7 @@
 
 namespace DAQ {
 namespace V12 {
+    class CRingItem;
     class CRawRingItem;
 } // end V12
 } // end DAQ
@@ -67,6 +68,12 @@ extern DAQ::CDataSource& operator>>(DAQ::CDataSource& stream,
 
 namespace DAQ {
 
+void writeItem(CDataSink& source, const V12::CRawRingItem& item);
+void writeItem(CDataSink& source, const V12::CRingItem& item);
+
+void readItem(CDataSource& source, V12::CRawRingItem& item);
+
+
 /*!
  * \brief Selectively read data item
  *
@@ -95,13 +102,13 @@ bool readItemIf(CDataSource& source, V12::CRawRingItem& item,
     while ( !stopLooking );
 
     if (stopLooking) {
-        source >> item;
+        readItem(source, item);
     }
 
     return stopLooking;
 }
 
-}
+} // end DAQ
 
 #endif // NSCLDAQ_BUILD
 

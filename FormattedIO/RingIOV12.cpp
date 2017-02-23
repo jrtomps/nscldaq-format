@@ -74,19 +74,46 @@ std::istream& operator>>(std::istream& stream,
 DAQ::CDataSink& operator<<(DAQ::CDataSink& sink,
                       const DAQ::V12::CRawRingItem& item)
 {
+    DAQ::writeItem(sink, item);
+    return sink;
+}
+
+
+DAQ::CDataSource& operator>>(DAQ::CDataSource& source,
+                        DAQ::V12::CRawRingItem& item)
+{
+    DAQ::readItem(source, item);
+
+    return source;
+}
+
+namespace DAQ {
+
+void writeItem(CDataSink& sink, const V12::CRawRingItem& item)
+{
     std::array<char,20> header;
     DAQ::V12::serializeHeader(item, header.begin());
 
     auto& body = item.getBody();
     sink.putv({ {header.data(), header.size()},
                 {body.data(), body.size()} });
-
-  return sink;
 }
 
+void writeItem(CDataSink& sink, const V12::CRingItem& item)
+{
+        auto pRawItem = dynamic_cast<const DAQ::V12::CRawRingItem*>(&item);
 
-DAQ::CDataSource& operator>>(DAQ::CDataSource& source,
-                        DAQ::V12::CRawRingItem& item)
+        // if this is a raw ring item, we can just ship it out
+        if (pRawItem) {
+            writeItem(sink, *pRawItem);
+        } else {
+            // the item needs to be serialized first as a raw ring item
+            // and then written to the sink
+            writeItem(sink, DAQ::V12::CRawRingItem(item));
+        }
+}
+
+void readItem(CDataSource& source, V12::CRawRingItem& item)
 {
     std::array<char,20> header;
     source.read(header.data(), header.size());
@@ -105,10 +132,8 @@ DAQ::CDataSource& operator>>(DAQ::CDataSource& source,
 
     item.getBody().resize(size-header.size());
     source.read(reinterpret_cast<char*>(item.getBody().data()), size-header.size());
-
-    return source;
 }
 
-
+}
 
 #endif // NSCLDAQ_BUILD
