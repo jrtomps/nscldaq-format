@@ -39,7 +39,8 @@ libdaqformatio_la_SOURCES = BufferIOV8.cpp \
                             CRingSelectPredWrapper.cpp \
                             CRingSelectionPredicate.cpp \
                             CAllButPredicate.cpp \
-                            CDesiredTypesPredicate.cpp
+                            CDesiredTypesPredicate.cpp \
+                            CSimpleAllButPredicate.cpp
 
 include_HEADERS	= BufferIOV8.h \
                   RingIOV10.h \
@@ -48,7 +49,8 @@ include_HEADERS	= BufferIOV8.h \
                   CRingSelectPredWrapper.h \
                   CRingSelectionPredicate.h \
                   CAllButPredicate.h \
-                  CDesiredTypesPredicate.h
+                  CDesiredTypesPredicate.h \
+                  CSimpleAllButPredicate.h
 
 
 libdaqformatio_la_CPPFLAGS	=  \
