@@ -63,32 +63,45 @@ std::ostream& operator<<(std::ostream& stream, const DAQ::V8::CRawBuffer& buffer
 #include <CDataSink.h>
 
 
+namespace DAQ {
+
+ void readBuffer(DAQ::CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
+ {
+     DAQ::Buffer::ByteBuffer bytes(DAQ::V8::gBufferSize);
+
+     auto pData = reinterpret_cast<char*>(bytes.data());
+     stream.read(pData, bytes.size());
+
+     // CDataSource gaurantees that we get the entirety of our requested data.
+
+     buffer.setBuffer(bytes);
+ }
+
+ void writeBuffer(DAQ::CDataSink& stream, const DAQ::V8::CRawBuffer& buffer)
+ {
+     if (buffer.getBuffer().size() != DAQ::V8::gBufferSize) {
+       std::string errmsg ("operator<<(CDataSource&, const DAQ::V8::CRawBuffer&) ");
+       errmsg += "buffer size is different than DAQ::V8::gBufferSize";
+       throw std::runtime_error(errmsg);
+     }
+
+     stream.put(buffer.getBuffer().data(), buffer.getBuffer().size());
+ }
+
+} // end DAQ
+
+
 DAQ::CDataSource& operator>>(DAQ::CDataSource& stream, DAQ::V8::CRawBuffer& buffer)
 {
-  DAQ::Buffer::ByteBuffer bytes(DAQ::V8::gBufferSize);
-
-  auto pData = reinterpret_cast<char*>(bytes.data());
-  stream.read(pData, bytes.size());
-
-  // CDataSource gaurantees that we get the entirety of our requested data.
-
-  buffer.setBuffer(bytes);
-
-  return stream;
+    readBuffer(stream, buffer);
+    return stream;
 }
 
 
 DAQ::CDataSink& operator<<(DAQ::CDataSink& stream, const DAQ::V8::CRawBuffer& buffer)
 {
-  if (buffer.getBuffer().size() != DAQ::V8::gBufferSize) {
-    std::string errmsg ("operator<<(CDataSource&, const DAQ::V8::CRawBuffer&) ");
-    errmsg += "buffer size is different than DAQ::V8::gBufferSize";
-    throw std::runtime_error(errmsg);
-  }
-
-  stream.put(buffer.getBuffer().data(), buffer.getBuffer().size());
-
-  return stream;
+    writeBuffer(stream, buffer);
+    return stream;
 }
 
 #endif // NSCLDAQ_BUILD

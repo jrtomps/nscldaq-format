@@ -61,6 +61,11 @@ extern std::ostream& operator<<(std::ostream& stream, const DAQ::V8::CRawBuffer&
 namespace DAQ {
 class CDataSource;
 class CDataSink;
+
+    void readBuffer(DAQ::CDataSource& stream, DAQ::V8::CRawBuffer& buffer);
+
+    void writeBuffer(DAQ::CDataSink& stream, const DAQ::V8::CRawBuffer& buffer);
+
 }
 
 /*!
