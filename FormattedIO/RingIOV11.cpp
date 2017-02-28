@@ -72,6 +72,12 @@ namespace DAQ {
         source.read(pItem, headerSize);
 
         uint32_t totalSize = byte_cast<uint32_t>(pItem);
+
+        if (totalSize < headerSize) {
+            throw std::runtime_error("Encountered incomplete V11 RingItem. "
+                                     "Fewer than 8 bytes in size field.");
+        }
+
         char* pBody = pItem + headerSize;
         source.read(pBody, totalSize-headerSize);
 
