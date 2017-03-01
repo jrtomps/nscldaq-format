@@ -22,6 +22,7 @@
 #include <V11/DataFormatV11.h>
 
 #include <iostream>
+#include <stdexcept>
 
 std::ostream& operator<<(std::ostream& stream,
                          const DAQ::V11::CRingItem& item)

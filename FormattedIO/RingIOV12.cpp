@@ -24,6 +24,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <stdexcept>
 
 std::ostream& operator<<(std::ostream& stream,
                          const DAQ::V12::CRawRingItem& item)
