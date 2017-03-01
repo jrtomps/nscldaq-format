@@ -153,7 +153,7 @@ static const uint16_t GLOM_TIMESTAMP_AVERAGE =  2;
 
 
 /* Default timestamp for all types that gets special treatment by the event builder */
-static const uint64_t NULL_TIMESTAMP = UINT64_MAX;
+static const uint64_t NULL_TIMESTAMP = 0xffffffffffffffff; // i.e. UINT64_MAX
 
 
 
