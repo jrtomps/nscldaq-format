@@ -46,7 +46,7 @@ namespace DAQ {
 
       bheader getHeader() const { return m_header; }
 
-      BufferTypes type() const { return VOID; }
+      BufferTypes type() const { return UNDEFINED; }
 
       /*! Does nothing. */
       void toRawBuffer(CRawBuffer& rawBuf) const;

@@ -1,5 +1,5 @@
-#ifndef DAQ_V12_STRINGSTOINTEGERS_H
-#define DAQ_V12_STRINGSTOINTEGERS_H
+#ifndef DAQ_V11_STRINGSTOINTEGERS_H
+#define DAQ_V11_STRINGSTOINTEGERS_H
 
 /*
     This software is Copyright by the Board of Trustees of Michigan
@@ -22,13 +22,13 @@
 #include <vector>
 
 namespace DAQ {
-namespace V12 {
+namespace V11 {
 
 /*! Convert list of strings to integers.
  */
 std::vector<int> stringListToIntegers(const std::string& items);
 
-} // end V12 namespace
+} // end V11 namespace
 } // end DAQ namespace
 
 #endif

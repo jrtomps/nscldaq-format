@@ -57,6 +57,41 @@ class CDataSink;
     void writeItem(CDataSink& sink, const V11::CRingItem& item);
     void readItem(CDataSource& sink, V11::CRingItem& item);
 
+
+    /*!
+     * \brief Selectively read data item
+     *
+     * \param source    the data source to read from
+     * \param item      a ring item to fill with data from the source
+     * \param pred      a functional that will determine whether we need to
+     *                  keep looking (search criteria was not satisfied)
+     *
+     * The pred parameter should be a functional object that has the signature
+     *
+     *     bool Predicate(CDataSource& source)
+     *
+     *  It should return true if the search criteria has not been satisfied. In
+     *  other words, it indicates that the caller should keep searching. If the
+     *  search can be ended, then the predicate should return false.
+     */
+    template<class UnaryPredicate>
+    bool readItemIf(CDataSource& source, V11::CRingItem& item,
+                    UnaryPredicate& pred)
+    {
+
+        bool stopLooking;
+        do {
+          stopLooking = pred(source);
+        }
+        while ( !stopLooking );
+
+        if (stopLooking) {
+            readItem(source, item);
+        }
+
+        return stopLooking;
+    }
+
 }
 
 /*!

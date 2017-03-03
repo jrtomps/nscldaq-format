@@ -28,7 +28,7 @@ namespace DAQ
     enum BufferVersion : std::uint16_t { StandardVsn=5, JumboVsn=6 };
 
     enum BufferTypes {
-      VOID         = 0,
+      UNDEFINED    = 0,
       DATABF       = 1,
       SCALERBF     = 2,
       SNAPSCBF     = 3,

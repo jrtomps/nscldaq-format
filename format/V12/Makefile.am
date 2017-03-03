@@ -13,7 +13,7 @@ libdataformatv12_la_SOURCES = CRingItem.cpp \
                               CCompoundRingItem.cpp \
                               CRingItemParser.cpp \
                               CDataFormatItem.cpp \
-															StringsToIntegers.cpp 
+                              StringsToIntegers.cpp
 
 nscldaq12dir = @includedir@/V12
 

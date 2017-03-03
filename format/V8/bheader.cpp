@@ -50,7 +50,7 @@ namespace DAQ {
 
     // Constructors
     bheader::bheader()
-      : bheader(16, VOID, 0, 0, 0, 0, 0, 0, 0, StandardVsn, BOM16, BOM32, 0, 0)
+      : bheader(16, UNDEFINED, 0, 0, 0, 0, 0, 0, 0, StandardVsn, BOM16, BOM32, 0, 0)
     {}
 
     bheader::bheader(std::uint16_t nwds_, std::uint16_t type_, std::uint16_t cks_,

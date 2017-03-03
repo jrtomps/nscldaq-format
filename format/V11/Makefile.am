@@ -13,6 +13,7 @@ libdataformatv11_la_SOURCES = CRingItem.cpp \
                            CDataFormatItem.cpp \
                            CRingItemFactory.cpp \
                                                                                                         RingItemComparisons.cpp \
+                                                                                                        StringsToIntegers.cpp \
 													 ringitem.c 
 nscldaq11dir = @includedir@/V11
 
@@ -29,7 +30,8 @@ nscldaq11_HEADERS = CRingItem.h \
                   CDataFormatItem.h \
                   CRingItemFactory.h \
                   RingItemComparisons.h \
-                  DataFormatV11.h 
+                  DataFormatV11.h \
+                  StringsToIntegers.h
 
 libdataformatv11_la_CFLAGS = -I@srcdir@/..
 
@@ -42,7 +44,8 @@ unittests_SOURCES	= TestRunner.cpp \
 										scalertests.cpp texttest.cpp physcounttests.cpp		\
                                                                                 physeventtests.cpp \
 										formatoutputtests.cpp dataformattests.cpp       \
-										fragmenttest.cpp glomparamtests.cpp factorytests.cpp 
+                                                                                fragmenttest.cpp glomparamtests.cpp factorytests.cpp \
+                                                                                stringtointstest.cpp
 
 if FORMAT_STANDALONE
 unittests_CPPFLAGS = -I@srcdir@/.. \

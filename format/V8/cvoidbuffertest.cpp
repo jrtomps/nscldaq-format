@@ -71,8 +71,8 @@ void toRawBuffer_0 () {
 }
 
 void type_0 () {
-  CPPUNIT_ASSERT_EQUAL_MESSAGE("type returns VOID",
-                               VOID, m_buffer.type());
+  CPPUNIT_ASSERT_EQUAL_MESSAGE("type returns UNDEFINED",
+                               UNDEFINED, m_buffer.type());
 }
 
 };

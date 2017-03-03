@@ -14,16 +14,17 @@
              East Lansing, MI 48824-1321
 */
 
-#include "V12/StringsToIntegers.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <V12/DataFormat.h>
+#include "V11/StringsToIntegers.h"
+#include <V11/DataFormatV11.h>
+
+#include <cstdio>
+#include <cstdlib>
 #include <stdexcept>
 
 #include <map>
 
 using namespace std;
-using namespace DAQ::V12;
+using namespace DAQ::V11;
 
 static bool initialized = false;
 static map<string, int>   textToInt;
@@ -42,20 +43,9 @@ static void initialize()
   textToInt["PERIODIC_SCALERS"]    = PERIODIC_SCALERS;    // Compatibility.
   textToInt["PHYSICS_EVENT"]       = PHYSICS_EVENT;
   textToInt["PHYSICS_EVENT_COUNT"] = PHYSICS_EVENT_COUNT;
+  textToInt["EVB_FRAGMENT"]        = EVB_FRAGMENT;
+  textToInt["EVB_UNKNOWN_PAYLOAD"] = EVB_UNKNOWN_PAYLOAD;
   textToInt["EVB_GLOM_INFO"]       = EVB_GLOM_INFO;
-
-  textToInt["COMP_BEGIN_RUN"]           = COMP_BEGIN_RUN;
-  textToInt["COMP_END_RUN"]             = COMP_END_RUN;
-  textToInt["COMP_PAUSE_RUN"]           = COMP_PAUSE_RUN;
-  textToInt["COMP_RESUME_RUN"]          = COMP_RESUME_RUN;
-  textToInt["COMP_ABNORMAL_ENDRUN"]     = COMP_ABNORMAL_ENDRUN;
-  textToInt["COMP_PACKET_TYPE"]         = COMP_PACKET_TYPES;
-  textToInt["COMP_MONITORED_VARIABLES"] = COMP_MONITORED_VARIABLES;
-  textToInt["COMP_RING_FORMAT"]         = COMP_RING_FORMAT;
-  textToInt["COMP_PERIODIC_SCALERS"]    = COMP_PERIODIC_SCALERS;    // Compatibility.
-  textToInt["COMP_PHYSICS_EVENT"]       = COMP_PHYSICS_EVENT;
-  textToInt["COMP_PHYSICS_EVENT_COUNT"] = COMP_PHYSICS_EVENT_COUNT;
-  textToInt["COMP_EVB_GLOM_INFO"]       = COMP_EVB_GLOM_INFO;
 
 }
 
@@ -85,7 +75,7 @@ convertOne(const string& aNumber)
 }
 
 namespace DAQ {
-  namespace V12 {
+  namespace V11 {
 
 ////////////////////////////////////////////////////////////////////////////////
 /*!
@@ -129,5 +119,5 @@ stringListToIntegers(const std::string &items)
 }
 
 
-} // end V12 namespace
+} // end V11 namespace
 } // end DAQ namespace
