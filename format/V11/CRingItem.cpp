@@ -262,6 +262,24 @@ CRingItem::type() const
   }
 }
 
+/*! \brief Set the type of the item
+ *
+ * \param type  the type to set
+ *
+ * Depending on whether the object has native byte ordering, the
+ * type is swapped when
+*/
+void CRingItem::setType(uint32_t type)
+{
+  if (mustSwap()) {
+    uint32_t swappedType = swal(type);
+    m_pItem->s_header.s_type = swappedType;
+  }
+  else {
+    m_pItem->s_header.s_type = type;
+  }
+}
+
 uint32_t 
 CRingItem::size() const
 {

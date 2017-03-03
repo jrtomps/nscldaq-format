@@ -78,6 +78,7 @@ public:
   void*  getBodyCursor();
   _RingItem*  getItemPointer();
   const _RingItem* getItemPointer() const;
+  void setType(uint32_t type);
   uint32_t type() const;
   uint32_t size() const;
   bool mustSwap() const;
