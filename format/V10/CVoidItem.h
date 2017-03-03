@@ -8,9 +8,9 @@ namespace V10 {
 class CVoidItem : public CRingItem
 {
   public:
-    CVoidItem() : CRingItem(0) {}
+    CVoidItem() : CRingItem(UNDEFINED) {}
 
-    uint32_t type() const { return 0; }
+    uint32_t type() const { return UNDEFINED; }
 };
 
 } // end V10
