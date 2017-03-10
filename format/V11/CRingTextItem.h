@@ -1,5 +1,5 @@
-#ifndef CRINGTEXTITEM_H
-#define CRINGTEXTITEM_H
+#ifndef DAQ_V11_CRINGTEXTITEM_H
+#define DAQ_V11_CRINGTEXTITEM_H
 
 /*
     This software is Copyright by the Board of Trustees of Michigan
@@ -29,6 +29,10 @@
 
 namespace DAQ {
   namespace V11 {
+
+  class CRingTextItem;
+  using CRingTextItemUPtr = std::unique_ptr<CRingTextItem>;
+  using CRingTextItemPtr  = std::shared_ptr<CRingTextItem>;
 
 /*!
   The text ring item provides a mechanism to put an item in/take an item out of 

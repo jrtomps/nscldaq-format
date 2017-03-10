@@ -25,6 +25,10 @@
 namespace DAQ {
   namespace V12 {
 
+  class CRingStateChangeItem;
+  using CRingStateChangeItemUPtr = std::unique_ptr<CRingStateChangeItem>;
+  using CRingStateChangeItemPtr  = std::shared_ptr<CRingStateChangeItem>;
+
 /*!
   This class represents a state change item.
   State change items are items that indicate a change in the state of

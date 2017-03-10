@@ -1,5 +1,5 @@
-#ifndef NSCLDAQ11_CRINGSCALERITEM_H
-#define NSCLDAQ11_CRINGSCALERITEM_H
+#ifndef DAQ_V11_CRINGSCALERITEM_H
+#define DAQ_V11_CRINGSCALERITEM_H
 /*
     This software is Copyright by the Board of Trustees of Michigan
     State University (c) Copyright 2005.
@@ -26,6 +26,10 @@
 
 namespace DAQ {
   namespace V11 {
+
+  class CRingScalerItem;
+  using CRingScalerItemUPtr = std::unique_ptr<CRingScalerItem>;
+  using CRingScalerItemPtr  = std::shared_ptr<CRingScalerItem>;
 
 /*!
    This class derived from CRingItem and represents a set of scalers that have been 

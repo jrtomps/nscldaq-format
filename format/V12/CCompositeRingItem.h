@@ -25,6 +25,9 @@
 namespace DAQ {
 namespace V12 {
 
+class CCompositeRingItem;
+using CCompositeRingItemUPtr = std::unique_ptr<CCompositeRingItem>;
+using CCompositeRingItemPtr  = std::shared_ptr<CCompositeRingItem>;
 
 /*!
  * \brief The CCompositeRingItem class

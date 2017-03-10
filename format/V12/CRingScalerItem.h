@@ -27,6 +27,10 @@
 namespace DAQ {
   namespace V12 {
 
+  class CRingScalerItem;
+  using CRingScalerItemUPtr = std::unique_ptr<CRingScalerItem>;
+  using CRingScalerItemPtr  = std::shared_ptr<CRingScalerItem>;
+
   /*!
  * \brief The CRingScalerItem class
  *

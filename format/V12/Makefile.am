@@ -10,7 +10,7 @@ libdataformatv12_la_SOURCES = CRingItem.cpp \
                               CGlomParameters.cpp \
                               CRingItemFactory.cpp \
                               CAbnormalEndItem.cpp \
-                              CCompoundRingItem.cpp \
+                              CCompositeRingItem.cpp \
                               CRingItemParser.cpp \
                               CDataFormatItem.cpp \
                               StringsToIntegers.cpp
@@ -27,7 +27,7 @@ nscldaq12_HEADERS = CRingItem.h \
                     CGlomParameters.h \
                     CRingItemFactory.h \
                     CAbnormalEndItem.h \
-                    CCompoundRingItem.h \
+                    CCompositeRingItem.h \
                     CRingItemParser.h \
                     CDataFormatItem.h \
                     format_cast.h \
@@ -61,7 +61,7 @@ unittests_SOURCES	= TestRunner.cpp \
                         glomparamtests.cpp \
                         factorytests.cpp \
                         abnormalendtests.cpp \
-                        compounditemtests.cpp \
+                        compositeitemtests.cpp \
                         ringparsertests.cpp \
                         dataformattest.cpp \
                         formatcasttest.cpp \

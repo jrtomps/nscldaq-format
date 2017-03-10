@@ -23,6 +23,10 @@
 namespace DAQ {
   namespace V12 {
 
+  class CPhysicsEventItem;
+  using CPhysicsEventItemUPtr = std::unique_ptr<CPhysicsEventItem>;
+  using CPhysicsEventItemPtr  = std::shared_ptr<CPhysicsEventItem>;
+
   /*!
  * \brief The CPhysicsEventItem class
  *

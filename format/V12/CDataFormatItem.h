@@ -20,6 +20,10 @@
 namespace DAQ {
   namespace V12 {
 
+  class CDataFormatItem;
+  using CDataFormatItemUPtr = std::unique_ptr<CDataFormatItem>;
+  using CDataFormatItemPtr  = std::shared_ptr<CDataFormatItem>;
+
 /**
  * @class CDataFormatItem
  *

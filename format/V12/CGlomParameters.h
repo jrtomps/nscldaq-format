@@ -22,6 +22,10 @@ namespace DAQ {
 
   class CRawRingItem;
 
+  class CGlomParameters;
+  using CGlomParametersUPtr = std::unique_ptr<CGlomParameters>;
+  using CGlomParametersPtr  = std::shared_ptr<CGlomParameters>;
+
 /**
  * @class CGlomParameters
  *

@@ -23,6 +23,10 @@
 namespace DAQ {
   namespace V12 {
 
+  class CRingItemFactory;
+  using CRingItemFactoryUPtr = std::unique_ptr<CRingItemFactory>;
+  using CRingItemFactoryPtr  = std::shared_ptr<CRingItemFactory>;
+
 /**
  * \brief A factory to construct ring items
  *
@@ -62,7 +66,7 @@ public:
  * usage:
  *
  * \code
- * #include "V12/CRingITemFactory.h"
+ * #include "V12/CRingItemFactory.h"
  *
  * using namespace DAQ::V12;
  *

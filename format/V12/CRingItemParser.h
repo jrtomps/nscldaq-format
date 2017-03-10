@@ -22,7 +22,7 @@
 #include <V12/DataFormat.h>
 #include <V12/CRingItem.h>
 #include <V12/CRingItemFactory.h>
-#include <V12/CCompoundRingItem.h>
+#include <V12/CCompositeRingItem.h>
 #include <utility>
 #include <cstdint>
 

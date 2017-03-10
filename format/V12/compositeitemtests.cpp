@@ -6,7 +6,7 @@
 
 #include "Asserts.h"
 #include "V12/DataFormat.h"
-#include "V12/CCompoundRingItem.h"
+#include "V12/CCompositeRingItem.h"
 #include "V12/CRawRingItem.h"
 #include "V12/CRingStateChangeItem.h"
 #include "V12/CPhysicsEventItem.h"

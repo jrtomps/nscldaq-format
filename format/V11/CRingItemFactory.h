@@ -18,10 +18,16 @@
 #ifndef DAQ_V11_CRINGITEMFACTORY_H
 #define DAQ_V11_CRINGITEMFACTORY_H
 
+#include <memory>
+
 namespace DAQ {
   namespace V11 {
 
 class CRingItem;
+
+    class CRingItemFactory;
+    using CRingItemFactoryUPtr = std::unique_ptr<CRingItemFactory>;
+    using CRingItemFactoryPtr  = std::shared_ptr<CRingItemFactory>;
 
 /**
  * This class is a factory for the correct type of ring item.

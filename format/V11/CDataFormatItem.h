@@ -1,5 +1,5 @@
-#ifndef CDATAFORMATITEM_H
-#define CDATAFORMATITEM_H
+#ifndef DAQ_V11_CDATAFORMATITEM_H
+#define DAQ_V11_CDATAFORMATITEM_H
 /*
     This software is Copyright by the Board of Trustees of Michigan
     State University (c) Copyright 2005.
@@ -22,6 +22,10 @@
 
 namespace DAQ {
   namespace V11 {
+
+  class CDataFormatItem;
+  using CDataFormatItemUPtr = std::unique_ptr<CDataFormatItem>;
+  using CDataFormatItemPtr  = std::shared_ptr<CDataFormatItem>;
 
 /**
  * @class CDataFormatItem

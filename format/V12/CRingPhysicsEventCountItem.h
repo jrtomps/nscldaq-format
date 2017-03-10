@@ -26,6 +26,11 @@
 namespace DAQ {
   namespace V12 {
 
+
+  class CRingPhysicsEventCountItem;
+  using CRingPhysicsEventCountItemUPtr = std::unique_ptr<CRingPhysicsEventCountItem>;
+  using CRingPhysicsEventCountItemPtr  = std::shared_ptr<CRingPhysicsEventCountItem>;
+
 /*!
    The physics event count item provides periodic information about the number
    of events that have been produced by the DAQ system.  This is provided

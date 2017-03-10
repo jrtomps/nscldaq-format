@@ -1,5 +1,5 @@
-#ifndef NSCLDAQ11_CRINGITEM_H
-#define NSCLDAQ11_CRINGITEM_H
+#ifndef DAQ_V11_CRINGITEM_H
+#define DAQ_V11_CRINGITEM_H
 
 /*
     This software is Copyright by the Board of Trustees of Michigan
@@ -17,14 +17,18 @@
 	     East Lansing, MI 48824-1321
 */
 
-#include <unistd.h>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
+#include <memory>
 
 namespace DAQ {
 	namespace V11 {
 
 struct _RingItem;
+
+    class CRingItem;
+    using CRingItemUPtr = std::unique_ptr<CRingItem>;
+    using CRingItemPtr  = std::shared_ptr<CRingItem>;
 
 // Constants:
 

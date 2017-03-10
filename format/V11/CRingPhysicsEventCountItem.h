@@ -1,5 +1,5 @@
-#ifndef NSCLDAQ11_CRINGPHYSICSEVENTCOUNTERITEM_H
-#define NSCLDAQ11_CRINGPHYSICSEVENTCOUNTERITEM_H
+#ifndef DAQ_V11_CRINGPHYSICSEVENTCOUNTERITEM_H
+#define DAQ_V11_CRINGPHYSICSEVENTCOUNTERITEM_H
 
 
 /*
@@ -28,6 +28,11 @@
 
 namespace DAQ {
   namespace V11 {
+
+  class CRingPhysicsEventCountItem;
+  using CRingPhysicsEventCountItemUPtr = std::unique_ptr<CRingPhysicsEventCountItem>;
+  using CRingPhysicsEventCountItemPtr  = std::shared_ptr<CRingPhysicsEventCountItem>;
+
 
 /*!
    The physics event count item provides periodic informatino about how

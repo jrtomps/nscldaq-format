@@ -1,5 +1,5 @@
-#ifndef NSCLDAQ11_CPHYSICSEVENTITEM_H
-#define NSCLDAQ11_CPHYSICSEVENTITEM_H
+#ifndef DAQ_V11_CPHYSICSEVENTITEM_H
+#define DAQ_V11_CPHYSICSEVENTITEM_H
 /*
     This software is Copyright by the Board of Trustees of Michigan
     State University (c) Copyright 2005.
@@ -25,6 +25,10 @@
 
 namespace DAQ {
   namespace V11 {
+
+  class CPhysicsEventItem;
+  using CPhysicsEventItemUPtr = std::unique_ptr<CPhysicsEventItem>;
+  using CPhysicsEventItemPtr  = std::shared_ptr<CPhysicsEventItem>;
 
 struct _RingItem;
 

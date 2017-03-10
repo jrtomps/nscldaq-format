@@ -14,8 +14,8 @@
 	     East Lansing, MI 48824-1321
 */
 
-#ifndef NSCLDAQ11_CRINGFRAGMENTITEM_H
-#define NSCLDAQ11_CRINGFRAGMENTITEM_H
+#ifndef DAQ_V11_CRINGFRAGMENTITEM_H
+#define DAQ_V11_CRINGFRAGMENTITEM_H
 
 #include "V11/CRingItem.h"
 
@@ -28,6 +28,10 @@ namespace DAQ {
 
 
 typedef struct _EventBuilderFragment *pEventBuilderFragment;
+
+  class CRingFragmentItem;
+  using CRingFragmentItemUPtr = std::unique_ptr<CRingFragmentItem>;
+  using CRingFragmentItemPtr  = std::shared_ptr<CRingFragmentItem>;
 
 
 /**

@@ -26,6 +26,10 @@
 namespace DAQ {
 namespace V12 {
 
+class CRawRingItem;
+using CRawRingItemUPtr = std::unique_ptr<CRawRingItem>;
+using CRawRingItemPtr  = std::shared_ptr<CRawRingItem>;
+
 /*!
  * \brief The CRawRingItem class
  *

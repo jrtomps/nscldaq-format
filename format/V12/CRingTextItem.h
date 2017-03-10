@@ -27,6 +27,10 @@
 namespace DAQ {
   namespace V12 {
 
+  class CRingTextItem;
+  using CRingTextItemUPtr = std::unique_ptr<CRingTextItem>;
+  using CRingTextItemPtr  = std::shared_ptr<CRingTextItem>;
+
 /*!
   The text ring item provides a mechanism to construct and manage
   ring items whose body are a series of null-terminated strings. It is

@@ -27,6 +27,11 @@
 namespace DAQ {
   namespace V11 {
 
+
+  class CAbnormalEndItem;
+  using CAbnormalEndItemUPtr = std::unique_ptr<CAbnormalEndItem>;
+  using CAbnormalEndItemPtr  = std::shared_ptr<CAbnormalEndItem>;
+
 class CAbnormalEndItem : public CRingItem
 {
 public:

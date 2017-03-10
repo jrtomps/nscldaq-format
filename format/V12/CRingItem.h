@@ -27,8 +27,8 @@ namespace DAQ {
 
     // Some type defs and forward declarations
     class CRingItem;
-    using CRingItemPtr = std::shared_ptr<CRingItem>;
     using CRingItemUPtr = std::unique_ptr<CRingItem>;
+    using CRingItemPtr  = std::shared_ptr<CRingItem>;
 
     class CRawRingItem;
 

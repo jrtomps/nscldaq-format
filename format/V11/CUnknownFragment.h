@@ -1,5 +1,5 @@
-#ifndef NSCLDAQ11_CUNKNOWNFRAGMENT_H
-#define NSCLDAQ11_CUNKNOWNFRAGMENT_H
+#ifndef DAQ_V11_CUNKNOWNFRAGMENT_H
+#define DAQ_V11_CUNKNOWNFRAGMENT_H
 
 /*
     This software is Copyright by the Board of Trustees of Michigan
@@ -23,6 +23,10 @@
 
 namespace DAQ {
   namespace V11 {
+
+  class CUnknownFragment;
+  using CUnknownFragmentUPtr  = std::unique_ptr<CUnknownFragment>;
+  using CUnknownFragmentPtr   = std::shared_ptr<CUnknownFragment>;
 
 /**
  * @class CUnknownFragment

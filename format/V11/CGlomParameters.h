@@ -1,5 +1,5 @@
-#ifndef CGLOMPARAMETERS_H
-#define CGLOMPARAMETERS_H
+#ifndef DAQ_V11_CGLOMPARAMETERS_H
+#define DAQ_V11_CGLOMPARAMETERS_H
 /*
     This software is Copyright by the Board of Trustees of Michigan
     State University (c) Copyright 2005.
@@ -22,6 +22,11 @@
 
 namespace DAQ {
   namespace V11 {
+
+
+  class CGlomParameters;
+  using CGlomParametersUPtr = std::unique_ptr<CGlomParameters>;
+  using CGlomParametersPtr  = std::shared_ptr<CGlomParameters>;
 
 /**
  * @class CGlomParameters
