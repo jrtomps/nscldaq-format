@@ -4,7 +4,7 @@
 #include <cppunit/Asserter.h>
 #include "Asserts.h"
 
-#include <V11/DataFormatV11.h>
+#include <V11/DataFormat.h>
 #include <V11/CPhysicsEventItem.h>
 
 #include <string.h>

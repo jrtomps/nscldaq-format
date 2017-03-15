@@ -14,7 +14,7 @@
  * @author  Ron Fox <fox@nscl.msu.edu>
  */
 #include "V11/CGlomParameters.h"
-#include "V11/DataFormatV11.h"
+#include "V11/DataFormat.h"
 #include <sstream>
 
 

@@ -6,7 +6,7 @@
 
 #include "Asserts.h"
 #include "V11/CAbnormalEndItem.h"
-#include "V11/DataFormatV11.h"
+#include "V11/DataFormat.h"
 
 #include <string.h>
 #include <stdlib.h>

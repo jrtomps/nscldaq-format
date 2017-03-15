@@ -5,7 +5,7 @@
 #include <string>
 
 #include "Asserts.h"
-#include "V11/DataFormatV11.h"
+#include "V11/DataFormat.h"
 #include "V11/CGlomParameters.h"
 
 // Tests for glom parameter ring item class:

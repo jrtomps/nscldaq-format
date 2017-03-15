@@ -15,7 +15,7 @@
 */
 
 #include "V11/CRingFragmentItem.h"
-#include "V11/DataFormatV11.h"
+#include "V11/DataFormat.h"
 #include "V11/CRingItemFactory.h"
 
 #include <string.h>

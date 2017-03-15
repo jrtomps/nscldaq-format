@@ -14,7 +14,7 @@
 	     East Lansing, MI 48824-1321
 */
 #include "V11/CRingScalerItem.h"
-#include <V11/DataFormatV11.h>
+#include <V11/DataFormat.h>
 #include <time.h>
 #include <string.h>
 #include <sstream>

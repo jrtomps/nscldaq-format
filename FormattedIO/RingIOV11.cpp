@@ -19,7 +19,7 @@
 #include <V11/CRingItem.h>
 #include <byte_cast.h>
 
-#include <V11/DataFormatV11.h>
+#include <V11/DataFormat.h>
 
 #include <iostream>
 #include <stdexcept>

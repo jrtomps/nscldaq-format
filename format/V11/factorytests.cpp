@@ -6,7 +6,7 @@
 
 #include "Asserts.h"
 
-#include "V11/DataFormatV11.h"
+#include "V11/DataFormat.h"
 #include "V11/CRingItemFactory.h"
 #include "V11/CRingItem.h"
 #include "V11/CRingStateChangeItem.h"

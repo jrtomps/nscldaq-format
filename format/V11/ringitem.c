@@ -17,7 +17,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include "V11/DataFormatV11.h"
+#include "V11/DataFormat.h"
 
 #ifdef __cplusplus
 namespace DAQ {

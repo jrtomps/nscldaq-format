@@ -28,7 +28,7 @@
 #include "V11/CUnknownFragment.h"
 #include "V11/CGlomParameters.h"
 #include "V11/CAbnormalEndItem.h"
-#include "V11/DataFormatV11.h"
+#include "V11/DataFormat.h"
 
 #include <vector>
 #include <string>
