@@ -1,5 +1,5 @@
 
-#include <V8/DataFormatV8.h>
+#include <V8/DataFormat.h>
 
 namespace DAQ {
   namespace V8 {
