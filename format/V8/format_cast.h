@@ -19,7 +19,7 @@
 
 #include <V8/CRawBuffer.h>
 #include <V8/CV8Buffer.h>
-#include <V8/DataFormatV8.h>
+#include <V8/DataFormat.h>
 
 #include <typeinfo>
 

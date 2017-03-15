@@ -19,7 +19,7 @@
 
 
 #include "V10/CRingItem.h"
-#include "V10/DataFormatV10.h"
+#include "V10/DataFormat.h"
 
 #include <typeinfo>
 #include <vector>

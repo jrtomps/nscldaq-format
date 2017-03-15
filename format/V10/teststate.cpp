@@ -6,12 +6,12 @@
 
 #define private public
 #define proteted public
-#include <V10/DataFormatV10.h>
+#include <V10/DataFormat.h>
 #include <V10/CRingStateChangeItem.h>
 #undef private
 #undef protected
 
-#include <V10/DataFormatV10.h>
+#include <V10/DataFormat.h>
 #include <string.h>
 #include <time.h>
 #include <stdexcept>

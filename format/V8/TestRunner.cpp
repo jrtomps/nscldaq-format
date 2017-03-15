@@ -18,7 +18,7 @@
 #include <cppunit/ui/text/TestRunner.h>
 #include <string>
 #include <iostream>
-#include <DataFormatV8.h>
+#include <DataFormat.h>
 
 using namespace std;
 

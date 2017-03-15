@@ -10,11 +10,11 @@ libdataformatv8_la_SOURCES = bheader.cpp \
                                 CControlBuffer.cpp \
                                 CTextBuffer.cpp \
                                 CVoidBuffer.cpp \
-																DataFormatV8.cpp
+																DataFormat.cpp
 
 nscldaq8dir = @includedir@/V8
 
-nscldaq8_HEADERS = DataFormatV8.h \
+nscldaq8_HEADERS = DataFormat.h \
                     bheader.h \
                     CV8Buffer.h \
                     CRawBuffer.h \

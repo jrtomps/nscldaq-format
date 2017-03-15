@@ -15,7 +15,7 @@
 */
 
 #include "V10/CRingFragmentItem.h"
-#include "V10/DataFormatV10.h"
+#include "V10/DataFormat.h"
 #include "V10/CRingItemFactory.h"
 
 #include <string.h>

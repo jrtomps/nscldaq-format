@@ -16,7 +16,7 @@
 #ifndef DAQ_V8_CVOIDBUFFER_H
 #define DAQ_V8_CVOIDBUFFER_H
 
-#include <V8/DataFormatV8.h>
+#include <V8/DataFormat.h>
 #include <V8/CV8Buffer.h>
 
 namespace DAQ {

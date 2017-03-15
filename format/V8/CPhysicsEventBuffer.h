@@ -18,7 +18,7 @@
 #define DAQ_V8_CPHYSICSEVENTBUFFER_H
 
 #include <V8/CV8Buffer.h>
-#include <V8/DataFormatV8.h>
+#include <V8/DataFormat.h>
 #include <ByteBuffer.h>
 #include <BufferPtr.h>
 

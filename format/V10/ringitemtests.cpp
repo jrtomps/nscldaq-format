@@ -10,7 +10,7 @@
 #undef private
 #undef protected
 
-#include <V10/DataFormatV10.h>
+#include <V10/DataFormat.h>
 
 using namespace DAQ::V10;
 using namespace std;

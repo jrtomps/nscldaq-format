@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "V10/DataFormatV10.h"
+#include "V10/DataFormat.h"
 
 namespace DAQ {
   namespace V10 {

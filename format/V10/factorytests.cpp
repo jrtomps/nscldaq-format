@@ -5,7 +5,7 @@
 #include <string>
 
 #include "Asserts.h"
-#include "DataFormatV10.h"
+#include "DataFormat.h"
 
 #include "CRingItemFactory.h"
 #include "CRingItem.h"

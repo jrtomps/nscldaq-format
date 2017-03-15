@@ -30,7 +30,7 @@ nscldaq11_HEADERS = CRingItem.h \
                   CDataFormatItem.h \
                   CRingItemFactory.h \
                   RingItemComparisons.h \
-                  DataFormatV11.h \
+                  DataFormat.h \
                   StringsToIntegers.h
 
 libdataformatv11_la_CFLAGS = -I@srcdir@/..

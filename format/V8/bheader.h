@@ -17,7 +17,7 @@
 #ifndef NSCLDAQ8_BHEADER_H
 #define NSCLDAQ8_BHEADER_H
 
-#include <V8/DataFormatV8.h>
+#include <V8/DataFormat.h>
 #include <ByteBuffer.h>
 
 #include <cstdint>

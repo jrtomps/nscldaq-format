@@ -20,7 +20,7 @@
 
 #include <V8/CV8Buffer.h>
 #include <V8/bheader.h>
-#include <V8/DataFormatV8.h>
+#include <V8/DataFormat.h>
 
 #include <vector>
 #include <string>

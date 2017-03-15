@@ -20,7 +20,7 @@
 #include <cppunit/Asserter.h>
 
 
-#include <V8/DataFormatV8.h>
+#include <V8/DataFormat.h>
 #include <V8/CRawBuffer.h>
 #include <DebugUtils.h>
 #include <ByteBuffer.h>

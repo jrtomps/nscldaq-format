@@ -25,7 +25,7 @@
 #include "V10/CRingTextItem.h"
 #include "V10/CPhysicsEventItem.h"
 #include "V10/CRingTimestampedRunningScalerItem.h"
-#include "V10/DataFormatV10.h"
+#include "V10/DataFormat.h"
 
 #include <vector>
 #include <string>

@@ -20,7 +20,7 @@
 #include <ByteBuffer.h>
 #include <BufferPtr.h>
 #include <V8/CPhysicsEventBodyParser.h>
-#include <V8/DataFormatV8.h>
+#include <V8/DataFormat.h>
 
 #include <memory>
 #include <cstdint>
