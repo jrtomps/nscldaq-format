@@ -53,8 +53,9 @@ extern std::istream& operator>>(std::istream& stream,
 
 #ifdef NSCLDAQ_BUILD
 
+#include <CDataSource.h>
+
 namespace DAQ {
-class CDataSource;
 class CDataSink;
 
     void writeItem(CDataSink& sink, const V10::CRingItem& item);
@@ -87,7 +88,7 @@ class CDataSink;
         do {
           stopLooking = pred(source);
         }
-        while ( !stopLooking );
+        while ( !stopLooking && !source.eof());
 
         if (stopLooking) {
             readItem(source, item);

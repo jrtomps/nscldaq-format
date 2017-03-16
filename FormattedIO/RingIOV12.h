@@ -1,8 +1,6 @@
 #ifndef DAQ_V12_RINGIOV12_H
 #define DAQ_V12_RINGIOV12_H
 
-#include <CDataSource.h>
-
 #include <iosfwd>
 #include <functional>
 
@@ -40,8 +38,9 @@ extern std::istream& operator>>(std::istream& stream,
 
 #ifdef NSCLDAQ_BUILD
 
+#include <CDataSource.h>
+
 namespace DAQ {
-class CDataSource;
 class CDataSink;
 }
 
