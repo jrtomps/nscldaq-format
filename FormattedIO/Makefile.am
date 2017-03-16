@@ -105,10 +105,11 @@ else
 
 unittests_SOURCES	= TestRunner.cpp  \
                             daq8test.cpp \
-                                                                                daq10test.cpp \
-                                                                                daq11test.cpp \
-                                                                                daq12test.cpp \
-                                                                                selecttest.cpp
+                            daq10test.cpp \
+                            daq11test.cpp \
+                            daq12test.cpp \
+                            selecttest.cpp \
+                            csimpleallbutpredicatetest.cpp
 
 
 unittests_LDADD		= @builddir@/libdaqformatio.la \

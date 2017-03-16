@@ -1,6 +1,8 @@
 #ifndef DAQ_V12_RINGIOV12_H
 #define DAQ_V12_RINGIOV12_H
 
+#include <CDataSource.h>
+
 #include <iosfwd>
 #include <functional>
 
@@ -99,7 +101,7 @@ bool readItemIf(CDataSource& source, V12::CRawRingItem& item,
     do {
       stopLooking = pred(source);
     }
-    while ( !stopLooking );
+    while ( !stopLooking && !source.eof());
 
     if (stopLooking) {
         readItem(source, item);

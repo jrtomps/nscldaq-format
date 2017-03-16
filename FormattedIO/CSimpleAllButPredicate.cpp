@@ -33,7 +33,13 @@ bool CSimpleAllButPredicate::operator()(CDataSource& source)
     V12::Parser::parseSizeAndType(shortHeader.begin(), shortHeader.end(),
                                   size, type, needsSwap);
 
-    return (m_blacklist.find(type) == m_blacklist.end());
+    if (m_blacklist.find(type) == m_blacklist.end()) {
+        return true;
+    } else {
+        // skip ahead to the next event
+        source.ignore(size);
+        return false;
+    }
 
 }
 
