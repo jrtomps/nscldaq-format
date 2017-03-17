@@ -19,5 +19,7 @@ SUBDIRS = utils \
           FormattedIO \
                                         testutils
 
+DIST_SUBDIRS = $(SUBDIRS)
+
 endif
 

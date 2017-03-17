@@ -3,8 +3,8 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/Asserter.h>
 #include <string>
-
 #include "Asserts.h"
+
 #include "V12/DataFormat.h"
 #include "V12/CCompositeRingItem.h"
 #include "V12/CRawRingItem.h"
@@ -45,6 +45,9 @@ class CCompositeRingItemTests : public CppUnit::TestFixture
     CPPUNIT_TEST(fromRawRingItem_2);
     CPPUNIT_TEST(consistency_0);
     CPPUNIT_TEST(setType_0);
+    CPPUNIT_TEST(access_0);
+    CPPUNIT_TEST(at_0);
+    CPPUNIT_TEST(at_1);
     CPPUNIT_TEST_SUITE_END();
 private:
 
@@ -361,6 +364,54 @@ protected:
       CPPUNIT_ASSERT_THROW_MESSAGE("type must have composite bit set",
                                    item.setType(UNDEFINED),
                                    std::invalid_argument);
+  }
+
+  void access_0() {
+      CCompositeRingItem item(COMP_PHYSICS_EVENT, 22, 33);
+
+      CRingItemPtr ptr0(new CPhysicsEventItem(22, 33));
+
+      // another way to make a shared ptr
+      auto ptr1 = std::make_shared<CPhysicsEventItem>(22, 33);
+
+      // append children
+      item.appendChild(ptr0);
+      item.appendChild(ptr1);
+
+      ASSERTMSG("array indexing returns correct value for first element",
+                ptr0 == item[0]);
+      ASSERTMSG("array indexing returns correct value for second element",
+                ptr1 == item[1]);
+
+  }
+
+
+  void at_0() {
+      CCompositeRingItem item(COMP_PHYSICS_EVENT, 22, 33);
+
+      CRingItemPtr ptr0(new CPhysicsEventItem(22, 33));
+
+      // another way to make a shared ptr
+      auto ptr1 = std::make_shared<CPhysicsEventItem>(22, 33);
+
+      // append children
+      item.appendChild(ptr0);
+      item.appendChild(ptr1);
+
+      ASSERTMSG("at(0) returns correct value for first element",
+                ptr0 == item.at(0));
+      ASSERTMSG("at(1) returns correct value for second element",
+                ptr1 == item.at(1));
+
+  }
+
+  void at_1() {
+      CCompositeRingItem item(COMP_PHYSICS_EVENT, 22, 33);
+
+      CPPUNIT_ASSERT_THROW_MESSAGE("at() throws out of range error if necessary",
+                                   item.at(0),
+                                   std::out_of_range);
+
   }
 
 };

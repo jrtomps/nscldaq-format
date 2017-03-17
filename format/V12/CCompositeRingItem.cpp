@@ -342,6 +342,50 @@ std::string CCompositeRingItem::insertIndent(const std::string& text, int nSpace
 }
 
 
+/*!
+ * \brief Element access operator with NO range checking
+ *
+ * \param i     the index
+ *
+ * \return element indexed by i
+ */
+CRingItemPtr CCompositeRingItem::operator[](size_t i) {
+    return m_children[i];
+}
+
+/*!
+ * \brief Element access with range checking
+ *
+ * It is the caller's responsibility to ensure that the argument passed
+ * in is a valid index. The user can find the number of children by calling
+ * count();
+ *
+ * \param i     index of element
+ *
+ * \return the element if it exists
+ *
+ * \throw std::out_of_range if i is out an invalid index
+ */
+CRingItemPtr CCompositeRingItem::at(size_t i) {
+    return m_children.at(i);
+}
+
+CCompositeRingItem::iterator
+CCompositeRingItem::begin() { return m_children.begin(); }
+
+CCompositeRingItem::const_iterator
+CCompositeRingItem::begin() const { return m_children.begin(); }
+
+
+CCompositeRingItem::iterator
+CCompositeRingItem::end() { return m_children.end(); }
+
+CCompositeRingItem::const_iterator
+CCompositeRingItem::end() const { return m_children.end(); }
+
+size_t CCompositeRingItem::count() const { return m_children.size(); }
+
+
 } // end V12
 } // end DAQ
 

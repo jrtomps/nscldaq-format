@@ -141,6 +141,9 @@ using CCompositeRingItemPtr  = std::shared_ptr<CCompositeRingItem>;
  */
 class CCompositeRingItem : public CRingItem
 {
+public:
+    using iterator       = std::vector<CRingItemPtr>::iterator;
+    using const_iterator = std::vector<CRingItemPtr>::const_iterator;
 
 private:
     uint32_t m_type;
@@ -181,6 +184,16 @@ public:
 
     const std::vector<CRingItemPtr> getChildren() const;
     void appendChild(CRingItemPtr item);
+    size_t count() const;
+
+    CRingItemPtr operator[](size_t i);
+    CRingItemPtr at(size_t i);
+
+    iterator begin();
+    const_iterator begin() const;
+
+    iterator end();
+    const_iterator end() const;
 
 private:
     std::string insertIndent(const std::string& text, int nSpaces) const;
