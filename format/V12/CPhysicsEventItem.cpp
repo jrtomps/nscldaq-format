@@ -107,6 +107,7 @@ namespace DAQ {
       if (type != PHYSICS_EVENT) {
           throw std::invalid_argument("CPhysicsEventItem::setType() must be provided type PHYSICS_EVENT");
       }
+      CRawRingItem::setType(type);
   }
 
   /*!
