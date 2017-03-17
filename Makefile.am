@@ -18,7 +18,6 @@ SUBDIRS = utils \
           FormattedIO \
                                         testutils
 
-DIST_SUBDIRS = $(SUBDIRS)
 endif
 
 # we need this so that make distclean does not try to clean out Buffer twice:
