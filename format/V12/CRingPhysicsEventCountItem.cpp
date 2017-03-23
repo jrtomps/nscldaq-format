@@ -250,6 +250,7 @@ void CRingPhysicsEventCountItem::toRawRingItem(CRawRingItem& item) const
     item.setType(type());
     item.setSourceId(m_sourceId);
     item.setEventTimestamp(m_evtTimestamp);
+    item.setMustSwap(mustSwap());
 
     auto& body = item.getBody();
     body.clear();

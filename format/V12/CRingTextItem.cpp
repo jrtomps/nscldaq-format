@@ -282,6 +282,7 @@ void CRingTextItem::toRawRingItem(CRawRingItem& buffer) const
     buffer.setType(m_type);
     buffer.setEventTimestamp(m_evtTimestamp);
     buffer.setSourceId(m_sourceId);
+    buffer.setMustSwap(mustSwap());
 
     // clear the body
     auto& body = buffer.getBody();

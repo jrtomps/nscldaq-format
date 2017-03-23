@@ -230,6 +230,7 @@ void CCompositeRingItem::toRawRingItem(CRawRingItem& rawBuffer) const {
     rawBuffer.setType(type() | 0x8000); // set the Composite bit in case it was not set
     rawBuffer.setSourceId(getSourceId());
     rawBuffer.setEventTimestamp(getEventTimestamp());
+    rawBuffer.setMustSwap(mustSwap());
 
     auto& body = rawBuffer.getBody();
     body.clear();

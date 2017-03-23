@@ -251,6 +251,7 @@ void CGlomParameters::toRawRingItem(CRawRingItem& raw) const
     raw.setType(EVB_GLOM_INFO);
     raw.setSourceId(m_sourceId);
     raw.setEventTimestamp(m_evtTimestamp);
+    raw.setMustSwap(mustSwap());
 
     auto& body = raw.getBody();
     body.clear();

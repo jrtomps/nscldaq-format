@@ -251,6 +251,7 @@ void CRingStateChangeItem::toRawRingItem(CRawRingItem& item) const
     item.setType(type());
     item.setEventTimestamp(getEventTimestamp());
     item.setSourceId(getSourceId());
+    item.setMustSwap(mustSwap());
 
     Buffer::ByteBuffer& body = item.getBody();
     body.clear();

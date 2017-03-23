@@ -267,6 +267,7 @@ void CRingScalerItem::toRawRingItem(DAQ::V12::CRawRingItem& item) const
   item.setType(type());
   item.setEventTimestamp(m_evtTimestamp);
   item.setSourceId(m_sourceId);
+  item.setMustSwap(mustSwap());
 
   auto& body = item.getBody();
      
@@ -281,7 +282,6 @@ void CRingScalerItem::toRawRingItem(DAQ::V12::CRawRingItem& item) const
   for (auto& scaler : m_scalers) {
     body << scaler;
   }
-  item.setMustSwap(false);
 }
 
 

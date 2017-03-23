@@ -164,6 +164,8 @@ namespace DAQ {
       item.setType(type());
       item.setEventTimestamp(getEventTimestamp());
       item.setSourceId(getSourceId());
+
+      item.setMustSwap(mustSwap());
   }
 
 
