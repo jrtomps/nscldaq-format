@@ -48,7 +48,7 @@ CRingStateChangeItem::CRingStateChangeItem(uint16_t reason) :
   m_pItem->s_runNumber    = 0;
   m_pItem->s_timeOffset   = 0;
   m_pItem->s_Timestamp = static_cast<uint32_t>(time(NULL));
-  memset(m_pItem->s_title, 0, TITLE_MAXSIZE+1);
+  memset(m_pItem->s_title, 0, V10_TITLE_MAXSIZE+1);
 }
 /*!
    Fully specified construction the initial values of the various
@@ -60,7 +60,7 @@ CRingStateChangeItem::CRingStateChangeItem(uint16_t reason) :
    \param timestamp  - Absolute time to be recorded in the buffer.. tyically
                        this should be time(NULL).
    \param title      - Title string.  The length of this string must be at most
-                       TITLE_MAXSIZE.
+                       V10_TITLE_MAXSIZE.
 
    \throw std::out_of_range - If the title string can't fit in s_title.
 */
@@ -212,12 +212,12 @@ CRingStateChangeItem::setTitle(string title)
 {
   // Ensure the title is small enough.
 
-  if(title.size() > TITLE_MAXSIZE) {
+  if(title.size() > V10_TITLE_MAXSIZE) {
       std::string msg ("Failure while ");
-      msg += "checking size of title against TITLE_MAXSIZE.";
+      msg += "checking size of title against V10_TITLE_MAXSIZE.";
 
       msg += " Index " + to_string(title.size());
-      msg += " is not in range [0," + to_string(TITLE_MAXSIZE);
+      msg += " is not in range [0," + to_string(V10_TITLE_MAXSIZE);
       msg += ").";
       throw std::out_of_range(msg);
   }

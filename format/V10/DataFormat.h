@@ -90,8 +90,8 @@ static const uint32_t FIRST_USER_ITEM_CODE = 32768; /* 0x8000 */
 
 // Longest allowed title:
 
-#ifndef TITLE_MAXSIZE
-#define TITLE_MAXSIZE 80
+#ifndef V10_TITLE_MAXSIZE
+#define V10_TITLE_MAXSIZE 80
 #endif
 
 
@@ -124,7 +124,7 @@ typedef struct _StateChangeItem {
   uint32_t        s_runNumber;
   uint32_t        s_timeOffset;
   uint32_t          s_Timestamp;
-  char            s_title[TITLE_MAXSIZE+1];
+  char            s_title[V10_TITLE_MAXSIZE+1];
 } StateChangeItem, *pStateChangeItem;
 
 /*!

@@ -252,8 +252,8 @@ formatStateChange(time_t stamp, uint32_t offset, uint32_t runNumber,
     pItem->s_runNumber = runNumber;
     pItem->s_timeOffset = offset;
     pItem->s_Timestamp  = stamp;
-    memset(pItem->s_title, 0, TITLE_MAXSIZE + 1);
-    memcpy(pItem->s_title,  pTitle, TITLE_MAXSIZE) ; 
+    memset(pItem->s_title, 0, V10_TITLE_MAXSIZE + 1);
+    memcpy(pItem->s_title,  pTitle, V10_TITLE_MAXSIZE) ;
   }
 
   return pItem;
