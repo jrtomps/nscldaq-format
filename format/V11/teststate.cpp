@@ -95,7 +95,7 @@ void teststate::fullcons()
   // The title does not fit in this one:
 
   string title("supercalifragalisticexpialidocious");
-  while (title.size() <= TITLE_MAXSIZE) {
+  while (title.size() <= V11_TITLE_MAXSIZE) {
     title += title;
   }
   

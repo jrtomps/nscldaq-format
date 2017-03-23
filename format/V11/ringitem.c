@@ -250,13 +250,13 @@ fillStateChangeBody(
     pBody->s_offsetDivisor = divisor;
     
     /*
-      Zero out the title and copy in at most TITLE_MAXSIZE bytes of title:
-      Note that since the storage is TITLE_MAXSIZE+1 our code ensures the
+      Zero out the title and copy in at most V11_TITLE_MAXSIZE bytes of title:
+      Note that since the storage is V11_TITLE_MAXSIZE+1 our code ensures the
       presence of a terminating null
     */
     
-    memset(pBody->s_title, 0, TITLE_MAXSIZE+1);
-    strncpy(pBody->s_title, pTitle, TITLE_MAXSIZE);
+    memset(pBody->s_title, 0, V11_TITLE_MAXSIZE+1);
+    strncpy(pBody->s_title, pTitle, V11_TITLE_MAXSIZE);
 }
 /*------------------------------------------------------------------------------------*/
 /**

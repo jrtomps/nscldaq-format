@@ -157,8 +157,8 @@ static const uint16_t GLOM_TIMESTAMP_AVERAGE = 2;
 
 /* Longest allowed title: */
 
-#ifndef TITLE_MAXSIZE
-#define TITLE_MAXSIZE 80
+#ifndef V11_TITLE_MAXSIZE
+#define V11_TITLE_MAXSIZE 80
 #endif
 
 
@@ -223,7 +223,7 @@ typedef PSTRUCT _StateChangeItemBody {
   uint32_t        s_timeOffset;
   uint32_t        s_Timestamp;
   uint32_t        s_offsetDivisor;
-  char            s_title[TITLE_MAXSIZE+1];
+  char            s_title[V11_TITLE_MAXSIZE+1];
 } StateChangeItemBody, *pStateChangeItemBody;
 
 typedef PSTRUCT _StateChangeItem  {
