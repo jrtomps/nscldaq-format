@@ -18,6 +18,7 @@
 #include "DataFormat.h"
 #include "ContainerDeserializer.h"
 #include "ByteOrder.h"
+#include <make_unique.h>
 #include <sstream>
 #include <iomanip>
 
@@ -282,5 +283,8 @@ namespace DAQ {
       m_mustSwap = on;
     }
 
+    CRingItemUPtr CRawRingItem::clone() const {
+        return make_unique<CRawRingItem>(*this);
+    }
   } // end of V12 namespace
 } // end DAq

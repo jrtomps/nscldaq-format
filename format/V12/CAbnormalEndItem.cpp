@@ -22,6 +22,9 @@
 #include "V12/CAbnormalEndItem.h"
 #include "V12/CRawRingItem.h"
 #include "V12/DataFormat.h"
+
+#include <make_unique.h>
+
 #include <typeinfo>
 #include <string>
 
@@ -186,6 +189,10 @@ namespace DAQ {
   CAbnormalEndItem::toString() const
   {
       return headerToString(*this);
+  }
+
+  CRingItemUPtr CAbnormalEndItem::clone() const {
+      return make_unique<CAbnormalEndItem>(*this);
   }
 
   } // end of V12 namespace

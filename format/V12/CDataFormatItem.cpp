@@ -18,6 +18,7 @@
 #include "V12/CRawRingItem.h"
 #include "ContainerDeserializer.h"
 #include "ByteBuffer.h"
+#include <make_unique.h>
 
 #include <sstream>
 
@@ -279,6 +280,11 @@ CDataFormatItem::toString() const
     return out.str();
 }
 
+
+CRingItemUPtr CDataFormatItem::clone() const
+{
+    return make_unique<CDataFormatItem>(*this);
+}
 
   } // end of V12 namespace
 } // end DAQ

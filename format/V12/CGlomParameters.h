@@ -101,6 +101,8 @@ public:
     virtual std::string typeName() const;
     virtual std::string toString() const;
 
+   virtual CRingItemUPtr clone() const;
+
 };
 
   } // end of V12 namespace

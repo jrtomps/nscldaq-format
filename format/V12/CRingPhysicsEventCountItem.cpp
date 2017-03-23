@@ -17,6 +17,7 @@
 #include "V12/CRingPhysicsEventCountItem.h"
 #include <V12/CRawRingItem.h>
 #include <ContainerDeserializer.h>
+#include <make_unique.h>
 #include <sstream>
 #include <stdexcept>
 
@@ -392,6 +393,10 @@ CRingPhysicsEventCountItem::toString() const
   return out.str();
 }
 
+CRingItemUPtr CRingPhysicsEventCountItem::clone() const
+{
+    return make_unique<CRingPhysicsEventCountItem>(*this);
+}
 
 } // end of V12 namespace
 } // end DAQ

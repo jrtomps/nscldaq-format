@@ -17,6 +17,7 @@
 
 #include "V12/CPhysicsEventItem.h"
 #include "V12/DataFormat.h"
+#include <make_unique.h>
 
 namespace DAQ {
   namespace V12 {
@@ -115,6 +116,10 @@ namespace DAQ {
    */
   bool CPhysicsEventItem::isComposite() const {
       return false;
+  }
+
+  CRingItemUPtr CPhysicsEventItem::clone() const {
+      return make_unique<CPhysicsEventItem>(*this);
   }
 
   } // end of V12 namespace

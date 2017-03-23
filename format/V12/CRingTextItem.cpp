@@ -18,6 +18,7 @@
 #include "V12/CRingTextItem.h"
 #include <V12/CRawRingItem.h>
 #include <ContainerDeserializer.h>
+#include <make_unique.h>
 #include <sstream>
 #include <ctime>
 #include <algorithm>
@@ -440,6 +441,11 @@ CRingTextItem::toString() const
   }
 
   return out.str();
+}
+
+
+CRingItemUPtr CRingTextItem::clone() const {
+    return make_unique<CRingTextItem>(*this);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////

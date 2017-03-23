@@ -133,6 +133,8 @@ namespace DAQ {
         virtual bool operator!=(const CRingItem& item) const = 0;
 
 
+        virtual CRingItemUPtr clone() const = 0;
+
     };
 
     /*!

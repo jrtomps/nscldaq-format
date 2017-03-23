@@ -81,6 +81,7 @@ public:
 
   virtual bool isComposite() const;
 
+  virtual CRingItemUPtr clone() const;
 };
 
 

@@ -19,6 +19,7 @@
 #include <ByteBuffer.h>
 #include <ByteOrder.h>
 #include <RangeDeserializer.h>
+#include <make_unique.h>
 #include <sstream>
 #include <iterator>
 #include <utility>
@@ -297,6 +298,11 @@ std::string CCompositeRingItem::toString() const {
         result << text;
     }
     return result.str();
+}
+
+CRingItemUPtr CCompositeRingItem::clone() const
+{
+    return make_unique<CCompositeRingItem>(*this);
 }
 
 std::vector<CRingItemPtr>& CCompositeRingItem::getChildren() {

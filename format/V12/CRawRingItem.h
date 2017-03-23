@@ -118,6 +118,8 @@ public:
   virtual std::string typeName() const;	// Textual type of item.
   virtual std::string toString() const; // Provide string dump of the item.
 
+  virtual CRingItemUPtr clone() const;
+
   uint32_t getBodySize() const;
   uint32_t getStorageSize() const;
 

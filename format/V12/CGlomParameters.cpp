@@ -17,6 +17,9 @@
 #include "V12/DataFormat.h"
 #include "V12/CRawRingItem.h"
 #include "ContainerDeserializer.h"
+
+#include <make_unique.h>
+
 #include <sstream>
 
 namespace DAQ {
@@ -327,6 +330,10 @@ CGlomParameters::toString() const
         out << "Tstamp Policy: " << policyNames[tsPolicy] << "\n";
     }
     return out.str();
+}
+
+CRingItemUPtr CGlomParameters::clone() const {
+    return make_unique<CGlomParameters>(*this);
 }
 
   } // end of V12 namespace

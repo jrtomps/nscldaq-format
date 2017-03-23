@@ -38,13 +38,16 @@ libdataformatv12_la_CFLAGS = -I@srcdir@/..
 
 if FORMAT_STANDALONE
 libdataformatv12_la_CPPFLAGS = -I@srcdir@/.. \
-                               -I@top_srcdir@/Buffer
+                               -I@top_srcdir@/Buffer \
+                               -I@top_srcdir@/utils
+
 
 libdataformatv12_la_LDFLAGS = @top_builddir@/Buffer/libbuffer.la
 else
 FORMAT_DIR=utilities/nscldaq-format
 libdataformatv12_la_CPPFLAGS = -I@srcdir@/.. \
-                               -I@top_srcdir@/$(FORMAT_DIR)/Buffer
+                               -I@top_srcdir@/$(FORMAT_DIR)/Buffer \
+                               -I@top_srcdir@/base/headers
 
 libdataformatv12_la_LDFLAGS = @top_builddir@/$(FORMAT_DIR)/Buffer/libbuffer.la
 endif
@@ -74,7 +77,8 @@ unittests_LDADD	= $(CPPUNIT_LIBS) 		\
 unittests_CPPFLAGS= -I@srcdir@/.. \
                     -I@top_srcdir@/Buffer \
 		    @CPPUNIT_CFLAGS@ \
-                    -I@top_srcdir@/testutils
+                    -I@top_srcdir@/testutils \
+                    -I@top_srcdir@/utils
 else
 unittests_LDADD	= $(CPPUNIT_LIBS) 		\
                         @builddir@/libdataformatv12.la	\
@@ -82,7 +86,8 @@ unittests_LDADD	= $(CPPUNIT_LIBS) 		\
 unittests_CPPFLAGS= -I@srcdir@/.. \
                     -I@top_srcdir@/$(FORMAT_DIR)/Buffer \
 		    @CPPUNIT_CFLAGS@ \
-                    -I@top_srcdir@/$(FORMAT_DIR)/testutils
+                    -I@top_srcdir@/$(FORMAT_DIR)/testutils \
+                    -I@top_srcdir@/base/headers
 endif
 
 unittests_CFLAGS= -I@srcdir@/..

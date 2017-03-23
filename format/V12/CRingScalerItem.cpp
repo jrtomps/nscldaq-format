@@ -19,6 +19,8 @@
 #include <V12/CRawRingItem.h>
 #include <ContainerDeserializer.h>
 
+#include <make_unique.h>
+
 #include <ctime>
 #include <stdexcept>
 
@@ -540,6 +542,12 @@ CRingScalerItem::toString() const
 
   return out.str();
   
+}
+
+
+CRingItemUPtr CRingScalerItem::clone() const
+{
+    return make_unique<CRingScalerItem>(*this);
 }
 
 /*-------------------------------------------------------

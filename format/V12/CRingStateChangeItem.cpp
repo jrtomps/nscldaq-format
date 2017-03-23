@@ -18,6 +18,7 @@
 #include "V12/CRingStateChangeItem.h"
 #include <V12/CRawRingItem.h>
 #include <ContainerDeserializer.h>
+#include <make_unique.h>
 #include <sstream>
 #include <ctime>
 
@@ -423,7 +424,13 @@ CRingStateChangeItem::toString() const
 
   return out.str();
 }
-    
+
+
+CRingItemUPtr CRingStateChangeItem::clone() const
+{
+    return make_unique<CRingStateChangeItem>(*this);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Private utilities.
 

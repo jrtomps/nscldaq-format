@@ -180,6 +180,8 @@ public:
     std::string typeName() const;
     std::string toString() const;
 
+    CRingItemUPtr clone() const;
+
     std::vector<CRingItemPtr>& getChildren();
 
     const std::vector<CRingItemPtr> getChildren() const;

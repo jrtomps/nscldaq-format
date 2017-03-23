@@ -123,6 +123,8 @@ public:
   virtual std::string typeName() const;
   virtual std::string toString() const;
 
+  virtual CRingItemUPtr clone() const;
+
   // Utility functions..
 private:
   bool isStateChange(uint32_t type) const;

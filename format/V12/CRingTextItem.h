@@ -107,6 +107,8 @@ public:
   virtual std::string typeName() const;
   virtual std::string toString() const;
 
+  virtual CRingItemUPtr clone() const;
+
   //private utilities:
 private:
   bool   validType(const CRingItem& item) const;
