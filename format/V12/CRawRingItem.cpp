@@ -262,6 +262,11 @@ namespace DAQ {
       return m_body;
     }
 
+    void CRawRingItem::setBody(const Buffer::ByteBuffer &body)
+    {
+        m_body = body;
+    }
+
     /*!
      * \brief Copy contents of this into another raw ring item
      *

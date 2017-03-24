@@ -125,6 +125,7 @@ public:
 
   Buffer::ByteBuffer& getBody();
   const Buffer::ByteBuffer& getBody() const;
+  void setBody(const Buffer::ByteBuffer& body);
 
   void toRawRingItem(CRawRingItem& item) const;
 
