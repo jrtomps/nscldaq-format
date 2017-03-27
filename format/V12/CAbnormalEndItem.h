@@ -45,7 +45,7 @@ private:
     uint32_t m_sourceId;
 
 public:
-    CAbnormalEndItem() = default;
+    CAbnormalEndItem();
     CAbnormalEndItem(const CAbnormalEndItem& rhs) = default;
     CAbnormalEndItem& operator=(const CAbnormalEndItem& rhs) = default;
     CAbnormalEndItem(const CRawRingItem& rhs);

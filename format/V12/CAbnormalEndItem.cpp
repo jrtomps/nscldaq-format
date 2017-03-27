@@ -31,6 +31,11 @@
 namespace DAQ {
   namespace V12 {
 
+    CAbnormalEndItem::CAbnormalEndItem() 
+      : m_evtTimestamp(V12::NULL_TIMESTAMP),
+      m_sourceId(0) 
+    {}
+
   /*!
  * \brief Construct from a raw ring item
  *
