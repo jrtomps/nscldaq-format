@@ -17,6 +17,8 @@
 	     East Lansing, MI 48824-1321
 */
 
+#include <V11/DataFormat.h>
+
 #include <cstdint>
 #include <string>
 #include <memory>
@@ -61,7 +63,7 @@ private:
   // Constructors and canonicals.
 
 public:
-  CRingItem(uint16_t type, size_t maxBody = CRingItemStaticBufferSize - 10);
+  CRingItem(uint16_t type = UNDEFINED, size_t maxBody = CRingItemStaticBufferSize - 10);
   CRingItem(uint16_t type, uint64_t timestamp, uint32_t sourceId,
             uint32_t barrierType = 0, size_t maxBody = CRingItemStaticBufferSize - 10);
   CRingItem(const CRingItem& rhs);

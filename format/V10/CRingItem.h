@@ -17,6 +17,8 @@
 	     East Lansing, MI 48824-1321
 */
 
+#include <V10/DataFormat.h>
+
 #include <unistd.h>
 #include <stdint.h>
 #include <string>
@@ -59,7 +61,7 @@ private:
   // Constructors and canonicals.
 
 public:
-  CRingItem(uint16_t type, size_t maxBody = 8192);
+  CRingItem(uint16_t type = UNDEFINED, size_t maxBody = 8192);
   CRingItem(const CRingItem& rhs);
   virtual ~CRingItem();
   
