@@ -71,6 +71,9 @@ namespace DAQ {
 
         char* pItem = reinterpret_cast<char*>(item.getItemPointer());
         source.read(pItem, headerSize);
+        if (source.eof()) {
+            return;
+        }
 
         uint32_t totalSize = byte_cast<uint32_t>(pItem);
 

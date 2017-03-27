@@ -119,6 +119,9 @@ void readItem(CDataSource& source, V12::CRawRingItem& item)
     std::array<char,20> header;
 
     source.read(header.data(), header.size());
+    if (source.eof()) {
+        return;
+    }
 
     uint32_t size, type, sourceId;
     uint64_t tstamp;
