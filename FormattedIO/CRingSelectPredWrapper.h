@@ -19,6 +19,7 @@
          East Lansing, MI 48824-1321
 */
 
+#include <CDataSourcePredicate.h>
 #include <memory>
 
 
@@ -28,7 +29,7 @@ namespace DAQ {
 
 class CDataSource;
 
-class CRingSelectPredWrapper
+class CRingSelectPredWrapper : public CDataSourcePredicate
 {
 
 private:

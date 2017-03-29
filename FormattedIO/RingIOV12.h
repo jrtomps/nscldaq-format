@@ -39,6 +39,7 @@ extern std::istream& operator>>(std::istream& stream,
 #ifdef NSCLDAQ_BUILD
 
 #include <CDataSource.h>
+#include <CTimeout.h>
 
 namespace DAQ {
 class CDataSink;
@@ -72,7 +73,9 @@ namespace DAQ {
 void writeItem(CDataSink& source, const V12::CRawRingItem& item);
 void writeItem(CDataSink& source, const V12::CRingItem& item);
 
-void readItem(CDataSource& source, V12::CRawRingItem& item);
+void readItem(CDataSource& source,
+              V12::CRawRingItem& item,
+              const CTimeout& timeout = CTimeout(std::numeric_limits<double>::max()));
 
 
 /*!
@@ -92,18 +95,20 @@ void readItem(CDataSource& source, V12::CRawRingItem& item);
  *  search can be ended, then the predicate should return false.
  */
 template<class UnaryPredicate>
-bool readItemIf(CDataSource& source, V12::CRawRingItem& item,
-                UnaryPredicate& pred)
+bool readItemIf(CDataSource& source,
+                V12::CRawRingItem& item,
+                UnaryPredicate& pred,
+                const CTimeout& timeout = CTimeout(std::numeric_limits<double>::max()))
 {
-
+    int count = 0;
     bool stopLooking;
     do {
       stopLooking = pred(source);
     }
-    while ( !stopLooking && !source.eof());
+    while ( !stopLooking && !source.eof() && !timeout.expired());
 
-    if (stopLooking) {
-        readItem(source, item);
+    if (stopLooking && !timeout.expired()) {
+        readItem(source, item, timeout);
     }
 
     return stopLooking;

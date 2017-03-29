@@ -114,12 +114,13 @@ void writeItem(CDataSink& sink, const V12::CRingItem& item)
         }
 }
 
-void readItem(CDataSource& source, V12::CRawRingItem& item)
+void readItem(CDataSource& source, V12::CRawRingItem& item,
+              const CTimeout& timeout)
 {
     std::array<char,20> header;
 
-    source.read(header.data(), header.size());
-    if (source.eof()) {
+    source.timedRead(header.data(), header.size(), timeout);
+    if (source.eof() || timeout.expired()) {
         return;
     }
 
@@ -139,7 +140,8 @@ void readItem(CDataSource& source, V12::CRawRingItem& item)
       throw std::runtime_error("Encountered incomplete V12 RingItem type. Fewer than 20 bytes in size field.");
     }
     item.getBody().resize(size-header.size());
-    source.read(reinterpret_cast<char*>(item.getBody().data()), size-header.size());
+    source.timedRead(reinterpret_cast<char*>(item.getBody().data()),
+                     size-header.size(), timeout);
 }
 
 }
