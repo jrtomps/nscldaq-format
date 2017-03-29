@@ -94,7 +94,7 @@ namespace DAQ {
   std::string
   CPhysicsEventItem::typeName() const
   {
-      return "Physics Event";
+      return "Event";
   }
 
   /*!

@@ -266,11 +266,11 @@ std::string CCompositeRingItem::typeName() const {
     case MONITORED_VARIABLES:
         return "Composite Monitored Variables";
     case PERIODIC_SCALERS:
-        return "Composite Periodic Scalers";
+        return "Composite Scalers";
     case PHYSICS_EVENT:
-        return "Composite Physics Event";
+        return "Composite Event";
     case PHYSICS_EVENT_COUNT:
-        return "Composite Physics Event Count";
+        return "Composite Event Count";
     case EVB_GLOM_INFO:
         return "Composite Glom Parameters";
     default:

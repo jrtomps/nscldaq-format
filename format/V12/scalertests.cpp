@@ -414,7 +414,7 @@ void scltests::toString_0()
 
     std::string msg;
     msg += "Size (bytes) : 52\n";
-    msg += "Type         : Scalers\n";
+    msg += "Type         : Scaler\n";
     msg += "Timestamp    : 123\n";
     msg += "Source Id    : 1\n";
     msg += "Unix Tstamp  : Mon Jan 30 12:28:15 2017\n";
@@ -439,7 +439,7 @@ void scltests::formatMask_0()
 
     std::string msg;
     msg += "Size (bytes) : 52\n";
-    msg += "Type         : Scalers\n";
+    msg += "Type         : Scaler\n";
     msg += "Timestamp    : 123\n";
     msg += "Source Id    : 1\n";
     msg += "Unix Tstamp  : Mon Jan 30 12:28:15 2017\n";

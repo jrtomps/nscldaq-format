@@ -496,7 +496,7 @@ void CRingScalerItem::setScalerWidth(uint32_t width)
 std::string
 CRingScalerItem::typeName() const
 {
-  return std::string("Scalers");
+  return std::string("Scaler");
 }
 /**
  * toString

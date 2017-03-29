@@ -161,26 +161,26 @@ protected:
       std::stringstream asString;
       asString << "Composite Item" << std::endl;
       asString << "Size (bytes) : 84" << std::endl;
-      asString << "Type         : Composite Physics Event" << std::endl;
+      asString << "Type         : Composite Event" << std::endl;
       asString << "Timestamp    : 12" << std::endl;
       asString << "Source Id    : 23" << std::endl;
       asString << "# subitems   : 2" << std::endl;
       asString << "+-- Subitem #0" << std::endl;
       asString << "    Composite Item" << std::endl;
       asString << "    Size (bytes) : 42" << std::endl;
-      asString << "    Type         : Composite Physics Event" << std::endl;
+      asString << "    Type         : Composite Event" << std::endl;
       asString << "    Timestamp    : 12" << std::endl;
       asString << "    Source Id    : 23" << std::endl;
       asString << "    # subitems   : 1" << std::endl;
       asString << "    +-- Subitem #0" << std::endl;
       asString << "        Size (bytes) : 22" << std::endl;
-      asString << "        Type         : Physics Event" << std::endl;
+      asString << "        Type         : Event" << std::endl;
       asString << "        Timestamp    : 12" << std::endl;
       asString << "        Source Id    : 23" << std::endl;
       asString << "        0201 " << std::endl;
       asString << "+-- Subitem #1" << std::endl;
       asString << "    Size (bytes) : 22" << std::endl;
-      asString << "    Type         : Physics Event" << std::endl;
+      asString << "    Type         : Event" << std::endl;
       asString << "    Timestamp    : 12" << std::endl;
       asString << "    Source Id    : 23" << std::endl;
       asString << "    0201 " << std::endl;
@@ -193,7 +193,7 @@ protected:
 
       CCompositeRingItem item(COMP_PHYSICS_EVENT, 12, 34);
 
-      EQMSG("typename", std::string("Composite Physics Event"), item.typeName());
+      EQMSG("typename", std::string("Composite Event"), item.typeName());
   }
 
 

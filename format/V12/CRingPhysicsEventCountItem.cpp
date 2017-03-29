@@ -357,7 +357,7 @@ CRingPhysicsEventCountItem::setEventCount(uint64_t count)
 std::string
 CRingPhysicsEventCountItem::typeName() const
 {
-  return std::string("Trigger Count");
+  return std::string("Trigger count");
 }
 /**
  * toString
