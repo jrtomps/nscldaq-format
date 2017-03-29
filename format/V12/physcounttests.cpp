@@ -376,7 +376,7 @@ void physcounttests::toString_0() {
 
     std::string msg;
     msg += "Size (bytes) : 40\n";
-    msg += "Type         : Trigger Count\n";
+    msg += "Type         : Trigger count\n";
     msg += "Timestamp    : 12\n";
     msg += "Source Id    : 234\n";
     msg += "Unix Tstamp  : Mon Jan 30 12:28:15 2017\n";
@@ -394,7 +394,7 @@ void physcounttests::toString_1() {
 
     std::string msg;
     msg += "Size (bytes) : 40\n";
-    msg += "Type         : Trigger Count\n";
+    msg += "Type         : Trigger count\n";
     msg += "Timestamp    : 12\n";
     msg += "Source Id    : 234\n";
     msg += "Unix Tstamp  : Mon Jan 30 12:28:15 2017\n";
@@ -410,7 +410,7 @@ void physcounttests::toString_2() {
 
     std::string msg;
     msg += "Size (bytes) : 40\n";
-    msg += "Type         : Trigger Count\n";
+    msg += "Type         : Trigger count\n";
     msg += "Timestamp    : 12\n";
     msg += "Source Id    : 234\n";
     msg += "Unix Tstamp  : Mon Jan 30 12:28:15 2017\n";
