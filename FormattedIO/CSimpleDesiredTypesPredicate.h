@@ -48,7 +48,7 @@ public:
 
   void addDesiredType(uint32_t type, bool sample = false);
 
-  bool operator()(CDataSource& source);
+  State operator()(CDataSource& source);
 };
 
 } // end DAQ

@@ -40,6 +40,9 @@ extern std::istream& operator>>(std::istream& stream,
 
 #include <CDataSource.h>
 #include <CTimeout.h>
+#include <CDataSourcePredicate.h>
+#include <thread>
+#include <chrono>
 
 namespace DAQ {
 class CDataSink;
@@ -88,30 +91,35 @@ void readItem(CDataSource& source,
  *
  * The pred parameter should be a functional object that has the signature
  *
- *     bool Predicate(CDataSource& source)
+ *     CDataSourcePredicate::State Predicate(CDataSource& source)
  *
  *  It should return true if the search criteria has not been satisfied. In
  *  other words, it indicates that the caller should keep searching. If the
  *  search can be ended, then the predicate should return false.
  */
 template<class UnaryPredicate>
-bool readItemIf(CDataSource& source,
+CDataSourcePredicate::State
+readItemIf(CDataSource& source,
                 V12::CRawRingItem& item,
                 UnaryPredicate& pred,
                 const CTimeout& timeout = CTimeout(std::numeric_limits<double>::max()))
 {
     int count = 0;
-    bool stopLooking;
+    CDataSourcePredicate::State result;
     do {
-      stopLooking = pred(source);
+      result = pred(source);
+      if (result == CDataSourcePredicate::INSUFFICIENT_DATA) {
+          std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      }
     }
-    while ( !stopLooking && !source.eof() && !timeout.expired());
+    while ( (result != CDataSourcePredicate::FOUND)
+            && !source.eof() && !timeout.expired());
 
-    if (stopLooking && !timeout.expired()) {
+    if (result == CDataSourcePredicate::FOUND) {
         readItem(source, item, timeout);
     }
 
-    return stopLooking;
+    return result;
 }
 
 } // end DAQ

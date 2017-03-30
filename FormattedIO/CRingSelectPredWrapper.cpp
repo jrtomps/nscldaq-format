@@ -43,14 +43,14 @@ CRingSelectPredWrapper::~CRingSelectPredWrapper() {}
 
 /*!
 */
-bool
+CDataSourcePredicate::State
 CRingSelectPredWrapper::operator()(CDataSource& ring)
 {
   // We need to have at least a header:
   auto& ringSource = dynamic_cast<CRingDataSource&>(ring);
   CRingBuffer& aRing = ringSource.getRing();
 
-  return ! m_pPredicate->operator()(aRing);
+  return (m_pPredicate->operator()(aRing) ? NOT_FOUND : FOUND );
 
 }
 

@@ -8,7 +8,9 @@ class CDataSource;
 
 class CDataSourcePredicate {
 public:
-    virtual bool operator()(CDataSource& source) = 0;
+    enum State { FOUND, NOT_FOUND, INSUFFICIENT_DATA };
+public:
+    virtual State operator()(CDataSource& source) = 0;
 };
 
 } // end DAQ

@@ -20,7 +20,7 @@ public:
 
     void addExceptionType(uint32_t type);
 
-    bool operator()(CDataSource& source);
+    State operator()(CDataSource& source);
 };
 
 

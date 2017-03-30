@@ -43,7 +43,7 @@ public:
 
   // Predicate virtual interface.
 
-  virtual bool operator()(CDataSource& ring);
+  virtual State operator()(CDataSource& ring);
 
   CRingSelectionPredicate& getPredicate();
 

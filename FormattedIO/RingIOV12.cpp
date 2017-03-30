@@ -119,8 +119,9 @@ void readItem(CDataSource& source, V12::CRawRingItem& item,
 {
     std::array<char,20> header;
 
+    // require atomicity of reads.
     source.timedRead(header.data(), header.size(), timeout);
-    if (source.eof() || timeout.expired()) {
+    if (source.eof()) {
         return;
     }
 
