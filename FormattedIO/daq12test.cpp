@@ -26,12 +26,15 @@ static const char* Copyright = "(C) Copyright Michigan State University 2014, Al
 
 #ifdef NSCLDAQ_BUILD
 #include <CTestSourceSink.h>
+#include <CTimeout.h>
+#include <CSimpleAllButPredicate.h>
 #endif
 
 #include <cstdint>
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <chrono>
 
 using namespace std;
 using namespace DAQ;
@@ -49,6 +52,9 @@ class CFormattedIOV12Test : public CppUnit::TestFixture
 #ifdef NSCLDAQ_BUILD
     CPPUNIT_TEST ( sourceInput_0 );
     CPPUNIT_TEST ( sourceInput_1 );
+    CPPUNIT_TEST ( sourceInput_2 );
+    CPPUNIT_TEST ( sourceInput_3 );
+    CPPUNIT_TEST ( sourceInput_4 );
     CPPUNIT_TEST ( sinkOutput_0 );
 #endif
     CPPUNIT_TEST_SUITE_END();
@@ -64,6 +70,9 @@ class CFormattedIOV12Test : public CppUnit::TestFixture
 #ifdef NSCLDAQ_BUILD
     void sourceInput_0();
     void sourceInput_1();
+    void sourceInput_2();
+    void sourceInput_3();
+    void sourceInput_4();
     void sinkOutput_0();
 #endif
 
@@ -239,6 +248,63 @@ void CFormattedIOV12Test::sourceInput_1()
                                uint32_t(16), item.getBodySize());
 
 }
+
+void CFormattedIOV12Test::sourceInput_2()
+{
+  CTestSourceSink ss(128);
+  // Load the source/sink with data (i.e item with body header)
+  const uint32_t data[] = {20, 1, 0, 0, 0, 20, 2, 0, 0, 0};
+  ss.put(data, sizeof(data));
+
+  // Exclude the BEGIN_RUN type (i.e. type=1)
+  CSimpleAllButPredicate pred;
+  pred.addExceptionType(1);
+
+  V12::CRawRingItem item;
+  auto result = readItemIf(ss, item, pred); 
+
+  CPPUNIT_ASSERT_EQUAL_MESSAGE("Should have skipped BEGIN_RUN and found END_RUN",
+                               uint32_t(2), item.type());
+  CPPUNIT_ASSERT_MESSAGE("Should have returned FOUND",
+                          CDataSourcePredicate::FOUND == result);
+}
+
+void CFormattedIOV12Test::sourceInput_3()
+{
+  CTestSourceSink ss(128);
+
+  // Check that we can timeout appropriately
+  V12::CRawRingItem item;
+  auto result = readItem(ss, item, CTimeout(1)); 
+
+  CPPUNIT_ASSERT_EQUAL_MESSAGE("timeout", 
+                               CDataSourcePredicate::INSUFFICIENT_DATA, result);
+}
+
+void CFormattedIOV12Test::sourceInput_4()
+{
+  // add a begin run and an end run
+  CTestSourceSink ss(128);
+  const uint32_t data[] = {20, 1, 0, 0, 0, 20, 2, 0, 0, 0};
+  ss.put(data, sizeof(data));
+
+  // make sure we skip the first begin run 
+  CSimpleAllButPredicate pred;
+  pred.addExceptionType(1);
+
+  // time how long it takes4
+  auto start = std::chrono::high_resolution_clock::now();
+  V12::CRawRingItem item;
+  auto result = readItemIf(ss, item, pred); 
+  auto stop = std::chrono::high_resolution_clock::now();
+
+  std::chrono::duration<double> elapsedTime = stop - start;
+
+  // make sure that the end run was found and that we did this without the 100 ms sleep.
+  CPPUNIT_ASSERT_EQUAL_MESSAGE("found end run", CDataSourcePredicate::FOUND, result);
+  CPPUNIT_ASSERT_MESSAGE("no sleep occurred between reads", elapsedTime.count() < 0.1);
+}
+
 
 void CFormattedIOV12Test::sinkOutput_0()
 {

@@ -41,12 +41,12 @@ extern std::istream& operator>>(std::istream& stream,
 #include <CDataSource.h>
 #include <CTimeout.h>
 #include <CDataSourcePredicate.h>
-#include <thread>
-#include <chrono>
+#include <limits>
 
 namespace DAQ {
 class CDataSink;
 }
+
 
 /*!
  * \brief Insert V12 CRingItem into CDataSink
@@ -76,7 +76,7 @@ namespace DAQ {
 void writeItem(CDataSink& source, const V12::CRawRingItem& item);
 void writeItem(CDataSink& source, const V12::CRingItem& item);
 
-void readItem(CDataSource& source,
+CDataSourcePredicate::State readItem(CDataSource& source,
               V12::CRawRingItem& item,
               const CTimeout& timeout = CTimeout(std::numeric_limits<double>::max()));
 
@@ -96,31 +96,54 @@ void readItem(CDataSource& source,
  *  It should return true if the search criteria has not been satisfied. In
  *  other words, it indicates that the caller should keep searching. If the
  *  search can be ended, then the predicate should return false.
+ *
+ * The little bit of template metaprogramming magic here just ensures that
+ * the UnaryPredicate does not derive from the CDataSourcePredicate base class.
+ * By doing so, we make sure that the overload for the CDataSourcePredicate
+ * gets called.
  */
-template<class UnaryPredicate>
+template<class UnaryPredicate,
+         typename = typename std::enable_if<
+                                             ! std::is_base_of<
+                                                                CDataSourcePredicate,
+                                                                UnaryPredicate
+                                                              >::value
+                                           >::type >
+bool
+readItemIf(CDataSource& source, V12::CRawRingItem& item, UnaryPredicate& pred)
+{
+    bool stopLooking = false;
+    do {
+      stopLooking = pred(source);
+    }
+    while ( !stopLooking && !source.eof() );
+
+    if (stopLooking) {
+        readItem(source, item);
+    }
+
+    return stopLooking;
+}
+
+/*!
+ * \brief Timed Condition Read
+ *
+ * \param source    the source to read from
+ * \param item      the raw ring item to fill with data from the source
+ * \param pred      a data source predicate
+ * \param timeout   a timeout object specifying the time till timeout
+ *
+ * \retval INSUFFICIENT_DATA - if timeout occurred or there was not enough data
+ * \retval FOUND             - read a data item that satisfied the predicate
+ * \retval NOT_FOUND         - did not read a data item because predicate was not satisfied
+ *                             and either the source reached an eof condition or the
+ *                             timeout expired.
+ */
 CDataSourcePredicate::State
 readItemIf(CDataSource& source,
                 V12::CRawRingItem& item,
-                UnaryPredicate& pred,
-                const CTimeout& timeout = CTimeout(std::numeric_limits<double>::max()))
-{
-    int count = 0;
-    CDataSourcePredicate::State result;
-    do {
-      result = pred(source);
-      if (result == CDataSourcePredicate::INSUFFICIENT_DATA) {
-          std::this_thread::sleep_for(std::chrono::milliseconds(100));
-      }
-    }
-    while ( (result != CDataSourcePredicate::FOUND)
-            && !source.eof() && !timeout.expired());
-
-    if (result == CDataSourcePredicate::FOUND) {
-        readItem(source, item, timeout);
-    }
-
-    return result;
-}
+                CDataSourcePredicate& pred,
+                const CTimeout& timeout = CTimeout(std::numeric_limits<double>::max()));
 
 } // end DAQ
 

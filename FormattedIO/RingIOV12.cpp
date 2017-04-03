@@ -71,6 +71,8 @@ std::istream& operator>>(std::istream& stream,
 
 #include <CDataSource.h>
 #include <CDataSink.h>
+#include <thread>
+#include <chrono>
 
 DAQ::CDataSink& operator<<(DAQ::CDataSink& sink,
                       const DAQ::V12::CRawRingItem& item)
@@ -96,54 +98,136 @@ void writeItem(CDataSink& sink, const V12::CRawRingItem& item)
     DAQ::V12::serializeHeader(item, header.begin());
 
     auto& body = item.getBody();
+
+    // the write is atomic
     sink.putv({ {header.data(), header.size()},
                 {body.data(), body.size()} });
 }
 
+
 void writeItem(CDataSink& sink, const V12::CRingItem& item)
 {
-        auto pRawItem = dynamic_cast<const DAQ::V12::CRawRingItem*>(&item);
+    auto pRawItem = dynamic_cast<const DAQ::V12::CRawRingItem*>(&item);
 
-        // if this is a raw ring item, we can just ship it out
-        if (pRawItem) {
-            writeItem(sink, *pRawItem);
-        } else {
-            // the item needs to be serialized first as a raw ring item
-            // and then written to the sink
-            writeItem(sink, DAQ::V12::CRawRingItem(item));
-        }
+    // if this is a raw ring item, we can just ship it out
+    if (pRawItem) {
+        writeItem(sink, *pRawItem);
+    } else {
+        // the item needs to be serialized first as a raw ring item
+        // and then written to the sink
+        writeItem(sink, DAQ::V12::CRawRingItem(item));
+    }
 }
 
-void readItem(CDataSource& source, V12::CRawRingItem& item,
+
+CDataSourcePredicate::State readItem(CDataSource& source, V12::CRawRingItem& item,
               const CTimeout& timeout)
 {
+
+    // To maintain sanity in the data stream, this function will only read data from
+    // the data stream if and only if a complete ring itme is found. It will peek
+    // at the source to learn whether there is indeed enough data to extract a complete
+    // a complete item.
+
     std::array<char,20> header;
-
-    // require atomicity of reads.
-    source.timedRead(header.data(), header.size(), timeout);
-    if (source.eof()) {
-        return;
-    }
-
     uint32_t size, type, sourceId;
     uint64_t tstamp;
     bool swapNeeded;
+
+    if (timeout.isPoll()) {
+      // polling... we need to try to read all data once. If there is not sufficient
+      // data to read the entire item, then return with INSUFFICIENT_DATA
+      if (source.availableData() < header.size()) {
+        return CDataSourcePredicate::INSUFFICIENT_DATA;
+      }
+    } else {
+        // wait until there is enough data for the header or the timeout expired
+        while (source.availableData() < header.size() && !timeout.expired()) {
+          std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+
+        if (timeout.expired()) {
+          return CDataSourcePredicate::INSUFFICIENT_DATA;
+        }
+    }
+
+        // don't read... just peek
+    size_t nRead = source.peek(header.data(), header.size());
+    if (nRead != header.size()) {
+       return CDataSourcePredicate::INSUFFICIENT_DATA;
+    }
+
     DAQ::V12::Parser::parseHeader(header.begin(), header.end(),
                                   size, type, tstamp, sourceId, swapNeeded);
 
+    if (size < header.size()) {
+        throw std::runtime_error("Encountered incomplete V12 RingItem type. Fewer than 20 bytes in size field.");
+    }
+
+
+    // Read the body
+    if (timeout.isPoll()) {
+        // polling means that only one attempt is made to read the item.
+        // the entire item is there or it is not.
+        if (source.availableData() < size) {
+            return CDataSourcePredicate::INSUFFICIENT_DATA;
+        }
+    } else {
+      // timeout ... keep trying until the data is present or it is time to
+      // give up
+      while (source.availableData() < size && !timeout.expired()) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+      }
+      if (timeout.expired()) {
+        return CDataSourcePredicate::INSUFFICIENT_DATA;
+      }
+
+    }
+
+    // the data for the header has already been acquired through the peek()
+    // operation, so it does not need to be read again. Skip it.
+    source.ignore(header.size());
+
+    // use the data that was already parsed from the header
     item.setType(type);
     item.setEventTimestamp(tstamp);
     item.setSourceId(sourceId);
-
     item.setMustSwap(swapNeeded);
 
-    if (size < header.size()) {
-      throw std::runtime_error("Encountered incomplete V12 RingItem type. Fewer than 20 bytes in size field.");
-    }
     item.getBody().resize(size-header.size());
-    source.timedRead(reinterpret_cast<char*>(item.getBody().data()),
-                     size-header.size(), timeout);
+    source.read(reinterpret_cast<char*>(item.getBody().data()),
+                         size-header.size());
+
+    return CDataSourcePredicate::FOUND;
+
 }
+
+
+
+
+CDataSourcePredicate::State
+readItemIf(CDataSource& source, V12::CRawRingItem& item, CDataSourcePredicate& pred,
+           const CTimeout& timeout)
+{
+    CDataSourcePredicate::State result;
+    do {
+        result = pred(source);
+
+        if (result == CDataSourcePredicate::INSUFFICIENT_DATA) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+    }
+    while ( (result != CDataSourcePredicate::FOUND) 
+              && !source.eof() 
+              && !timeout.expired()                  );
+
+    if (result == CDataSourcePredicate::FOUND) {
+        readItem(source, item, timeout);
+    }
+
+    return result;
+}
+
 
 }
 
