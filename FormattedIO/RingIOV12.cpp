@@ -136,7 +136,6 @@ CDataSourcePredicate::State readItem(CDataSource& source, V12::CRawRingItem& ite
 
     if ( ! timeout.isPoll() ) {
         // wait until there is enough data for the header or the timeout expired
-        std::cerr << source.availableData() << std::endl;
         while (source.availableData() < header.size() && !timeout.expired() && !source.eof()) {
           std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
