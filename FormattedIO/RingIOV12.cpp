@@ -134,19 +134,14 @@ CDataSourcePredicate::State readItem(CDataSource& source, V12::CRawRingItem& ite
     uint64_t tstamp;
     bool swapNeeded;
 
-    if (timeout.isPoll()) {
-      // polling... we need to try to read all data once. If there is not sufficient
-      // data to read the entire item, then return with INSUFFICIENT_DATA
-      if (source.availableData() < header.size()) {
-        return CDataSourcePredicate::INSUFFICIENT_DATA;
-      }
-    } else {
+    if ( ! timeout.isPoll() ) {
         // wait until there is enough data for the header or the timeout expired
-        while (source.availableData() < header.size() && !timeout.expired()) {
-          std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::cerr << source.availableData() << std::endl;
+        while (source.availableData() < header.size() && !timeout.expired() && !source.eof()) {
+          std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
 
-        if (timeout.expired()) {
+        if (timeout.expired() || source.eof()) {
           return CDataSourcePredicate::INSUFFICIENT_DATA;
         }
     }
@@ -157,13 +152,16 @@ CDataSourcePredicate::State readItem(CDataSource& source, V12::CRawRingItem& ite
        return CDataSourcePredicate::INSUFFICIENT_DATA;
     }
 
+    if (source.eof()) {
+        return CDataSourcePredicate::INSUFFICIENT_DATA;
+    }
+
     DAQ::V12::Parser::parseHeader(header.begin(), header.end(),
                                   size, type, tstamp, sourceId, swapNeeded);
 
     if (size < header.size()) {
         throw std::runtime_error("Encountered incomplete V12 RingItem type. Fewer than 20 bytes in size field.");
     }
-
 
     // Read the body
     if (timeout.isPoll()) {
@@ -175,10 +173,10 @@ CDataSourcePredicate::State readItem(CDataSource& source, V12::CRawRingItem& ite
     } else {
       // timeout ... keep trying until the data is present or it is time to
       // give up
-      while (source.availableData() < size && !timeout.expired()) {
+      while (source.availableData() < size && !timeout.expired() && !source.eof()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
       }
-      if (timeout.expired()) {
+      if (timeout.expired() || source.eof()) {
         return CDataSourcePredicate::INSUFFICIENT_DATA;
       }
 

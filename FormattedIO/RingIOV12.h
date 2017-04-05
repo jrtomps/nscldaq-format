@@ -41,7 +41,7 @@ extern std::istream& operator>>(std::istream& stream,
 #include <CDataSource.h>
 #include <CTimeout.h>
 #include <CDataSourcePredicate.h>
-#include <limits>
+#include <chrono>
 
 namespace DAQ {
 class CDataSink;
@@ -78,7 +78,7 @@ void writeItem(CDataSink& source, const V12::CRingItem& item);
 
 CDataSourcePredicate::State readItem(CDataSource& source,
               V12::CRawRingItem& item,
-              const CTimeout& timeout = CTimeout(std::numeric_limits<double>::max()));
+              const CTimeout& timeout = CTimeout(std::chrono::hours(24)));
 
 
 /*!
@@ -143,7 +143,7 @@ CDataSourcePredicate::State
 readItemIf(CDataSource& source,
                 V12::CRawRingItem& item,
                 CDataSourcePredicate& pred,
-                const CTimeout& timeout = CTimeout(std::numeric_limits<double>::max()));
+                const CTimeout& timeout = CTimeout(std::chrono::hours(24)));
 
 } // end DAQ
 
